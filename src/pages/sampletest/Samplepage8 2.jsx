@@ -4,7 +4,7 @@ import Samplepage7list from "./Samplepage7list";
 
 import "./Samplepage7list.css";
 
-const SamplePage7 = () => {
+const SamplePage7 = () => { 
   const [isPaused, setIsPaused] = useState(false);
 
   const [productlist, setProductlist] = useState({

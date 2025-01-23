@@ -4,7 +4,7 @@ import Samplepage8list from "./Samplepage8list";
 import ReactPaginate from "react-paginate";
 
 import "./Samplepage8list.css";
-import "./SamplePage1.css";
+import "./SamplePage1.css"; 
 
 const SamplePage8 = () => {
   const [searchinfo, setSearchinfo] = useState({
@@ -38,7 +38,7 @@ const SamplePage8 = () => {
   }, [searchinfo.cpage, searchinfo.pagesize]);
 
   useEffect(() => {
-    fetchmovielist();
+    fetchmovielist(); //시작점
   }, [fetchmovielist, searchinfo.cpage, searchinfo.pagesize]);
 
   const pagebutton = (event) => {

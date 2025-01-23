@@ -7,7 +7,7 @@ import Samplepage8detailpopup from "./Samplepage8detailpopup";
 import Samplepage8reserve from "./Samplepage8reserve";
 
 const Samplepage8list = ({ item, index }) => {
-  const [imageurl, setImageurl] = useState("");
+  const [imageurl, setImageurl] = useState(""); 
 
   const [isopen, setIsopen] = useState(false);
 
@@ -17,7 +17,7 @@ const Samplepage8list = ({ item, index }) => {
     try {
       const param = new URLSearchParams();
       param.append("movie_no", item.movie_no);
-
+      //이미지경로를 blob타입으로 받아옴
       const res = await axios.post("/movie/imageblob", param, {
         responseType: "blob",
       });
@@ -26,7 +26,7 @@ const Samplepage8list = ({ item, index }) => {
     } catch (err) {
       console.error("Error fetching product list:", err);
     }
-  }, [item]);
+  }, [item]); //item이 넘어왔다면 실행
 
   useEffect(() => {
     imageroad();

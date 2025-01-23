@@ -7,7 +7,7 @@ const Samplepage8reserve = ({ item, imageurl, closemodal }) => {
     beforemonth: "",
     curmonth: "",
   });
-
+ 
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [selectedDate, setSelectedDate] = useState("2025.01");
   const movies = [
@@ -62,12 +62,12 @@ const Samplepage8reserve = ({ item, imageurl, closemodal }) => {
       curmonth: curmonth,
     }));
 
-    return days;
+    return days; //배열 리턴
   };
 
   useEffect(() => {
-    setDaylist(getNext14DaysWithWeekdays());
-  }, []);
+    setDaylist(getNext14DaysWithWeekdays()); //위에서 리턴받은 배열을 daylist에 넣음
+  }, []); //onload로 실행
 
   return (
     <div className="fast-reservation">

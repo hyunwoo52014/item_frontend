@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Daumpostcode from "react-daum-postcode";
 import * as commonjs from "../../components/common/commonfunction.js";
+import Commcodeselect from "../../components/common/Commcodeselect";
 
 import "./SamplePage1.css";
 
@@ -43,9 +44,6 @@ const Samplepage9popup = (prop) => {
 
   const [phone, setPhone] = useState("");
   const [isValid, setIsValid] = useState(true); // 유효성 상태
-
-  const [mail, setMail] = useState("");
-  const [emailValid, setEmailValid] = useState(true); // 유효성 상태
 
   useEffect(() => {
     if (prop.modalflag.action === "I") {
@@ -131,20 +129,6 @@ const Samplepage9popup = (prop) => {
     const phoneRegex = /^\d{3}-\d{4}-\d{4}$/;
     setIsValid(phoneRegex.test(input));
   };
-/*
-  ^[^\s@]+: @ 앞에 공백이 아닌 문자가 한 글자 이상.
-  @[^\s@]+: @ 뒤에 공백이 아닌 문자가 한 글자 이상.
-  \.[^\s@]+$: 마지막에 도메인을 나타내는 점(.)과 뒤에 공백이 아닌 문자가 한 글자 이상.
-*/
-  const emailCheck = (e) => {
-    let email = e.target.value;
-
-    // 상태 업데이트
-    setMail(email);
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    setEmailValid(emailRegex.test(email));
-  };
 
   const datavalidation = () => {
     const checklist = [
@@ -169,11 +153,12 @@ const Samplepage9popup = (prop) => {
 
     const param = new URLSearchParams(Object.entries(editelent));
     param.append("username", editelent.name);
-    console.log("typeof e");
-    console.log(typeof e);
-    if(typeof e === "string"){
+
+    console.log("save typeof e : ", typeof e);
+
+    if (typeof e === "string") {
       param.append("action", "D");
-    }else{
+    } else {
       param.append("action", prop.modalflag.action);
     }
 
@@ -194,9 +179,18 @@ const Samplepage9popup = (prop) => {
       });
   };
 
-  const deleteData = () => {
+  const InputvalueChange = (e) => {
+    const { id, value } = e.target;
+
+    setEditelent((prev) => ({
+      ...prev,
+      [id]: value, // id를 키로 사용하여 상태를 동적으로 업데이트
+    }));
+  };
+
+  const deleteuser = () => {
     save("D");
-  }
+  };
 
   const zipreturn = (data) => {
     // console.log(data);
@@ -215,6 +209,13 @@ const Samplepage9popup = (prop) => {
 
   const daumclopsepop = () => {
     setDaimisopen(false);
+  };
+
+  const areareturn = (value) => {
+    setEditelent({
+      ...editelent,
+      loc: value,
+    });
   };
 
   return (
@@ -243,13 +244,7 @@ const Samplepage9popup = (prop) => {
                 name="loginID"
                 readOnly={prop.modalflag.action === "I" ? false : true}
                 value={editelent.loginID}
-                onChange={(e) =>
-                  setEditelent({
-                    ...editelent,
-                    loginID: e.target.value,
-                    iddupcheck: false,
-                  })
-                }
+                onChange={(e) => InputvalueChange(e)}
               />
               {prop.modalflag.action === "I" && (
                 <button className="btn btn-primary" onClick={iddupcheck}>
@@ -259,17 +254,13 @@ const Samplepage9popup = (prop) => {
             </td>
             <th style={{ padding: "30px" }}>사용자 구분</th>
             <td>
+              groupcode : usertype
               <select
-                id="usertype"
-                name="usertype"
+                id="user_type"
+                name="user_type"
                 style={{ width: 80 }}
                 value={editelent.user_type}
-                onChange={(e) =>
-                  setEditelent({
-                    ...editelent,
-                    user_type: e.target.value,
-                  })
-                }
+                onChange={(e) => InputvalueChange(e)}
               >
                 <option value="">선택</option>
                 <option value="A">관리자</option>
@@ -285,12 +276,7 @@ const Samplepage9popup = (prop) => {
                 id="name"
                 name="name"
                 value={editelent.name}
-                onChange={(e) =>
-                  setEditelent({
-                    ...editelent,
-                    name: e.target.value,
-                  })
-                }
+                onChange={(e) => InputvalueChange(e)}
               />
             </td>
             <th style={{ padding: "30px" }}>비밀번호</th>
@@ -300,12 +286,7 @@ const Samplepage9popup = (prop) => {
                 id="pwd"
                 name="pwd"
                 value={editelent.password}
-                onChange={(e) =>
-                  setEditelent({
-                    ...editelent,
-                    password: e.target.value,
-                  })
-                }
+                onChange={(e) => InputvalueChange(e)}
               />
             </td>
           </tr>
@@ -317,12 +298,7 @@ const Samplepage9popup = (prop) => {
                 name="sex"
                 style={{ width: 80 }}
                 value={editelent.sex}
-                onChange={(e) =>
-                  setEditelent({
-                    ...editelent,
-                    sex: e.target.value,
-                  })
-                }
+                onChange={(e) => InputvalueChange(e)}
               >
                 <option value="">선택</option>
                 <option value="M">남</option>
@@ -339,10 +315,7 @@ const Samplepage9popup = (prop) => {
                 placeholder="010-0000-0000"
                 onChange={(e) => {
                   phonecheck(e);
-                  setEditelent({
-                    ...editelent,
-                    hp: e.target.value,
-                  });
+                  InputvalueChange(e);
                 }}
               />
               {!isValid && phone !== "" && (
@@ -361,54 +334,17 @@ const Samplepage9popup = (prop) => {
                 id="email"
                 name="email"
                 value={editelent.email}
-                onChange={(e) => {
-                  emailCheck(e);
-                  setEditelent({
-                    ...editelent,
-                    email: e.target.value,
-                  })
-                }
-                }
+                onChange={(e) => InputvalueChange(e)}
               />
-              {!emailValid && mail !== "" && (
-                <p style={{ color: "red" }}>
-                  {" "}
-                  올바른 형식의 이메일을 입력해주세요.
-                </p>
-              )}
             </td>
             <th style={{ padding: "30px" }}>지역</th>
             <td>
-              <select
-                id="loc"
-                name="loc"
-                value={editelent.loc}
-                onChange={(e) =>
-                  setEditelent({
-                    ...editelent,
-                    loc: e.target.value,
-                  })
-                }
-              >
-                <option value="">선택</option>
-                <option value="11">서울특별시</option>
-                <option value="21">부산광역시</option>
-                <option value="22">대구광역시</option>
-                <option value="23">인천광역시</option>
-                <option value="24">광주광역시</option>
-                <option value="25">대전광역시</option>
-                <option value="26">울산광역시</option>
-                <option value="29">세종특별자치시</option>
-                <option value="31">경기도</option>
-                <option value="32">강원도</option>
-                <option value="33">충청북도</option>
-                <option value="34">충청남도</option>
-                <option value="35">전라북도</option>
-                <option value="36">전라남도</option>
-                <option value="37">경상북도</option>
-                <option value="38">경상남도</option>
-                <option value="39">제주특별자치도</option>
-              </select>
+              <Commcodeselect
+                groupcode="areacd"
+                selecttype="sel"
+                defaultValue={editelent.loc}
+                returnfunction={areareturn}
+              />
             </td>
           </tr>
           <tr>
@@ -420,12 +356,7 @@ const Samplepage9popup = (prop) => {
                 name="zipcd"
                 readOnly={true}
                 value={editelent.zipcd}
-                onChange={(e) =>
-                  setEditelent({
-                    ...editelent,
-                    zipcd: e.target.value,
-                  })
-                }
+                onChange={(e) => InputvalueChange(e)}
               />
               <button className="btn btn-primary" onClick={daumopenpop}>
                 우편번호
@@ -439,24 +370,14 @@ const Samplepage9popup = (prop) => {
                 name="addr"
                 readOnly={true}
                 value={editelent.addr}
-                onChange={(e) =>
-                  setEditelent({
-                    ...editelent,
-                    addr: e.target.value,
-                  })
-                }
+                onChange={(e) => InputvalueChange(e)}
               />
               <input
                 type="text"
                 id="dtladdr"
                 name="dtladdr"
                 value={editelent.dtladdr}
-                onChange={(e) =>
-                  setEditelent({
-                    ...editelent,
-                    dtladdr: e.target.value,
-                  })
-                }
+                onChange={(e) => InputvalueChange(e)}
               />
             </td>
           </tr>
@@ -468,12 +389,7 @@ const Samplepage9popup = (prop) => {
                 id="birthday"
                 name="birthday"
                 value={editelent.birthday}
-                onChange={(e) =>
-                  setEditelent({
-                    ...editelent,
-                    birthday: e.target.value,
-                  })
-                }
+                onChange={(e) => InputvalueChange(e)}
               />
             </td>
             <th style={{ padding: "30px" }}>등록일자</th>
@@ -484,12 +400,7 @@ const Samplepage9popup = (prop) => {
                 name="regdate"
                 value={editelent.regdate}
                 readOnly={true}
-                onChange={(e) =>
-                  setEditelent({
-                    ...editelent,
-                    regdate: e.target.value,
-                  })
-                }
+                onChange={(e) => InputvalueChange(e)}
               />
             </td>
           </tr>
@@ -497,7 +408,9 @@ const Samplepage9popup = (prop) => {
             <td colSpan={4}>
               <div className="modal-button">
                 <button onClick={save}> 저장 </button>
-                {prop.modalflag.action === "U" && <button onClick={deleteData}> 삭제 </button>}
+                {prop.modalflag.action === "U" && (
+                  <button onClick={deleteuser}> 삭제 </button>
+                )}
                 <button onClick={clopsepop}> 닫기 </button>
               </div>
             </td>

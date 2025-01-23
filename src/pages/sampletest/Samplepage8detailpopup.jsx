@@ -4,7 +4,7 @@ import { useState, useRef } from "react";
 import "./Samplepage8detailpopup.css";
 
 const Samplepage8detailpopup = ({
-  item,
+  item, 
   imageurl,
   closemodal,
   openreserve,
@@ -25,6 +25,7 @@ const Samplepage8detailpopup = ({
     }, 0);
   };
 
+  //부모창에 전달
   const movereserve = () => {
     closemodal();
     openreserve();
