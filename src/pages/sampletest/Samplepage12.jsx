@@ -143,6 +143,12 @@ function TreeTable() {
     if(name==="type"){
       searchTypeList(value,'2');
     }
+    
+    //로우에서 수정시
+    if(name==="rowType"){
+      searchTypeList(value,'2');
+    }
+    
   };
 
   const formatDate = (reg_date) => {
@@ -198,7 +204,7 @@ function TreeTable() {
             readOnlyYn[node.emp_no] ? 
             <>
             <select
-              name="type"
+              name="rowType"
               value={node.up_dept_cd}
               onChange={handleInputChange}
               className="w-full border border-gray-100 rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-100"
@@ -209,7 +215,7 @@ function TreeTable() {
               }
             </select>
             <select
-              name="detailType"
+              name="rowDType"
               value={node.dept_cd}
               onChange={handleInputChange}
               className="w-full border border-gray-100 rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-100"
