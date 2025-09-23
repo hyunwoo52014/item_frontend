@@ -1,8 +1,25 @@
 import React from 'react';
 import ReactPaginate from 'react-paginate';
 import '../../assets/css/admin/common.css';
+import Pagination from '../../components/common/Pagination'
 
 const Approvals = () => {
+
+    //페이지 관련 json 필요 (현재 페이지, 전체 목록 갯수)
+    const paginationJSON = {
+        currentPage : 0,
+        totalListCnt : 0,
+    };
+    //select 전체 받아오는 json 형태의 list 필요
+    const getAllList = () =>{
+        axios.get("/api/approvals/showList")
+        .then((res)=>{
+            console.log("/api/approvals/showList 반환값 :   "+res.data);
+        })
+        .catch((err)=>{
+            
+        });
+    }//getAllList
 
 
     return (
@@ -41,6 +58,7 @@ const Approvals = () => {
 									</tr>
 								</thead>
 								<tbody id="approvalsList">
+                                    {/* 만약 select 값이 0 이면, 조회되는 값이 없습니다. 출력 */}
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -50,7 +68,9 @@ const Approvals = () => {
 							</table>
 						</div>
 						
-						<div className="paging_area">아마 이 부분에 reactpagination을 넣으면 될 듯</div>
+						<div className="paging_area">
+                            <ReactPaginate pageCount={} onPageChange={} />
+                        </div>
 					</div>
 
 				</li>
