@@ -1522,7 +1522,7 @@ table.qna {
 }
 
 table.qna tr.view {
-  display: ;
+  display: none;
 }
 
 table.qna tr.view td {
