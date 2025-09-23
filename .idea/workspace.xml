@@ -5,12 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="767c8228-90ae-45e3-96b9-c4e4b2b610ff" name="변경" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/IntelliLang.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/sampletest/Postcode.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/sampletest/Samplepage14.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/sampletest/Samplepage14permit.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/sampletest/Samplepage14submenu.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/sampletest/Samplepage15.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/sampletest/Samplepage15compo.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/sampletest/Samplepage15progress.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/sampletest/Samplepage16.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/sampletest/Samplepage16popup.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reportWebVitals.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/setupTests.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/sampletest/Samplepage1.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/sampletest/Samplepage1.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/sampletest/Samplepage2.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/sampletest/Samplepage2.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/sampletest/Samplepage4.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/sampletest/Samplepage4.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,23 +36,68 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="2qMolv3CYdh9HwRndvzYpOjHTnw" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.javacompiler&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ReactCreateComponentLastSelected": "arrowFunctionComponent",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "CSH__250923__returns__front",
+    "ignore.virus.scanning.warn.message": "true",
+    "junie.onboarding.icon.badge.shown": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/reactWorkspace/my-app/src/pages/requests",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "npm.start.executor": "Run",
+    "project.structure.last.edited": "프로젝트",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "to.speed.mode.migration.done": "true",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\IntelliJ IDEA 2025.2\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
+  <component name="ReactDesignerToolWindowState">
+    <option name="myId2Visible">
+      <map>
+        <entry key="com.intellij.reactbuddy.reactComponents" value="false" />
+        <entry key="com.intellij.reactbuddy.reactInspector" value="false" />
+        <entry key="com.intellij.reactbuddy.storybook" value="false" />
+      </map>
+    </option>
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\reactWorkspace\my-app\src\pages\requests" />
+      <recent name="D:\reactWorkspace\my-app\src\pages\sampletest" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\reactWorkspace\my-app\src\pages\sampletest" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.23892.409" />
+        <option value="bundled-js-predefined-d6986cc7102b-e03c56caf84a-JavaScript-IU-252.23892.409" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration>C:\Users\dbserver\AppData\Roaming\Subversion</configuration>
@@ -53,10 +111,27 @@
       <updated>1705991131692</updated>
       <workItem from="1734481966771" duration="344000" />
       <workItem from="1734482340205" duration="78000" />
+      <workItem from="1757642316676" duration="581000" />
+      <workItem from="1757642934653" duration="941000" />
+      <workItem from="1757643935567" duration="2293000" />
+      <workItem from="1757648022937" duration="11920000" />
+      <workItem from="1757894123847" duration="21857000" />
+      <workItem from="1757980787652" duration="3892000" />
+      <workItem from="1757991253365" duration="5249000" />
+      <workItem from="1758068741973" duration="11828000" />
+      <workItem from="1758153874791" duration="11959000" />
+      <workItem from="1758240455325" duration="4828000" />
+      <workItem from="1758498618650" duration="1804000" />
+      <workItem from="1758501133331" duration="8799000" />
+      <workItem from="1758585997776" duration="6890000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

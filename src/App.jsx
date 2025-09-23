@@ -10,6 +10,8 @@ import Menu from './pages/Menu';
 import Content from './Content';
 import './App.css'
 
+import { Returns } from './Pages/requests';
+
 const App = () => {
   return (
     <div id='app'>
@@ -21,6 +23,7 @@ const App = () => {
         <Route path='/dashboard/menu' element={<Menu />} />
         <Route path='/dashboard/:type/:menu' element={<Content />} />
       </Route>
+      <Route path='/requests/returns' element={<Returns />} />
     </Routes>
     </div>
   );

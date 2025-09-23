@@ -5,11 +5,12 @@ import SamplePage3 from "./Samplepage3";
 import Selectcomponent from "./Selectcomponent";
 
 const SamplePage2 = () => {
+
   const [distime, setDistime] = useState(0);
   const [distimetwo, setDistimetwo] = useState(0);
   const [param1, setParam1] = useState("황기현");
   const [param2, setParam2] = useState("방가방가 !!!!!!!");
-  const indata = "11";
+  let indata = "11";
   const [radioid, setRadioid] = useState("genderid");
   const [radioname, setRadioname] = useState("gendername");
   const [radiovalue, setRadiovalue] = useState("M");
@@ -21,15 +22,16 @@ const SamplePage2 = () => {
   //useEffect의 기본틀
   useEffect(
     () => {
-      alert('useEffect = '+distime);
+      alert('useEffect = '+ distime);
       //distime의 값이 변경된다면 useEffect실행, [distime, ditime2] 이와같은 형식으로 여러개 사용가능
     },[distime]
   )
 
   const addtime = () => {
-    //useState는 비동기 처리기때문에 이 addtime method가 종료되어야 적용되기때문에
+    //useState는  큐 처리 때문에 이 addtime method가 종료되어야 적용되기때문에
     //현재 도는 여기에서 변경된 distime값을 사용하는것은 불가 이게 문제니 useeffect를 사용한다
     setDistime(distime + 1);
+
     setParam1("황기현");
   };
 
@@ -142,11 +144,11 @@ const SamplePage2 = () => {
       <br />
       <a
         href="https://codingapple.com/unit/react-if-else-patterns-enum-switch-case/"
-        target="_blank"
+        target="_blank" rel="noreferrer"
       >
         <h6>if 문 샘픔</h6>
       </a>
-      <a href="https://codingbroker.tistory.com/123" target="_blank">
+      <a href="https://codingbroker.tistory.com/123" target="_blank" rel="noreferrer">
         <h6>Looping 샘픔</h6>
       </a>
       <br />
@@ -171,8 +173,8 @@ const SamplePage2 = () => {
       !!!!!!!!!!!!!!!!!!! <Incomponent msg="홍길동" />
       ==================== Radio 테스트 =============================
       <br />
-      <br /> defaultChecked 빼면 값은 바뀌지만 'checked' 옵션이 안바뀜
-      <br /> defaultChecked 넣으면 라디오 값이 안바뀜
+      <br />
+      <br />
       <br />남 :{" "}
       <input
         type="radio"
@@ -207,7 +209,7 @@ const SamplePage2 = () => {
         onChange={(e, prev) => {
           setInputtest(e.target.value);
           // undefined : 1233 : 123    alert 이후 setInputtest에 의해 randering 됨
-          alert(prev + " : " + e.target.value + " : " + inputtest);
+          //alert(prev + " : " + e.target.value + " : " + inputtest);
         }}
       />
       {/*

@@ -105,8 +105,9 @@ const SamplePage1 = () => {
     searchlist(parseInt(event.selected) + 1);
   };
 
-  const searchlist = async (cpage) => {
-    cpage = cpage || 1;
+  const searchlist = async (cpage = 1) => {
+    // cpage = cpage || 1;
+
     setCurrentPage(cpage);
 
     console.log(cpage);
@@ -149,7 +150,7 @@ const SamplePage1 = () => {
           ...varlistdata,
           noticelist: res.data.listdate,
           totalcnt: res.data.totalcnt,
-          pageCount: pageCount(res.data.totalcnt),
+          pageCount: pageCount(res.data.totalcnt),  
         });
       })
       .catch((err) => {

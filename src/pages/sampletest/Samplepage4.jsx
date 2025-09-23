@@ -68,6 +68,8 @@ const SamplePage4 = () => {
       body: param.toString(),
     })
       .then((response) => {
+        console.log("response : ", response);
+
         if (!response.ok) {
           throw new Error("Group Code Data 요청 중 Error 발생");
         }
@@ -86,6 +88,7 @@ const SamplePage4 = () => {
           grouplist: data.commcodeModel,
           totalcnt: data.totalcnt,
         }));
+
         // groupdata를 직접 참조하면 React는 의존성 배열에 groupdata를 추가하도록 요구
         // 그렇지 않으면 groupdata가 최신 상태를 유지하지 못할 수 있음.
         /*
@@ -123,6 +126,7 @@ const SamplePage4 = () => {
       .post("/system/selectgroupcode", param)
       .then((res) => {
         console.log(res);
+    
 
         setGroupeditdata((prev) => ({
           ...prev,
@@ -207,6 +211,13 @@ const SamplePage4 = () => {
     }
 
     groupsave("D");
+     
+    setGroupeditdata({
+      ...groupeditdata,
+      action: "D",
+    });
+
+    groupsave();
   };
 
   const pagebutton = (event) => {
