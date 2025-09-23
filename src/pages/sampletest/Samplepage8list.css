@@ -1,0 +1,181 @@
+.movie-list {
+  display: flex;
+  flex-wrap: nowrap;
+  /* 한 줄로 정렬 */
+  gap: 16px;
+  /* 카드 간격 */
+  overflow-x: false;
+}
+
+.movie-list-container {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0px;
+  /* 카드 간격 */
+  overflow: hidden;
+  /* 스크롤바 숨기기 */
+  padding: 0px;
+  width: 100%;
+  position: relative;
+}
+
+.movie-card {
+  width: 200px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  text-align: center;
+  position: relative;
+  font-size: 14px;
+}
+
+/* 순위 */
+
+.rank {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 5px;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 포스터 */
+
+/* 기본 스타일 */
+
+.poster {
+  position: relative;
+  width: 200px;
+  height: 300px;
+  overflow: hidden;
+}
+
+.poster img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border-radius: 8px;
+  /* 둥근 모서리 */
+}
+
+/* 영화 정보 */
+
+.movie-info {
+  padding: 10px;
+  text-align: left;
+}
+
+.age-rating {
+  display: inline-block;
+  background-color: #ff7a00;
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 4px;
+  padding: 2px 5px;
+  margin-right: 5px;
+}
+
+.title {
+  font-size: 16px;
+  margin: 5px 0;
+  font-weight: bold;
+  color: #333;
+}
+
+.details {
+  font-size: 12px;
+  color: #666;
+}
+
+/* 액션 영역 */
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-top: 1px solid #eee;
+}
+
+/* 좋아요 */
+
+.like {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #999;
+  cursor: pointer;
+}
+
+.heart {
+  font-size: 18px;
+}
+
+.like-count {
+  font-size: 14px;
+}
+
+/* 예매 버튼 */
+
+.reserve-button {
+  background-color: #5e3db4;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.reserve-button:hover {
+  background-color: #4a2e91;
+}
+
+/* Dolby Cinema */
+
+.dolby {
+  font-size: 12px;
+  color: #5e3db4;
+  font-weight: bold;
+}
+
+/* 버튼 기본 스타일 (초기 상태: 숨김) */
+
+.quick-view {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  font-size: 16px;
+  padding: 10px 0;
+  text-align: center;
+  opacity: 0;
+  /* 숨김 상태 */
+  transform: translateY(100%);
+  /* 화면 아래로 숨김 */
+  transition: all 0.3s ease-in-out;
+  /* 부드러운 애니메이션 */
+}
+
+/* 마우스 올렸을 때 버튼 나타나기 */
+
+.poster:hover .quick-view {
+  opacity: 1;
+  /* 버튼 보이기 */
+  transform: translateY(0);
+  /* 원래 위치로 이동 */
+}
