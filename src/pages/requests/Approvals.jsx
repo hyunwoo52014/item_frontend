@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import ReactPaginate from 'react-paginate';
 import '../../assets/css/admin/common.css';
 import Pagination from '../../components/common/Pagination'
+import axios from 'axios';
 
 const Approvals = () => {
 
@@ -12,14 +13,22 @@ const Approvals = () => {
     };
     //select 전체 받아오는 json 형태의 list 필요
     const getAllList = () =>{
+
         axios.get("/api/approvals/showList")
         .then((res)=>{
-            console.log("/api/approvals/showList 반환값 :   "+res.data);
+            console.log("/api/approvals/showList 반환값 :   ");
+			console.log(res);
         })
         .catch((err)=>{
             
-        });
+        });//end axios
+
     }//getAllList
+
+	//onload 형태
+	useEffect(()=>{
+		getAllList();
+	},[]);
 
 
     return (
@@ -58,18 +67,20 @@ const Approvals = () => {
 									</tr>
 								</thead>
 								<tbody id="approvalsList">
+									<tr>
                                     {/* 만약 select 값이 0 이면, 조회되는 값이 없습니다. 출력 */}
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
+									</tr>
                                 </tbody>
 							</table>
 						</div>
 						
 						<div className="paging_area">
-                            <ReactPaginate pageCount={} onPageChange={} />
+                            {/* <ReactPaginate pageCount={} onPageChange={} /> */}
                         </div>
 					</div>
 
