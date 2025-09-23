@@ -12,7 +12,6 @@
 /build
 /out
 .idea
-!.idea/runConfigurations/react_run.xml
 
 # misc
 .DS_Store
