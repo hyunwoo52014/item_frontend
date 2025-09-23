@@ -5,25 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="767c8228-90ae-45e3-96b9-c4e4b2b610ff" name="변경" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/IntelliLang.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/sampletest/Postcode.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/sampletest/Samplepage14.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/sampletest/Samplepage14permit.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/sampletest/Samplepage14submenu.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/sampletest/Samplepage15.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/sampletest/Samplepage15compo.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/sampletest/Samplepage15progress.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/sampletest/Samplepage16.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/sampletest/Samplepage16popup.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/sampletest/Samplepage1.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/sampletest/Samplepage1.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/sampletest/Samplepage2.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/sampletest/Samplepage2.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/sampletest/Samplepage4.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/sampletest/Samplepage4.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/requests/ApplyModal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/requests/ApplyModal.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/requests/Pagination.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/requests/Pagination.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/requests/Returns.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/requests/Returns.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/requests/ReturnsTable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/requests/ReturnsTable.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/requests/SearchBar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/requests/SearchBar.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,6 +51,7 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "npm.start.executor": "Run",
+    "npm.test.executor": "Run",
     "project.structure.last.edited": "프로젝트",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
@@ -123,7 +112,7 @@
       <workItem from="1758240455325" duration="4828000" />
       <workItem from="1758498618650" duration="1804000" />
       <workItem from="1758501133331" duration="8799000" />
-      <workItem from="1758585997776" duration="6890000" />
+      <workItem from="1758585997776" duration="11735000" />
     </task>
     <servers />
   </component>
