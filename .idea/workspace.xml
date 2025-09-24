@@ -5,43 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="767c8228-90ae-45e3-96b9-c4e4b2b610ff" name="변경" comment="">
-      <change afterPath="$PROJECT_DIR$/my-app.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-app/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-app/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-app/package-lock.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-app/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-app/public/favicon.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-app/public/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-app/public/logo192.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-app/public/logo512.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-app/public/manifest.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-app/public/robots.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-app/src/App.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-app/src/App.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-app/src/App.test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-app/src/index.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-app/src/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-app/src/logo.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-app/src/reportWebVitals.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-app/src/setupTests.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-vue-app/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-vue-app/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-vue-app/babel.config.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-vue-app/jsconfig.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-vue-app/package-lock.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-vue-app/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-vue-app/public/favicon.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-vue-app/public/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-vue-app/src/App.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-vue-app/src/assets/logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-vue-app/src/components/HelloWorld.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-vue-app/src/main.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-vue-app/vue.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/requests/Returns.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/requests/Returns.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/requests/ReturnsTable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/requests/ReturnsTable.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +20,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="dev" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -69,17 +38,18 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Node.js.App.jsx.executor": "Run",
     "ReactCreateComponentLastSelected": "arrowFunctionComponent",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "CSH__250923__returns__front 병합 중",
+    "git-widget-placeholder": "CSH__feature/returns",
     "ignore.virus.scanning.warn.message": "true",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/reactWorkspace/my-app/src/pages/requests",
+    "last_opened_file_path": "D:/test/item_frontend",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -148,6 +118,8 @@
       <workItem from="1758498618650" duration="1804000" />
       <workItem from="1758501133331" duration="8799000" />
       <workItem from="1758585997776" duration="12039000" />
+      <workItem from="1758614225799" duration="4046000" />
+      <workItem from="1758672090557" duration="12402000" />
     </task>
     <servers />
   </component>

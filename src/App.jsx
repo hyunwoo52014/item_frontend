@@ -8,9 +8,9 @@ import Main from './pages/Main';
 import Login from './pages/Login';
 import Menu from './pages/Menu';
 import Content from './Content';
-import './App.css';
+import Returns from './pages/requests/Returns';
 
-import { Returns } from './pages/requests';
+import './App.css';
 
 const App = () => {
     return (
@@ -23,6 +23,7 @@ const App = () => {
                     <Route path='menu' element={<Menu />} />
                     <Route path=':type/:menu' element={<Content />} />
                 </Route>
+                <Route path='/returns' element={<Returns />} />
             </Routes>
         </div>
     );
