@@ -37,6 +37,9 @@ const RemainingDataModal = (props) => {
                     <p className="conTitle">
                         <span>{"잔여 카테고리 정보들"}</span>
                     </p>
+                    <b>
+                        총건수 : {remainData.totalCount}
+                    </b>
                     <table style={{ width: "550px", height: "350px" }}>
                         <colgroup>
                             <col width="5%" />
