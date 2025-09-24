@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import axios from "axios";
 import ReactPaginate from "react-paginate";
 import "./CategoriesCss.css";
-import CategoryRegisterModal from "./CategoryRegisterModal";
+import CategoryModal from "./CategoryModal";
 import Modal from "react-modal";
 
 const Categories = () => {
@@ -46,7 +46,9 @@ const Categories = () => {
 
     const [modalState, setModalState] = useState({
         isOpen: false,
-        action: ''
+        action: '',
+        categoryCode: '',
+        categoryName: '',
     })
 
     const searchCategories = async (cPage = 1) => {
@@ -80,10 +82,12 @@ const Categories = () => {
         searchCategories();
     }, []);
 
-    const openRegisterModal = (status) => {
+    const openModal = (status, categoryCode, categoryName) => {
         setModalState(() => ({
             isOpen: true,
             action: status,
+            categoryCode: categoryCode,
+            categoryName: categoryName
         }))
     }
 
@@ -147,7 +151,7 @@ const Categories = () => {
                               className="btn btn-primary"
                               name="newRegister"
                               id="newRegister"
-                              onClick={() => openRegisterModal("I")}
+                              onClick={() => openModal("I", '')}
                           >
                             <span>신규등록</span>
                           </button>
@@ -177,7 +181,15 @@ const Categories = () => {
                                     <>
                                         <tr key={index}>
                                             <td>{category.categoryNumber}</td>
-                                            <td>{category.categoryName}</td>
+                                            <td style={{
+                                                fontWeight: 'bold',
+                                                textDecoration: 'underline',
+                                                color: 'blue'
+                                            }}
+                                            onClick={() => {
+                                                openModal('U', category.categoryCode, category.categoryName);
+                                            }}
+                                            >{category.categoryName}</td>
                                             <td>{category.categoryQuantity}</td>
                                         </tr>
                                     </>
@@ -209,7 +221,7 @@ const Categories = () => {
                 onRequestClose={closeRegisterModal}
                 ariaHideApp={false}
             >
-                <CategoryRegisterModal action={modalState.action} closeModal={closeRegisterModal}/>
+                <CategoryModal action={modalState.action} closeModal={closeRegisterModal} categoryCode={modalState.categoryCode} categoryName={modalState.categoryName}/>
             </Modal>
         </>
     )
