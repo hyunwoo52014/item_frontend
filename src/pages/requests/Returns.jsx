@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { ReturnsTable } from './ReturnsTable.jsx';
-import { SearchBar } from './SearchBar.jsx';
+import SearchBar from './SearchBar.jsx';
 import { Pagination } from './Pagination.jsx';
 import { ApplyModal } from './ApplyModal.jsx';
 import Session from "react-session-api";
@@ -93,7 +93,10 @@ const Returns = () => {
                 <a href="/requests/returns" className="btn_set refresh">새로고침</a>
             </p>
 
-            <SearchBar onSearch={handleSearch} />
+            <p className="conTitle">
+                <span>내 장비 관리</span>
+                <SearchBar onSearch={handleSearch} />
+            </p>
 
             <div id="divReturnsList">
                 <ReturnsTable
