@@ -1,23 +1,62 @@
-import React, {useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import ReactPaginate from 'react-paginate';
 import '../../assets/css/admin/common.css';
-import Pagination from '../../components/common/Pagination'
 import axios from 'axios';
+import styled from 'styled-components';
 
 const Approvals = () => {
+
+	/* 스타일 */
+	const BtnUseStyle = styled.button`
+	background-color: #3498db;
+	color: #fff;
+	border: none;
+	padding: 5px 12px;
+	border-radius: 4px;
+	cursor: pointer;
+	&:hover {
+		background-color: #2980b9;
+	}
+
+	&:active {
+		transform: scale(0.95);   /* 살짝 눌린 듯 */
+		background-color: #2471a3; /* 좀 더 진한 파랑 */
+	}
+	`;
+
+	const BtnReturnStyle = styled.button`
+	background-color: #e67e22;
+	color: #fff;
+	border: none;
+	padding: 5px 12px;
+	border-radius: 4px;
+	cursor: pointer;
+	&:hover {
+		background-color: #d35400;
+	}
+
+	&:active {
+		transform: scale(0.95);   /* 살짝 눌린 듯 */
+		background-color: #ba4a00; /* 눌렀을 때 색 변경 */
+	}
+	`;
+
+	/* ************************************************ */
 
     //페이지 관련 json 필요 (현재 페이지, 전체 목록 갯수)
     const paginationJSON = {
         currentPage : 0,
         totalListCnt : 0,
     };
-    //select 전체 받아오는 json 형태의 list 필요
+    
+	//select 전체 받아오는 json 형태의 list 필요
+	const [showAllList, setShowAllList] = useState([]);
+
     const getAllList = () =>{
 
         axios.get("/api/approvals/showList")
         .then((res)=>{
-            console.log("/api/approvals/showList 반환값 :   ");
-			console.log(res);
+            setShowAllList(res.data);
         })
         .catch((err)=>{
             
@@ -36,7 +75,7 @@ const Approvals = () => {
 			<ul>
 				<li className="contents">
 					<div className="content">
-                        <p class="Location">
+                        <p className="Location">
                             <a href="../dashboard/dashboard.do" className="btn_set home">메인으로</a>
                             <span className="btn_nav bold">신청/반납</span>
                             <span className="btn_nav bold">사용신청</span>
@@ -66,15 +105,30 @@ const Approvals = () => {
 										<th>상태</th>
 									</tr>
 								</thead>
-								<tbody id="approvalsList">
-									<tr>
-                                    {/* 만약 select 값이 0 이면, 조회되는 값이 없습니다. 출력 */}
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-									</tr>
+								<tbody id="approvalsList" >
+									{showAllList.length === 0 ? 
+										<tr>
+											<td colSpan="5">조회된 데이터가 없습니다.</td>
+										</tr>
+										:
+										showAllList.map((item, index) => (
+												<tr key={index}>
+													<td>{index+1}</td>
+													<td>{item.name}</td>
+													<td>{item.product_name}</td>
+													<td>{item.order_date}</td>
+													<td>
+														{item.product_state === "사용신청"?
+															(<BtnUseStyle>{item.product_state}</BtnUseStyle>) 
+																: 
+															(<BtnReturnStyle>{item.product_state}</BtnReturnStyle>)	
+														}
+													</td>
+												</tr>
+											)
+										)//end map
+									}
+									
                                 </tbody>
 							</table>
 						</div>
