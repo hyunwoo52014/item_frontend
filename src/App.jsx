@@ -8,7 +8,12 @@ import Main from './pages/Main';
 import Login from './pages/Login';
 import Menu from './pages/Menu';
 import Content from './Content';
+
+
+
 import './App.css'
+import Notice from "./pages/notice/Notice";
+
 
 const App = () => {
   return (
@@ -19,7 +24,9 @@ const App = () => {
       <Route exact path='/main' element={<Main />} />
       <Route exact path='/dashboard' element={<Dashboard />} >
         <Route path='/dashboard/menu' element={<Menu />} />
-        <Route path='/dashboard/:type/:menu' element={<Content />} />
+          <Route path='notice' element={<Notice />} />
+          <Route path='/dashboard/:type/:menu' element={<Content />} />
+
       </Route>
     </Routes>
     </div>
