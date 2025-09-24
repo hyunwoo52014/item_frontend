@@ -4,8 +4,6 @@ import '../../assets/css/admin/common.css';
 import axios from 'axios';
 import styled from 'styled-components';
 
-const Approvals = () => {
-
 	/* 스타일 */
 	const BtnUseStyle = styled.button`
 	background-color: #3498db;
@@ -41,16 +39,32 @@ const Approvals = () => {
 	}
 	`;
 
+
+const Approvals = () => {
+
+
+
 	/* ************************************************ */
+
+	//select 전체 받아오는 json 형태의 list 필요
+	const [showAllList, setShowAllList] = useState([]);
 
     //페이지 관련 json 필요 (현재 페이지, 전체 목록 갯수)
     const paginationJSON = {
+		itemPerPage : 10, // 한 페이지당 출력할 행 수
         currentPage : 0,
-        totalListCnt : 0,
+        totalListCnt : showAllList.length, // 총 행 수
     };
     
-	//select 전체 받아오는 json 형태의 list 필요
-	const [showAllList, setShowAllList] = useState([]);
+	//현재 페이지
+	const [currentPage, setCurrentPage] = useState(0);
+	//시작 페이지
+	const startPage = currentPage * paginationJSON.itemPerPage;
+
+	//한 페이지 데이터 계산
+	const currentItems = showAllList.slice(startPage, startPage + paginationJSON.itemPerPage);
+
+
 
     const getAllList = () =>{
 
@@ -99,6 +113,7 @@ const Approvals = () => {
 								<thead>
 									<tr>
 										<th>번호</th>
+										<th>장비 코드</th>
 										<th>이름</th>
 										<th>대여 장비</th>
 										<th>신청날짜</th>
@@ -111,9 +126,10 @@ const Approvals = () => {
 											<td colSpan="5">조회된 데이터가 없습니다.</td>
 										</tr>
 										:
-										showAllList.map((item, index) => (
+										currentItems.map((item, index) => (
 												<tr key={index}>
-													<td>{index+1}</td>
+													<td>{startPage+index+1}</td>
+													<td>{item.category_code}-{item.product_detail_code}</td>
 													<td>{item.name}</td>
 													<td>{item.product_name}</td>
 													<td>{item.order_date}</td>
@@ -132,9 +148,19 @@ const Approvals = () => {
                                 </tbody>
 							</table>
 						</div>
-						
+						<br/>
 						<div className="paging_area">
-                            {/* <ReactPaginate pageCount={} onPageChange={} /> */}
+                                <ReactPaginate
+										previousLabel = {"← 이전"}
+										nextLabel={"다음 →"}
+										breakLabel={"..."}
+										pageCount={Math.ceil(showAllList.length / paginationJSON.itemPerPage)} // 총 페이지 수
+										marginPagesDisplayed={1}
+										pageRangeDisplayed={5}
+										onPageChange={({ selected }) => setCurrentPage(selected)} // 페이지 변경
+										containerClassName={"pagination"}
+										activeClassName={"active"}
+								/>
                         </div>
 					</div>
 
