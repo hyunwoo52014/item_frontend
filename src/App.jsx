@@ -25,7 +25,6 @@ const App = () => {
                     <Route path='menu' element={<Menu />} />
                     <Route path=':type/:menu' element={<Content />} />
                 </Route>
-                <Route path='/returns' element={<Returns />} />
             </Routes>
         </div>
     );
