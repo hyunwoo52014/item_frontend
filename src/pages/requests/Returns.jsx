@@ -14,7 +14,7 @@ const Returns = () => {
     const [totalCount, setTotalCount] = useState(0);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalData, setModalData] = useState(null);
-    const [searchParam, setSearchParam] = useState({ categoryCode: '' });
+    const [searchParam, setSearchParam] = useState({ productState: '' });
     const [newSearchKey, setNewSearchKey] = useState('');
 
     // API에서 반납 목록을 가져오는 함수
@@ -66,7 +66,7 @@ const Returns = () => {
 
     // 검색 핸들러 함수
     const handleSearch = (newSearchKey) => {
-        setSearchParam({ categoryCode: newSearchKey });
+        setSearchParam({ productState: newSearchKey });
         setCurrentPage(1);
     };
 
@@ -140,7 +140,10 @@ const Returns = () => {
 
             <div id="divReturnsList">
                 <ReturnsTable
-                    list={list}
+                    list={list.filter(item => {
+                        if (!searchParam.productState) return true; // 전체 보기
+                        return item.product_state === searchParam.productState;
+                    })}
                     onReturnDtl={handleReturnDtl}
                     onCancelDtl={handleCancelDtl}
                 />

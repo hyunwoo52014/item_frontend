@@ -14,7 +14,7 @@ export const ReturnsTable = ({list, onReturnDtl, onCancelDtl}) => {
             <tbody>
             {list && list.length > 0 ? (
                 list.map((item, index) => (
-                    <tr key={item.product_detail_code}>
+                    <tr key={`${item.product_detail_code}-${index}`}>
                         <td>{index + 1}</td>
                         <td>{item.product_name}</td>
                         <td>{item.category_name}</td>
