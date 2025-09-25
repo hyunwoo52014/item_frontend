@@ -1,29 +1,35 @@
-import React from 'react';
+import React,{useState} from 'react';
 import '../../assets/css/admin/common.css';
 
-const ApprovalsPopup=()=>{
+const ApprovalsPopup=(props)=>{
+    const [propsValue, setPropsValue] = useState(
+        {
+            closeModal : props.closeModal,
+        }
+    );
+
     return(
         <div>
-            <div id="approvalsReturnDetailDiv" className="layerPop layerType2" style={{width:"800px"}}>
+            <div id="approvalsReturnDetailDiv" className="layerPop layerType2 return" style={{width:"800px"}}>
                 <dl>
-                    <dt><strong>IT 비품 반납 상세</strong></dt>
+                    <dt><strong>IT 비품 신청 처리</strong></dt>
                     <dd className="content">
                         <p id="r_modalStatusText" style={{fontWeight: "bold", fontSize: "1.2em", textAlign: "center", marginBottom: "10px"}}></p>
                         <table className="row">
                             <tbody>
                                 <tr>
-                                    <th scope="row">사용신청일</th>
-                                    <td colspan="3"><input type="text" className="inputTxt p100" id="r_orderDate" name="r_orderDate" readonly/></td>
+                                    <th scope="row">사용요청일</th>
+                                    <td colSpan="3"><span>22020-123401234 fix된 값</span></td>
                                 </tr>
-                                <tr><th>대여인</th><td><input type="text" id="r_name" readonly/></td></tr>
-                                <tr><th>반납 장비</th><td><input type="text" id="r_productName" readonly/></td></tr>
-                                <tr><th>반납 사유</th><td><input type="text" id="r_returnReason" readonly/></td></tr>
+                                <tr><th>신청자</th><td><span>길동테스트fix된 값</span></td></tr>
+                                <tr><th>장비명</th><td><span>장비테스트fix된 값</span></td></tr>
+                                <tr><th>사용 목적</th><td><span>사용목적테스트fix된 값</span></td></tr>
                             </tbody>
                         </table>
                         <div className="btn_areaC mt30">
-                            <a href="#" className="btnType blue" id="btnReturnApprove"><span>승인</span></a>
-                            <a href="#" className="btnType gray" id="btnReturnReject"><span>거절</span></a>
-                            <a href="#" className="btnType gray" id="btnCloseReturn"><span>창닫기</span></a>
+                            <button className="btnType approval">승인</button>
+                            <button className="btnType reject">거절</button>
+                            <button className="btnType btnClose" onClick={propsValue.closeModal}>닫기</button>
                         </div>
 
                         <div id="r_modalStatusBadgeBox" style={{textAlign:"center", margin:"10px 0", display:"none"}}>
