@@ -50,7 +50,7 @@ function NoticeDetail({ noticeCode, onClose, onDeleted }) {
         }
     }
 
-
+/****/
     const handleDelete = async () => {
         if (!detail?.notice_code) return;
         if (!window.confirm("정말 삭제하시겠습니까?")) return;
