@@ -1,0 +1,123 @@
+/* 검색 영역 테이블 */
+.searchTable {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 8px 0;
+    margin-bottom: 12px;
+}
+
+.searchTable td {
+    vertical-align: middle;
+    padding: 4px 6px;
+    border: none;
+    font-size: 14px;
+    color: #333;
+}
+
+/* 라벨 */
+.searchTable td.label {
+    text-align: center !important;
+    font-weight: 600;
+    color: #555;
+    white-space: nowrap;
+    vertical-align: middle;
+    padding-right: 8px !important;
+    font-size: 14px;
+    width: 80px;
+}
+
+/* 입력 박스 */
+.searchTable input[type="text"],
+.searchTable input[type="date"] {
+    width: 100%;
+    height: 36px;
+    padding: 0 8px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.searchTable input[type="text"]:focus,
+.searchTable input[type="date"]:focus {
+    border-color: #50bcdf;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(80, 188, 223, 0.2);
+}
+
+/* 버튼 */
+.searchTable .btnType {
+    height: 36px;
+    line-height: 36px;
+    padding: 0 14px;
+    background-color: #007bff;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    color : #0f0f0f;
+}
+
+
+
+/* 리스트 - 테이블 */
+.divNoticeList {
+    margin-top: 16px;
+}
+
+.divNoticeList table.col {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.divNoticeList table.col th,
+.divNoticeList table.col td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.divNoticeList table.col th {
+    background: #f7f7f7;
+    font-weight: 600;
+    color: #333;
+}
+
+.divNoticeList table.col td a {
+    color: #333;
+    text-decoration: none;
+}
+
+.divNoticeList table.col td a:hover {
+    text-decoration: underline;
+}
+
+/* 페이징 영역 */
+.paging_area {
+    margin-top: 12px;
+    text-align: center;
+}
+
+.paging_area {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 16px 0;
+    text-align: center;
+}
+.paging_area > * {
+    margin: 0 auto;
+}
+
+.paging_area * {
+    float: none !important;
+}
+
+.paging_area ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: inline-flex;
+    gap: 6px;
+}
