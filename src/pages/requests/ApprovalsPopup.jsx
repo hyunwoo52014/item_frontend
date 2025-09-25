@@ -2,12 +2,6 @@ import React,{useState,useEffect} from 'react';
 import '../../assets/css/admin/common.css';
 
 const ApprovalsPopup=(props)=>{
-    // const [propsValue, setPropsValue] = useState(
-    //     {
-    //         status : props.action, //사용신청인지, 반납신청인지
-    //         closeModal : props.closeModal,
-    //     }
-    // );
 
     const [titleStr,setTitleStr] = useState({});
 

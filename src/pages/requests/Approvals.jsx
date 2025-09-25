@@ -5,6 +5,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import ApprovalsPopup from './ApprovalsPopup';
 import Modal from 'react-modal';
+import '../../assets/css/admin/approvals.css';
 
 	/* 스타일 */
 	const BtnUseStyle = styled.button`
@@ -220,7 +221,7 @@ const Approvals = () => {
 				</li>
 			</ul>
 
-			<Modal style={modalStyle} overlayClassName="mask" isOpen={modalwin.isopen} onRequestClose={closeModal} ariaHideApp={false} shouldCloseOnOverlayClick={false} shouldCloseOnEsc={false}>
+			<Modal style={modalStyle} overlayClassName="mask" isOpen={modalwin.isopen} onRequestClose={closeModal} ariaHideApp={false} shouldCloseOnOverlayClick={false} shouldCloseOnEsc={false} closeTimeoutMS={200} >
 				<ApprovalsPopup closeModal={closeModal} action={modalwin.action} oneRowData={oneRowData}/>
 			</Modal>
 		</div>
