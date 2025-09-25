@@ -3,6 +3,8 @@ import ReactPaginate from 'react-paginate';
 import '../../assets/css/admin/common.css';
 import axios from 'axios';
 import styled from 'styled-components';
+import ApprovalsPopup from './ApprovalsPopup';
+import Modal from 'react-modal';
 
 	/* 스타일 */
 	const BtnUseStyle = styled.button`
@@ -43,6 +45,50 @@ import styled from 'styled-components';
 const Approvals = () => {
 
 
+	/* modal 관련 */
+	const modalStyle = {
+		content : {
+			top: "50%",
+			left: "50%",
+			right: "auto",
+			bottom: "auto",
+			transform: "translate(-50%, -50%)", // 👈 중앙 정렬
+			width: "850px",
+			height: "400px",
+			background: "#fff",
+			borderRadius: "8px",
+			padding: "20px",
+			boxShadow: "rgba(0,0,0,0.24) 0px 3px 8px",
+		},
+	};
+
+
+
+    const [modalwin, setModalwin] = useState({
+            isopen : false,
+            action : "I",//등록으로 여는건지 수정으로 여는건지...!
+            loginid : "",
+        }
+    );
+
+	const openModal = () => {
+		setModalwin((old)=>(
+			{
+				...old,
+				isopen : true,
+			}
+		));
+	}// openModal
+
+
+	const closeModal = () => {
+		setModalwin((old)=>(
+			{
+				...old,
+				isopen : false,
+			}
+		));
+	}// closeModal
 
 	/* ************************************************ */
 
@@ -96,7 +142,7 @@ const Approvals = () => {
                             <a href="/requests/apply" className="btn_set refresh"></a>
                         </p>
 						<p className="conTitle">
-							<span>결제</span>
+							<span>결재</span>
 							<span className="fr">
 								<select id="searchKey" name="searchKey" style={{width:"100px"}}>
 									<option value="">전체</option>
@@ -135,9 +181,9 @@ const Approvals = () => {
 													<td>{item.order_date}</td>
 													<td>
 														{item.product_state === "사용신청"?
-															(<BtnUseStyle>{item.product_state}</BtnUseStyle>) 
+															(<BtnUseStyle onClick={openModal}>{item.product_state}</BtnUseStyle>) 
 																: 
-															(<BtnReturnStyle>{item.product_state}</BtnReturnStyle>)	
+															(<BtnReturnStyle onClick={openModal}>{item.product_state}</BtnReturnStyle>)	
 														}
 													</td>
 												</tr>
@@ -166,6 +212,10 @@ const Approvals = () => {
 
 				</li>
 			</ul>
+
+			<Modal style={modalStyle} overlayClassName="mask" isOpen={modalwin.isopen} onRequestClose={closeModal} ariaHideApp={false}>
+				<ApprovalsPopup closeModal={closeModal}/>
+			</Modal>
 		</div>
     );
 };//approvals
