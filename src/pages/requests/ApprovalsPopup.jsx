@@ -1,6 +1,5 @@
 import React,{useState,useEffect} from 'react';
 import '../../assets/css/admin/common.css';
-import axios from 'axios';
 
 const ApprovalsPopup=(props)=>{
     // const [propsValue, setPropsValue] = useState(
@@ -53,32 +52,15 @@ const ApprovalsPopup=(props)=>{
                 }
             ));
         }
+
     }; // tempStr
 
     
-    const [purposeStrFromDB, setPurposeStrFromDB] = useState();
-    //사용목적, 반납목적 기입한거, DB에서 가져와야 함.
-    const writtenPurposeStr = () => {
-        
-        //props.oneRowData를 DB 쪽으로 넘겨야해.
-        //axios POST를 이용해서 넘기면 되겠지.
-        axios.post("/api/approvals/getWrittenPurpose",props.oneRowData)
-        .then((res)=>{
-            console.log("-----------/api/approvals/getWrittenPurpose----------");
-            console.log(res);
 
-            //받아온 결과 화면에 뿌리기(randering이 필요하기 때문에 useState 이용)
-            setPurposeStrFromDB(res.data);
-        })
-        .catch((err)=>{
-
-        });
-    };
 
     /* onload */
     useEffect(()=>{
         tempStr(props.action); //사용신청인지 반납신청인지 틀 만드는거.
-        writtenPurposeStr(); // 신청 사유 받아오기
     },[]);
 
     return(
@@ -97,7 +79,7 @@ const ApprovalsPopup=(props)=>{
                                 <tr><th>{commonStr.tableNameStr}</th><td><span>{props.oneRowData.name}</span></td></tr>
                                 <tr><th>{commonStr.tableEquiveCodeStr}</th><td><span>{props.oneRowData.category_code}-{props.oneRowData.product_detail_code}</span></td></tr>
                                 <tr><th>{commonStr.tableEquivStr}</th><td><span>{props.oneRowData.product_name}</span></td></tr>
-                                <tr><th>{titleStr.purposeStr}</th><td><span>{purposeStrFromDB}</span></td></tr>
+                                <tr><th>{titleStr.purposeStr}</th><td><span>{props.oneRowData.order_reason}</span></td></tr>
                             </tbody>
                         </table>
                         <div className="btn_areaC mt30">
