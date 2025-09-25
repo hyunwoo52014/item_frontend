@@ -1442,7 +1442,9 @@ table.col tbody td a {
 table.col tbody td a:hover {
   text-decoration: underline;
 }
-
+table.col tbody tr:hover {
+  background: #e0e0e0;
+}
 table.col.hover tbody tr:hover {
   background: #ddd;
 }

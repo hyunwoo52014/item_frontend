@@ -54,7 +54,7 @@ const Approvals = () => {
 			bottom: "auto",
 			transform: "translate(-50%, -50%)", // 👈 중앙 정렬
 			width: "850px",
-			height: "400px",
+			height: "420px",
 			background: "#fff",
 			borderRadius: "8px",
 			padding: "20px",
@@ -66,16 +66,21 @@ const Approvals = () => {
 
     const [modalwin, setModalwin] = useState({
             isopen : false,
-            action : "I",//등록으로 여는건지 수정으로 여는건지...!
+            action : "",//등록으로 여는건지 수정으로 여는건지...!
             loginid : "",
         }
     );
 
-	const openModal = () => {
+	
+	const [oneRowData, setOneRowData] = useState({});
+	const openModal = (status, itemJson) => {
+		setOneRowData(itemJson);
+
 		setModalwin((old)=>(
 			{
 				...old,
 				isopen : true,
+				action : status, //사용신청인지, 반납신청인지
 			}
 		));
 	}// openModal
@@ -181,9 +186,9 @@ const Approvals = () => {
 													<td>{item.order_date}</td>
 													<td>
 														{item.product_state === "사용신청"?
-															(<BtnUseStyle onClick={openModal}>{item.product_state}</BtnUseStyle>) 
+															(<BtnUseStyle onClick={()=>openModal(item.product_state, item)}>{item.product_state}</BtnUseStyle>) 
 																: 
-															(<BtnReturnStyle onClick={openModal}>{item.product_state}</BtnReturnStyle>)	
+															(<BtnReturnStyle onClick={()=>openModal(item.product_state, item)}>{item.product_state}</BtnReturnStyle>)	
 														}
 													</td>
 												</tr>
@@ -214,7 +219,7 @@ const Approvals = () => {
 			</ul>
 
 			<Modal style={modalStyle} overlayClassName="mask" isOpen={modalwin.isopen} onRequestClose={closeModal} ariaHideApp={false} shouldCloseOnOverlayClick={false} shouldCloseOnEsc={false}>
-				<ApprovalsPopup closeModal={closeModal}/>
+				<ApprovalsPopup closeModal={closeModal} action={modalwin.action} oneRowData={oneRowData}/>
 			</Modal>
 		</div>
     );
