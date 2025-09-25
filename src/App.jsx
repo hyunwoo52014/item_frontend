@@ -9,7 +9,7 @@ import Login from './pages/Login';
 import Menu from './pages/Menu';
 import History from "./pages/requests/History";
 import Content from './Content';
-import Returns from './pages/requests/Returns';
+// import Returns from './pages/requests/Returns';
 
 import './App.css';
 

@@ -1,10 +1,11 @@
-import React, {useContext} from "react";
+import React, {useState, useContext, useEffect} from "react";
 import {HistoryModalContext} from "./History";
 import customCss from "./css_custom/forHistory.css";
+import axios from "axios";
 
 const HistoryBody = ({historyList}) => {
 
-    const modalContext = useContext(HistoryModalContext);
+    const {modalState,setModalState} = useContext(HistoryModalContext);
 
     const checkStatus = (status) => {
         if (status === 'Y') {
@@ -16,15 +17,37 @@ const HistoryBody = ({historyList}) => {
         }
     }
 
-    const modalOpen = (item) => {
-        console.log("modal open")
-        modalContext.isOpen = true;
-        modalContext.payload = item;
-        console.log(modalContext.isOpen, modalContext.payload);
+    const modalOpen = async (item) => {
+
+        const payload = await getProductDetails(item);
+
+        setModalState((prev)=>(
+            {
+                ...prev,
+                isOpen: true,
+                payload: payload,
+            }
+        ));
     }
 
+    const getProductDetails = (item) => {
+
+        const param = new URLSearchParams();
+        param.append("productNo",item.productNo);
+        param.append("productDetailCode",item.productDetailCode);
+
+
+        return axios.post("/requests/detailHistory",param)
+        .then((res) => {
+            return res.data;
+        }).catch((err) => {
+            return null;
+        });
+
+    }
+
+
     if (!historyList || historyList.length === 0) {
-        console.log("HistoryBody list : " , typeof historyList , historyList);
         return (
             <tbody>
             <tr>
@@ -38,9 +61,10 @@ const HistoryBody = ({historyList}) => {
             <tbody>
             {
                 historyList.map((item, index) => (
-                    <tr key={index} data-product-no={item.productNo}
-                        data-product-detail-code={item.productDetailCode}
+                    <tr key={index}
                         className={"customCss.lineDraw"}
+                        data-product-no={item.productNo}
+                        data-product-detail-code={item.productDetailCode}
                         onClick={()=>{modalOpen(item)}}>
                         <td>{item.team??"-"}</td>
                         <td>{item.name??"-"}</td>

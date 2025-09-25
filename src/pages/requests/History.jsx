@@ -4,6 +4,12 @@ import ReactPaginate from "react-paginate";
 import axios from "axios";
 import HistoryModal from "./HistoryModal";
 
+//Context 생성, 기본값 provider가 없을 시 사용
+export const HistoryModalContext = createContext({
+    modalState : null,
+    setModalState : ()=>{},
+});
+
 const History = () => {
 
 
@@ -21,6 +27,12 @@ const History = () => {
         status : 0,
         statusText : "",
     });
+
+    const [modalState, setModalState] = useState({
+        modalId : "history-modal",
+        isOpen : false,
+        payload : {},
+    })
 
     const changeElement = (e,value) => {
         setSearchElement((prev) => (
@@ -42,7 +54,6 @@ const History = () => {
 
         await axios.post("/requests/historyList",param)
             .then(res => {
-                console.log("res",res);
                 setResponseDataList({
                     currentPage : res.data.currentPage,
                     historyCnt : res.data.historyCnt,
@@ -53,7 +64,13 @@ const History = () => {
                 });
             })
             .catch((err)=>{
-                console.log("err",err);
+                setResponseDataList((prev)=>(
+                    {
+                        ...prev,
+                        historyCnt: 0,
+                        historyList: [],
+                    }
+                ));
             });
     }
 
@@ -63,7 +80,6 @@ const History = () => {
     }
 
     const changePageEvent = (e)=> {
-        console.log("selected",e.selected);
         searchHandler(parseInt(e.selected) + 1);
     }
 
@@ -82,6 +98,7 @@ const History = () => {
 
     return (
         <form id="myForm" action="" method="">
+            <HistoryModalContext.Provider value={{modalState, setModalState}}>
             <div id="wrap_area">
                 <div id="container">
                     <ul>
@@ -162,17 +179,12 @@ const History = () => {
                             </div>
                         </li>
                     </ul>
-                    <HistoryModal />
                 </div>
             </div>
+            {modalState.isOpen && <HistoryModal />}
+            </HistoryModalContext.Provider>
         </form>
     )
 }
-
-export const HistoryModalContext = createContext({
-    id: "history-modal",
-    isOpen: false,
-    payload: {}
-});
 
 export default History
