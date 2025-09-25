@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import content from "../../Content";
 
 function NoticeDetail({ noticeCode, onClose, onDeleted }) {
     const [detail, setDetail] = useState(null);
+    const [editMode, setEditMode] = useState(null);
+    const [form, setForm] = useState(false);
+    const [saving, setSaving] = useState(false);
 
+    // 상세조회
     useEffect(() => {
         const fetchDetail = async () => {
             try {
@@ -21,6 +26,30 @@ function NoticeDetail({ noticeCode, onClose, onDeleted }) {
         };
         if (noticeCode) fetchDetail();
     }, [noticeCode]);
+
+
+    // 수정
+    const handleUpdate = async () => {
+        if (!content?.trim()){
+            alert("내용을 입력하세요");
+            return;
+        }
+        try{
+            setSaving(true);
+            const params = new URLSearchParams();
+            params.append("nontice_code", noticeCode);
+            params.append("content", content);
+
+            const {data} = await axios.post("apt/notice/update", params, {
+                headers: {"Content-Type" : "application/x-www"}
+            })
+        } catch (e) {
+
+        } finally {
+
+        }
+    }
+
 
     const handleDelete = async () => {
         if (!detail?.notice_code) return;
@@ -85,12 +114,12 @@ function NoticeDetail({ noticeCode, onClose, onDeleted }) {
                     }}
                 >
                     <tbody>
-                    <tr style={{ fontSize: 14, color: "#444" }}>
-                        <th style={{ width: 80, textAlign: "left", fontWeight: 600, color: "#666", paddingRight: 8, whiteSpace: "nowrap" }}>
+                    <tr style={{ fontSize: 14, color:"#444" }}>
+                        <th style={{ width: 80, textAlign: "left",fontWeight: 600, color: "#666", paddingRight: 8, whiteSpace: "nowrap" }}>
                             작성자
                         </th>
                         <td style={{ paddingRight: 16 }}>{detail.loginID || "-"}</td>
-                        <th style={{ width: 80, textAlign: "left", fontWeight: 600, color: "#666", paddingRight: 8, whiteSpace: "nowrap" }}>
+                        <th style={{ width: 80, textAlign: "left",fontWeight: 600, color: "#666", paddingRight: 8, whiteSpace: "nowrap" }}>
                             작성일
                         </th>
                         <td>{detail.writeDate || "-"}</td>
@@ -109,10 +138,7 @@ function NoticeDetail({ noticeCode, onClose, onDeleted }) {
                         <button className="btnType red" onClick={handleDelete}>
                             삭제
                         </button>
-                        <button
-                            className="btnType blue"
-                            onClick={() => {
-                                // TODO: 수정 모달/화면 열기
+                        <button className="btnType blue" onClick={() => {
                                 console.log("수정:", detail.notice_code);
                             }}
                         >

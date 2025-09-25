@@ -224,7 +224,7 @@ function Notice() {
                                         <tr>
                                             <td colSpan={4}>데이터가 존재하지 않습니다.</td>
                                         </tr>
-                                    ) : (
+                                    ) :(
                                         rows.map((r) => (
                                             <tr key={r.notice_code}>
                                                 <td>{r.notice_code}</td>
@@ -246,7 +246,7 @@ function Notice() {
                                     <Pagination
                                         currentPage={currentPage}
                                         totalPage={totalPage}
-                                        pageSize={fakePageSize}   // Pagination 내부 계산용
+                                        pageSize={fakePageSize}   // Pagination계산용
                                         blockSize={blockSize}
                                         onClick={onPageClick}
                                     />
