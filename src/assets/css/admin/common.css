@@ -1521,9 +1521,9 @@ table.row3 > tbody > tr > td {
 table.qna {
 }
 
-table.qna tr.view {
+/*table.qna tr.view {
   display: ;
-}
+}*/
 
 table.qna tr.view td {
   position: relative;

@@ -8,7 +8,7 @@ import Main from './pages/Main';
 import Login from './pages/Login';
 import Menu from './pages/Menu';
 import Content from './Content';
-import Returns from './pages/requests/Returns';
+//import Returns from './pages/requests/Returns';
 
 import './App.css';
 

@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Pagination from "../../components/common/Pagination";
+import Pagination from "./NoticePagination";
 import NoticeDetail from "./NoticeDetail";
+import "../../assets/css/notice/notice.css";
+import "../../assets/css/admin/common.css";
+
 
 const pageSize = 5; // 페이지당 행 수
 const blockSize = 5; // 페이지 버튼 묶음 수
@@ -12,6 +15,11 @@ function Notice() {
     const [fromDate, setFromDate] = useState("");
     const [toDate, setToDate] = useState("");
 
+    // 관리자 - 새글작성버튼 보임
+    const [loginId, setLoginID] = useState("");
+    const isAdmin = (loginId || "").trim().toUpperCase() === "ADMIN";
+
+
     // 리스트/페이징
     const [rows, setRows] = useState([]);
     const [totalCount, setTotalCount] = useState(0);
@@ -19,12 +27,20 @@ function Notice() {
 
     // 총페이지 / Pagination용 가짜 pageSize
     const totalPage = Math.max(1, Math.ceil(totalCount / pageSize));
-    const fakePageSize = Math.max(1, Math.ceil(totalPage / blockSize));
+    //const fakePageSize = Math.max(1, Math.ceil(totalPage / blockSize));
 
     // 신규등록
     const [showModal, setShowModal] = useState(false);
     const [form, setForm] = useState({ title: "", content: "" });
-    const openModal = () => setShowModal(true);
+
+    // 관리리자 - 모달 나옴
+    const openModal = () => {
+        if (!isAdmin) {
+            alert("관리자만 등록할 수 있습니다.");
+            return;
+        }
+        setShowModal(true);
+    };
     const closeModal = () => {
         setShowModal(false);
         setForm({ title: "", content: "" });
@@ -33,9 +49,14 @@ function Notice() {
     // 상세페이지
     const [detailCode, setDetailCode] = useState(null);
 
-    const fetchNoticeList = async (page = 1) => {
+    const fetchNoticeList = async (page = 1, override) => {
+
+        const _title = override?.title ?? title;
+        const _fromDate = override?.fromDate ?? fromDate;
+        const _toDate = override?.toDate?? toDate;
+
         // 날짜 유효성
-        if (fromDate && toDate && toDate < fromDate) {
+        if (_fromDate && _toDate && _toDate < _fromDate) {
             alert("종료일은 시작일보다 빠를 수 없습니다.");
             return;
         }
@@ -43,9 +64,12 @@ function Notice() {
         setCurrentPage(page);
 
         const params = new URLSearchParams();
-        params.append("title", title);
-        params.append("from_date", fromDate);
-        params.append("to_date", toDate);
+        //params.append("title", title);
+        //params.append("from_date", fromDate);
+        //params.append("to_date", toDate);
+        params.append("title", _title);
+        params.append("from_date", _fromDate);
+        params.append("to_date", _toDate);
         params.append("currentPage", page);
         params.append("pageSize", pageSize);
 
@@ -80,10 +104,65 @@ function Notice() {
     };
 
     // 페이지 삭제 후 갱신
-    const handleDeleted = () => {
+    const handleDetailClose = (shouldRefresh = false) => {
         setDetailCode(null);
-        fetchNoticeList(currentPage);
+        if(shouldRefresh){
+            fetchNoticeList(currentPage,{title, fromDate, toDate});
+        }
+
     };
+
+
+    // 새로고침
+    const onRefreshAll = () => {
+        setTitle("");
+        setForm("");
+        setToDate("");
+        setCurrentPage(1);
+        fetchNoticeList(1,{title: "", fromDate:"", toDate:""});
+    }
+
+    // 관리자 확인
+    useEffect(() => {
+        try {
+            let raw = sessionStorage.getItem("loginInfo");
+            if(!raw){
+                raw = localStorage.getItem("loginInfo")
+            }
+            if (!raw) {
+                const fallbackId =
+                    sessionStorage.getItem("loginId") ||
+                    sessionStorage.getItem("loginID") ||
+                    localStorage.getItem("loginId") ||
+                    localStorage.getItem("loginID") ||
+                    "";
+                setLoginID((fallbackId || "").toString().trim());
+                return;
+            }
+
+            let id="";
+            const trimmed =raw.toString().trim();
+
+            if(trimmed.startsWith("{") && trimmed.endsWith("}")){
+                const info = JSON.parse(trimmed);
+                id =
+                    (info.userId ??
+                        info.loginID ??
+                        info.loginId ??
+                        info.id ??
+                        info.username ??
+                        "") + "";
+            } else {
+                id = trimmed;
+            }
+
+            setLoginID((id || "").toString().trim());
+            // console.log("loginId:", id); // 필요시 확인
+        } catch (e) {
+            console.error("loginInfo 파싱 실패:", e);
+            setLoginID("");
+        }
+    }, []);
 
 
     // 신규등록
@@ -142,71 +221,52 @@ function Notice() {
                                 <a href="#!" className="btn_set home">메인으로</a>
                                 <a href="#!" className="btn_nav bold">공지사항</a>
                                 <span className="btn_nav bold">공지 사항</span>
-                                <a href="#!" className="btn_set refresh" onClick={() => fetchNoticeList(currentPage)}>새로고침</a>
+                                <a   href="#!" className="btn_set refresh" onClick={(e) => {
+                                    e.preventDefault();
+                                    onRefreshAll();
+                                }}
+                                >새로고침</a>
                             </p>
 
                             <p className="conTitle">
                                 <span>공지 사항</span>
                                 <span className="fr">
-                  {/* 신규등록 버튼 오픈 */}
-                                    <button className="btnType blue" onClick={openModal}>
-                    신규등록
-                  </button>
-                </span>
+                                    {
+                                        isAdmin && (
+                                            <button className="btnType blue" onClick={openModal}>신규등록</button>
+                                        )
+                                    }
+                                 </span>
                             </p>
 
                             {/* 검색 */}
-                            <table
-                                width="100%"
-                                cellPadding="5"
-                                cellSpacing="0"
-                                border="1"
-                                align="left"
-                                style={{ borderCollapse: "collapse", border: "1px #50bcdf" }}
-                            >
+                            <table className="searchTable">
                                 <tbody>
                                 <tr>
-                                    <td width="100" height="25" />
-                                    <td width="50" height="25">제목</td>
-                                    <td width="200" height="25">
-                                        <input
-                                            type="text"
-                                            style={{ width: 200 }}
-                                            value={title}
-                                            onChange={(e) => setTitle(e.target.value)}
-                                        />
+                                    <td className="label">제목</td>
+                                    <td width="200">
+                                        <input type="text" value={title} onChange={(e)=>setTitle(e.target.value)} />
                                     </td>
-                                    <td width="60" height="25">작성일</td>
-                                    <td width="180" height="25">
-                                        <input
-                                            type="date"
-                                            style={{ width: 160 }}
-                                            value={fromDate}
-                                            onChange={(e) => setFromDate(e.target.value)}
-                                        />
+                                    <td className="label">작성일</td>
+                                    <td width="180">
+                                        <input type="date" value={fromDate} onChange={(e)=>setFromDate(e.target.value)} />
                                     </td>
-                                    <td width="180" height="25">
-                                        <input
-                                            type="date"
-                                            style={{ width: 160 }}
-                                            value={toDate}
-                                            onChange={(e) => setToDate(e.target.value)}
-                                        />
+                                    <td width="180">
+                                        <input type="date" value={toDate} onChange={(e)=>setToDate(e.target.value)} />
                                     </td>
-                                    <td width="110" height="25">
-                                        <button className="btnType blue" onClick={onSearch}>
-                                            검색
-                                        </button>
+                                    <td width="110">
+                                        <button className="btnType blue" onClick={onSearch}>검색</button>
                                     </td>
                                 </tr>
                                 </tbody>
                             </table>
 
+
                             {/* 리스트 */}
-                            <div className="divNoticeList" style={{ marginTop: 10 }}>
+                            <div className="divNoticeList">
                                 <table className="col">
                                     <colgroup>
-                                        <col width="70" />
+                                        <col width="100" />
                                         <col />
                                         <col width="160" />
                                         <col width="120" />
@@ -246,7 +306,6 @@ function Notice() {
                                     <Pagination
                                         currentPage={currentPage}
                                         totalPage={totalPage}
-                                        pageSize={fakePageSize}   // Pagination계산용
                                         blockSize={blockSize}
                                         onClick={onPageClick}
                                     />
@@ -318,8 +377,9 @@ function Notice() {
                 detailCode && (
                     <NoticeDetail
                         noticeCode={detailCode}
-                        onClose={() => setDetailCode(null)}
-                        onDeleted={handleDeleted}
+                        onClose={handleDetailClose}
+                        //onDeleted={handleDetailClose}
+                       // onDeleted={handleUpdate}
             />
                 )}
         </div>
