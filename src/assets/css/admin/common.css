@@ -1699,6 +1699,18 @@ table tbody .bg_gray {
   background: #dce1e6;
 }
 
+.history_pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.history_pagination_li {
+    margin: 0 5px
+
+}
+
 .paging {
   /* float:right; */
   height: 23px;

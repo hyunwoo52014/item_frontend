@@ -1,5 +1,19 @@
+import React, {useContext, useEffect} from "react";
+import {HistoryModalContext} from "./History";
 
 const HistoryModal = () => {
+
+    const modalContext = useContext(HistoryModalContext);
+
+    const closeModal = () => {
+        modalContext.isOpen = false;
+        modalContext.close();
+    }
+
+    useEffect(() => {
+        document.getElementById("historyModal").setAttribute("display", modalContext.isOpen);
+    },[modalContext.isOpen]);
+
     return (
         <div id="historyModal" className="layerPop layerType2" style={{width: "700px"}}>
             <dl>

@@ -7,7 +7,7 @@ import Dashboard from './Dashboard';
 import Main from './pages/Main';
 import Login from './pages/Login';
 import Menu from './pages/Menu';
-import History from "./pages/history/History";
+import History from "./pages/requests/History";
 import Content from './Content';
 import './App.css'
 
@@ -21,7 +21,6 @@ const App = () => {
                 <Route exact path='/dashboard' element={<Dashboard/>}>
                     <Route path='/dashboard/menu' element={<Menu/>}/>
                     <Route path='/dashboard/:type/:menu' element={<Content/>}/>
-                    <Route path='/dashboard/requests/history' element={<History/>}/>
                 </Route>
             </Routes>
         </div>
