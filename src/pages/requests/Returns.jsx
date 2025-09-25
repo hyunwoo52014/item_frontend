@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { ReturnsTable } from './ReturnsTable.jsx';
 import SearchBar from './SearchBar.jsx';
-import { Pagination } from './Pagination.jsx';
+import Pagination from '../../components/common/Pagination.jsx';
 import { ApplyModal } from './ApplyModal.jsx';
 import Session from "react-session-api";
+import Commcodeselect from '../../components/common/Commcodeselect.jsx';
+
 
 const Returns = () => {
 
@@ -15,7 +17,7 @@ const Returns = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalData, setModalData] = useState(null);
     const [searchParam, setSearchParam] = useState({ productState: '' });
-    const [newSearchKey, setNewSearchKey] = useState('');
+    const safeTotalPage = totalCount > 0 ? Math.ceil(totalCount / pageSize) : 1;
 
     // API에서 반납 목록을 가져오는 함수
     const fetchReturnsList = async () => {
@@ -122,7 +124,7 @@ const Returns = () => {
     // `currentPage` 또는 `searchParam`이 변경될 때마다 데이터를 다시 가져옴
     useEffect(() => {
         fetchReturnsList();
-    }, [currentPage, searchParam]);
+    }, [currentPage, searchParam.productState]);
 
     return (
         <div>
@@ -149,12 +151,14 @@ const Returns = () => {
                 />
             </div>
 
-            <div className="paging_area" id="pagingnavi">
+            <div className="paging_area">
                 <Pagination
                     currentPage={currentPage}
-                    totalCount={totalCount}
+                    // totalCount가 0일 때 totalPage가 0이 아닌 1로 계산되도록 수정
+                    totalPage={safeTotalPage}
                     pageSize={pageSize}
-                    onPageChange={handlePageChange}
+                    blockSize={5} // 한 번에 보여줄 페이지 블록 수
+                    onClick={handlePageChange}
                 />
             </div>
             {isModalOpen && <ApplyModal data={modalData} onClose={() => setIsModalOpen(false)} />}
