@@ -5,7 +5,6 @@ import SearchBar from './SearchBar.jsx';
 import Pagination from '../../components/common/Pagination.jsx';
 import { ApplyModal } from './ApplyModal.jsx';
 import Session from "react-session-api";
-import Commcodeselect from '../../components/common/Commcodeselect.jsx';
 
 
 const Returns = () => {
@@ -150,16 +149,19 @@ const Returns = () => {
                     onCancelDtl={handleCancelDtl}
                 />
             </div>
-
-            <div className="paging_area">
-                <Pagination
-                    currentPage={currentPage}
-                    // totalCount가 0일 때 totalPage가 0이 아닌 1로 계산되도록 수정
-                    totalPage={safeTotalPage}
-                    pageSize={pageSize}
-                    blockSize={5} // 한 번에 보여줄 페이지 블록 수
-                    onClick={handlePageChange}
-                />
+            <div className="d-flex justify-content-center">
+                {totalCount > 0 && (
+                    <div className="paging_area">
+                        <Pagination
+                            currentPage={currentPage}
+                            // totalCount가 0일 때 totalPage가 0이 아닌 1로 계산되도록 수정
+                            totalPage={safeTotalPage}
+                            pageSize={pageSize}
+                            blockSize={5} // 한 번에 보여줄 페이지 블록 수
+                            onClick={handlePageChange}
+                        />
+                    </div>
+                )}
             </div>
             {isModalOpen && <ApplyModal data={modalData} onClose={() => setIsModalOpen(false)} />}
         </div>
