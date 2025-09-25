@@ -7,7 +7,6 @@ import Dashboard from './Dashboard';
 import Main from './pages/Main';
 import Login from './pages/Login';
 import Menu from './pages/Menu';
-import History from "./pages/requests/History";
 import Content from './Content';
 // import Returns from './pages/requests/Returns';
 

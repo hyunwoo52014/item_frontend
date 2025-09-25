@@ -1,7 +1,8 @@
 import React, {useContext, useEffect, useState} from "react";
 import {HistoryModalContext} from "./History";
+import axios from "axios";
 
-const HistoryModal = () => {
+const HistoryModal = ({searchHandler}) => {
 
     const {modalState, setModalState} = useContext(HistoryModalContext);
 
@@ -29,6 +30,7 @@ const HistoryModal = () => {
                 payload: {},
             }
         ))
+        searchHandler();
     }
 
     useEffect(() => {
@@ -50,10 +52,31 @@ const HistoryModal = () => {
 
     }, [modalState]);
 
+    const deleteProduct = (e) =>{
+        e.preventDefault();
+        if(window.confirm("정말 이 장비를 폐기하시겠습니까?")) {
+            const param = new URLSearchParams({
+                productNo : modalState.payload.productNo,
+                productDetailCode : modalState.payload.productDetailCode,
+            });
+
+            axios.post("/requests/deleteHistory",param)
+                .then(res => {
+                    alert("장비가 성공적으로 폐기되었습니다.");
+                })
+                .catch(err => {
+                    alert("폐기 중 오류가 발생했습니다");
+                });
+
+
+        }
+        closeModal(e);
+    }
+
     useEffect(() => {
         const storedUserTypeData = sessionStorage.getItem("userType");
 
-        if(storedUserTypeData){
+        if(storedUserTypeData === "A"){
             setSessionToUserTypeData((prev)=>(
                 {
                     ...prev,
@@ -145,7 +168,7 @@ const HistoryModal = () => {
                         </table>
 
                         <div className="btn_areaC mt30">
-                            <a href="" className="btnType blue" id="btnDelete" name="btn"
+                            <a href="" className="btnType blue" id="btnDelete" name="btn" onClick={deleteProduct}
                                style={{display: sessionToUserTypeData.userType? "inline-block": "none", marginRight:"10px"}}><span>폐기</span></a>
                             <a href="" className="btnType gray" id="btnClose" name="btn"
                                onClick={closeModal}><span>닫기</span></a>

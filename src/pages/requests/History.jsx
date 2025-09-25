@@ -181,7 +181,7 @@ const History = () => {
                     </ul>
                 </div>
             </div>
-            {modalState.isOpen && <HistoryModal />}
+            {modalState.isOpen && <HistoryModal searchHandler = {searchHandler} />}
             </HistoryModalContext.Provider>
         </form>
     )
