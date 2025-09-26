@@ -1,0 +1,127 @@
+#divRentalList {
+    margin: 30px 0;
+    padding: 25px;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+/* 제목 */
+#divRentalList h4 {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #222;
+}
+
+/* 테이블 기본 스타일 */
+#divRentalList .tb_list {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+    text-align: center;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* 테이블 헤더 */
+#divRentalList .tb_list thead th {
+    background-color: #f9fafb;
+    color: #333;
+    font-weight: 600;
+    padding: 16px 12px;
+    border-bottom: 2px solid #e5e7eb;
+    font-size: 15px;
+}
+
+/* 테이블 바디 */
+#divRentalList .tb_list tbody td {
+    padding: 18px 12px;
+    border-bottom: 1px solid #f1f1f1;
+    color: #444;
+    font-size: 15px;
+}
+
+/* 행 hover */
+#divRentalList .tb_list tbody tr:hover {
+    background-color: #f9fcff;
+    transition: background-color 0.2s ease;
+}
+
+/* 홀/짝수 구분 */
+#divRentalList .tb_list tbody tr:nth-child(even) {
+    background-color: #fcfcfc;
+}
+
+/* 페이징 영역 */
+.paging_area {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.paging_area .paging a,
+.paging_area .paging strong {
+    display: inline-block;
+    margin: 0 5px;
+    padding: 3px 5px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    color: #333;
+    background: #fff;
+}
+
+.paging_area .paging strong {
+    background: #2563eb;
+    color: #fff;
+    border-color: #2563eb;
+}
+
+.paging_area .paging a:hover {
+    background: #f1f5ff;
+}
+
+.search-section {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+}
+
+.search-form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.search-input {
+    flex: 1;
+    max-width: 300px;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.search-input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.btn-search {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn-search:hover {
+    background-color: #0056b3;
+}
