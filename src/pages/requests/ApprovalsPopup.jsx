@@ -1,7 +1,44 @@
 import React,{useState,useEffect} from 'react';
 import '../../assets/css/admin/common.css';
+import Modal from 'react-modal';
+import ApprovalsApproveModal from './ApprovalsApproveModal';
+import ApprovalsRejectModal from './ApprovalsRejectModal';
+import axios from 'axios';
+import '../../assets/css/admin/approvals.css';
 
 const ApprovalsPopup=(props)=>{
+
+
+	/* modal 관련 */
+	const modalStyle = {
+		content : {
+			width: "450px",
+			height: "220px",
+			background: "#fff",
+			borderRadius: "8px",
+			padding: "20px",
+			boxShadow: "rgba(0,0,0,0.24) 0px 3px 8px",
+		},
+	};
+
+
+    const [modalwin, setModalwin] = useState({
+            isopen : false,
+            action : "",//등록으로 여는건지 수정으로 여는건지...!
+            loginid : "",
+        }
+    );
+
+    const closeModal = () => {
+		setModalwin((old)=>(
+			{
+				...old,
+				isopen : false,
+			}
+		));
+	}// closeModal
+
+    /************************************************** */
 
     const [titleStr,setTitleStr] = useState({});
 
@@ -49,6 +86,76 @@ const ApprovalsPopup=(props)=>{
 
     }; // tempStr
 
+
+    /***************승인, 거절 모달******************************** */
+
+    const approvalModal = (
+        <ApprovalsApproveModal></ApprovalsApproveModal>
+    );
+
+    const rejectModal = (
+        <ApprovalsRejectModal></ApprovalsRejectModal>
+    );
+
+    const [approvalReactModalStatus, setApproapprovalReactModalStatus] = useState(
+        {
+            status : "",
+        }
+    );
+    const clickApprovalsBtn = () => {
+        // props.oneRowData 이걸 서버쪽으로 넘겨서 계산해야지
+        const str=1;
+        /*
+        axios.post("/api/approvals/clickApprovals",props.oneRowData)
+        .then((res)=>{
+            if(props.oneRowData === 'O' && res.data === 2){
+                //승인되었습니다.
+                setApproapprovalReactModalStatus(()=>(
+                    {
+                        status : "approval",
+                    }
+                ));
+            }else if(props.oneRowData === 'R' && res.data === 2){
+                //거절되었습니다.
+                setApproapprovalReactModalStatus(()=>(
+                    {
+                        status : "reject",
+                    }
+                ));
+            }//end if~else
+        })
+        .catch((err)=>{
+
+        });
+        */
+
+        if(str === 1){
+            //승인되었습니다.
+            setApproapprovalReactModalStatus(()=>(
+                {
+                    status : "approval",
+                }
+            ));
+
+            setModalwin((old)=>(
+                {
+                    ...old,
+                    isopen : true,
+                }
+            ));
+        }else if(str === 2){
+            //거절되었습니다.
+            setApproapprovalReactModalStatus(()=>(
+                {
+                    status : "reject",
+                }
+            ));
+        }
+        
+        // return으로 돌아온 값이 2라면 잘 처리된거니까
+        // 승인되었습니다. 팝업 띄우자
+
+    }; //clickApprovalsBtn
     
 
 
@@ -70,14 +177,14 @@ const ApprovalsPopup=(props)=>{
                                     <th scope="row">{titleStr.tableDateStr}</th>
                                     <td colSpan="3"><span className="font_black">{props.oneRowData.order_date}</span></td>
                                 </tr>
-                                <tr><th>{commonStr.tableNameStr}</th><td ><span className="font_black">{props.oneRowData.name}</span></td></tr>
+                                <tr><th>{commonStr.tableNameStr}</th><td><span className="font_black">{props.oneRowData.name}</span></td></tr>
                                 <tr><th>{commonStr.tableEquiveCodeStr}</th><td><span className="font_black">{props.oneRowData.category_code}-{props.oneRowData.product_detail_code}</span></td></tr>
                                 <tr><th>{commonStr.tableEquivStr}</th><td><span className="font_black">{props.oneRowData.product_name}</span></td></tr>
                                 <tr><th>{titleStr.purposeStr}</th><td><span className="font_black">{props.oneRowData.order_reason}</span></td></tr>
                             </tbody>
                         </table>
                         <div className="btn_areaC2 mt30">
-                            <button className="btnType10 approval">승인</button>
+                            <button className="btnType10 approval" onClick={clickApprovalsBtn}>승인</button>
                             <button className="btnType10 reject">거절</button>
                             <button className="btnType10 btnClose" onClick={props.closeModal}>닫기</button>
                         </div>
@@ -88,6 +195,12 @@ const ApprovalsPopup=(props)=>{
                     </dd>
                 </dl>
             </div>
+            {approvalReactModalStatus.status &&
+            <Modal style={modalStyle} isOpen={modalwin.isopen} onRequestClose={closeModal} ariaHideApp={false} shouldCloseOnOverlayClick={false}  closeTimeoutMS={200} className="approval_modal_content-level2" overlayClassName="approval_modal_overlay-level2">
+                {approvalReactModalStatus.status === 'approval' ? approvalModal : rejectModal}
+            
+            </Modal>
+            }
         </div>
     );//return
 };//ApprovalsPopup

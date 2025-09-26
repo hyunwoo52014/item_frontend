@@ -1843,7 +1843,7 @@ table tbody .bg_gray {
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 9000;
+    z-index: 500;
     background-color: rgba(51, 51, 51, 0.7); /* #333에 투명도 */
     /* display: none; */
 }
