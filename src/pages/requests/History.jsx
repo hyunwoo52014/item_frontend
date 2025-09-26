@@ -3,6 +3,7 @@ import HistoryBody from "./HistoryBody";
 import ReactPaginate from "react-paginate";
 import axios from "axios";
 import HistoryModal from "./HistoryModal";
+import customCss from "./css_custom/forHistory.css";
 
 //Context 생성, 기본값 provider가 없을 시 사용
 export const HistoryModalContext = createContext({
