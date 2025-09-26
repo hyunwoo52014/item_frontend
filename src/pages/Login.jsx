@@ -150,12 +150,12 @@ const Login = () => {
                 <span className="id_save"> ID저장 </span>
               </p>
               <div>
-                <a href="" id="RegisterBtn" name="modal">
+                <Link id="RegisterBtn" to ="/register" name="modal">
                   <strong> [회원가입] </strong>
-                </a>
-                <a href="">
+                </Link>
+                <Link to={"/find"}>
                   <strong> [아이디 / 비밀번호 찾기] </strong>
-                </a>
+                </Link>
                 <a onClick={linkTest}>
                   <Link to="/left"> left </Link>
                 </a>
