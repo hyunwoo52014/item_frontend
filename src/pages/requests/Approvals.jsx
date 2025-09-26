@@ -221,7 +221,7 @@ const Approvals = () => {
 				</li>
 			</ul>
 
-			<Modal style={modalStyle} overlayClassName="mask" isOpen={modalwin.isopen} onRequestClose={closeModal} ariaHideApp={false} shouldCloseOnOverlayClick={false} shouldCloseOnEsc={false} closeTimeoutMS={200} >
+			<Modal style={modalStyle} overlayClassName="mask10" isOpen={modalwin.isopen} onRequestClose={closeModal} ariaHideApp={false} shouldCloseOnOverlayClick={false} shouldCloseOnEsc={false} closeTimeoutMS={200} >
 				<ApprovalsPopup closeModal={closeModal} action={modalwin.action} oneRowData={oneRowData}/>
 			</Modal>
 		</div>
