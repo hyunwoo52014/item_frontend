@@ -1,6 +1,5 @@
 import React, {useState, useContext, useEffect} from "react";
 import {HistoryModalContext} from "./History";
-import customCss from "./css_custom/forHistory.css";
 import axios from "axios";
 
 const HistoryBody = ({historyList}) => {
