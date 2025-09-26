@@ -1,14 +1,9 @@
-//import { useState } from 'react'
-//import reactLogo from './assets/react.svg'
-//import viteLogo from '/vite.svg'
-
 import { Route, Routes } from 'react-router-dom';
 import Dashboard from './Dashboard';
 import Main from './pages/Main';
 import Login from './pages/Login';
 import Menu from './pages/Menu';
 import Content from './Content';
-import Returns from './pages/requests/Returns';
 
 import './App.css';
 
@@ -30,5 +25,5 @@ const App = () => {
   );
 }
 
-export default App;
+export default App
 
