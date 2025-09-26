@@ -1,0 +1,20 @@
+@charset "utf-8";
+
+tr td{
+    cursor: pointer;
+}
+
+tr td:hover {
+    text-decoration: underline;
+}
+
+.history_pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.history_pagination_li {
+    margin: 0 5px
+}
