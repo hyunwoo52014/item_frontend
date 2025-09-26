@@ -441,16 +441,16 @@ a.btnType span {
     cursor: pointer;
 }
 
-.btnType.approval:hover{
+.btnType10.approval:hover{
     background-color: #27642a;
 }
 
-.btnType.approval:active{
+.btnType10.approval:active{
     transform: scale(0.95);   /* 살짝 눌린 듯 */
     background-color: #1b4d1e;
 }
 
-.btnType.reject {
+.btnType10.reject {
     background-color: #c62828 ;
     color: #fff;
     border: none;
@@ -486,17 +486,7 @@ a.btnType span {
     background-color: #5a5a5a;
 }
 
-.btnType10.gray span {
-    background-position: 100% 0px;
-}
 
-.btnType10.blue {
-    background-position: 0px -41px;
-}
-
-.btnType10.blue span {
-    background-position: 100% -41px;
-}
 
 a.btnType.gray {
   background-position: 0px 0px;
@@ -1419,13 +1409,6 @@ table.row > tbody > tr > td {
   color: #868686;
 }
 
-table10.row > tbody > tr > td {
-    height: 27px;
-    padding: 5px 10px;
-    border: 1px solid #e5e5e5;
-    color: #000;
-}
-
 table {
   font-family: '나눔바른고딕', NanumBarunGothic;
   background-color: #fff;
@@ -1951,9 +1934,7 @@ div.layerType1 .closePop {
     no-repeat;
 }
 
-/*
-주황 계열 (반납일 경우)
-*/
+/* 사용 신청인 경우 */
 .layerType210 {
     position: absolute;
     width: 400px;
@@ -1966,6 +1947,17 @@ div.layerType1 .closePop {
     -webkit-box-shadow: 2px 2px 3px #666;
     box-shadow: 2px 2px 3px #666;
 }
+
+div.layerType210 > dl dt {
+  height: 40px;
+  line-height: 40px;
+  padding: 0px 20px;
+  background-color: #3e4463;
+}
+/*
+주황 계열 (반납일 경우)
+*/
+
 .layerType210.return {
     position: absolute;
     width: 400px;
@@ -2038,12 +2030,24 @@ div.layerType2 > dl dd table.row > tbody > tr > th {
   background: #bbc2cd;
 }
 
+/*********************layerType210********************************/
+
+
+
+div.layerType210.return > dl dd table.row > tbody > tr > th{
+  background: #fff2e0;
+  border : 1px solid #000;
+  padding: 8px;
+  text-align : center;
+  width:20%;
+}
+
 div.layerType210 > dl dd table.row > tbody > tr > th{
-    background: #dfe6e9;
-    border : 1px solid #000;
-    padding: 8px;
-    text-align : center;
-    width:20%;
+  background: #dfe6e9;
+  border : 1px solid #000;
+  padding: 8px;
+  text-align : center;
+  width:20%;
 }
 
 div.layerType210 > dl dd table.row > tbody > tr > td {
@@ -2052,6 +2056,24 @@ div.layerType210 > dl dd table.row > tbody > tr > td {
     padding: 8px;
 
 }
+
+div.layerType210 > dl dt strong {
+  font-size: 17px;
+  color: #fff;
+}
+
+div.layerType210 > dl dd {
+  padding: 40px 30px;
+  background-color : #fff;
+}
+div.layerType210 > dl dd table.row{
+  border-collapse: collapse;
+  width:80%;
+  margin : 0 auto; /*테이블 가운데 정렬*/
+
+}
+
+/*********************layerType210********************************/
 
 div.layerType2 .closePop,
 div.layerType2 .closePop2 {
