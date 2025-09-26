@@ -3,6 +3,7 @@ import logo_img from "../../assets/images/admin/login/logo_img.png";
 import left_myImg from "../../assets/images/admin/comm/left_myImg.jpg";
 import { useNavigate, Link } from "react-router-dom";
 
+
 const LeftMenu = () => {
   const [loginId, setLoginId] = useState("");
   const [loginNm, setLoginNm] = useState("");
@@ -45,18 +46,18 @@ const LeftMenu = () => {
     */
   };
 
-  useLayoutEffect(() => {
-    console.log(
-      "leftmenu useEffect start : " + sessionStorage.getItem("usrMnuAtrt2")
-    );
-    console.log("leftmenu logo_img : " + logo_img);
-    //loginProc()
-    const loginInfo = JSON.parse(sessionStorage.getItem("loginInfo"));
-    const usrMnuAtrt2 = JSON.parse(sessionStorage.getItem("usrMnuAtrt2"));
-    setLoginId(loginInfo.userId);
-    setLoginNm(loginInfo.userNm);
-    setMenuList(usrMnuAtrt2);
-  }, []);
+    useLayoutEffect(() => {
+        console.log(
+            "leftmenu useEffect start : " + sessionStorage.getItem("usrMnuAtrt2")
+        );
+        console.log("leftmenu logo_img : " + logo_img);
+        //loginProc()
+        const loginInfo = JSON.parse(sessionStorage.getItem("loginInfo"));
+        const usrMnuAtrt2 = JSON.parse(sessionStorage.getItem("usrMnuAtrt2"));
+        setLoginId(loginInfo.userId);
+        setLoginNm(loginInfo.userNm);
+        setMenuList(usrMnuAtrt2);
+    }, []);
 
   let i = -1;
   const nodeList = () => {
@@ -69,6 +70,7 @@ const LeftMenu = () => {
       if (!(url.indexOf(".do") === -1)) {
         url = url.slice(0, url.length - 3);
       }
+
       nodeList.push(
         <li
           style={{

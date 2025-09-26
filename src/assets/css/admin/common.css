@@ -379,10 +379,37 @@
   text-align: center;
 }
 
+
+.btn_areaC2 {
+    position: relative;
+    justify-content: flex-end; /* 오른쪽 정렬 */
+    gap : 12px;
+    width: 80%;
+    text-align: right;
+    margin: 20px auto 0 auto;   /* 가운데 정렬 + 위쪽 여백 */
+    padding-right: 10px;
+
+}
+
+.btn_areaC2 button{
+    min-width:70px;
+}
+
+/* 인접한 버튼 사이에만 여백 */
+.btn_areaC2 button + button {
+    margin-left: 4px;
+}
+
 .btn_areaR {
   position: relative;
   width: 100%;
   text-align: right;
+}
+
+.btnType {
+    display: inline-block;
+    padding-left: 10px;
+    background: url('/src/assets/images/admin/comm/set_btnBg.png') 0 0px no-repeat;
 }
 
 a.btnType {
@@ -403,6 +430,72 @@ a.btnType span {
   text-align: center;
   font-weight: 400;
   background: url('/src/assets/images/admin/comm/set_btnBg.png') 100% 0px no-repeat;
+}
+
+.btnType10.approval {
+    background-color: #2e7d32  ;
+    color: #fff;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btnType.approval:hover{
+    background-color: #27642a;
+}
+
+.btnType.approval:active{
+    transform: scale(0.95);   /* 살짝 눌린 듯 */
+    background-color: #1b4d1e;
+}
+
+.btnType.reject {
+    background-color: #c62828 ;
+    color: #fff;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btnType10.reject:hover{
+    background-color: #a32323;
+}
+
+.btnType10.reject:active{
+    transform: scale(0.95);   /* 살짝 눌린 듯 */
+    background-color: #7f1c1c;
+}
+
+.btnType10.btnClose {
+    background-color: #95a5a6  ;
+    color: #fff;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btnType10.btnClose:hover{
+    background-color: #8d8d8d;
+}
+
+.btnType10.btnClose:active{
+    transform: scale(0.95);   /* 살짝 눌린 듯 */
+    background-color: #5a5a5a;
+}
+
+.btnType10.gray span {
+    background-position: 100% 0px;
+}
+
+.btnType10.blue {
+    background-position: 0px -41px;
+}
+
+.btnType10.blue span {
+    background-position: 100% -41px;
 }
 
 a.btnType.gray {
@@ -1326,6 +1419,13 @@ table.row > tbody > tr > td {
   color: #868686;
 }
 
+table10.row > tbody > tr > td {
+    height: 27px;
+    padding: 5px 10px;
+    border: 1px solid #e5e5e5;
+    color: #000;
+}
+
 table {
   font-family: '나눔바른고딕', NanumBarunGothic;
   background-color: #fff;
@@ -1378,7 +1478,9 @@ table.col tbody td a {
 table.col tbody td a:hover {
   text-decoration: underline;
 }
-
+table.col tbody tr:hover {
+    background: #e0e0e0;
+}
 table.col.hover tbody tr:hover {
   background: #ddd;
 }
@@ -1699,18 +1801,6 @@ table tbody .bg_gray {
   background: #dce1e6;
 }
 
-.history_pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-}
-
-.history_pagination_li {
-    margin: 0 5px
-
-}
-
 .paging {
   /* float:right; */
   height: 23px;
@@ -1762,6 +1852,45 @@ table tbody .bg_gray {
   color: #fff;
   background: url('/src/assets/images/admin/comm/set_btn.png') -362px -150px no-repeat;
 }
+
+/*popup2*/
+.mask10 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9000;
+    background-color: rgba(51, 51, 51, 0.7); /* #333에 투명도 */
+    /* display: none; */
+}
+
+.layerPop10 {
+    /* display: none; */
+    clear: both;
+    position: relative;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.layerPop10 .closePop {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    width: 23px;
+    height: 23px;
+}
+
+.layerPop10 p.title {
+    margin-bottom: 5px;
+    border-bottom: 2px solid #d3d3d3;
+}
+
+.layerPop10 p.title strong {
+    font-size: 15px;
+}
+
+
 
 /* popup */
 
@@ -1822,6 +1951,44 @@ div.layerType1 .closePop {
     no-repeat;
 }
 
+/*
+주황 계열 (반납일 경우)
+*/
+.layerType210 {
+    position: absolute;
+    width: 400px;
+    padding: 0px;
+    margin: 0;
+    border: 3px solid #34495e;
+    background-color: #eff2f5;
+    z-index: 9999;
+    -moz-box-shadow: 2px 2px 3px #666;
+    -webkit-box-shadow: 2px 2px 3px #666;
+    box-shadow: 2px 2px 3px #666;
+}
+.layerType210.return {
+    position: absolute;
+    width: 400px;
+    padding: 0px;
+    margin: 0;
+    border: 3px solid #d8894b;
+    background-color: #eff2f5;
+    z-index: 9999;
+    -moz-box-shadow: 2px 2px 3px #666;
+    -webkit-box-shadow: 2px 2px 3px #666;
+    box-shadow: 2px 2px 3px #666;
+}
+
+div.layerType210.return > dl dt {
+    height: 40px;
+    line-height: 40px;
+    padding: 0px 20px;
+    background-color: #d8894b;
+}
+
+
+
+/*   */
 div.layerType2 {
   position: absolute;
   width: 400px;
@@ -1842,6 +2009,15 @@ div.layerType2 > dl dt {
   background-color: #3e4463;
 }
 
+div.layerType2.return > dl dd table.row > tbody > tr > th{
+  background: #fff2e0;
+  border : 1px solid #000;
+  padding: 8px;
+  text-align : center;
+  width:20%;
+}
+/*****************************************/
+
 div.layerType2 > dl dt strong {
   font-size: 17px;
   color: #fff;
@@ -1849,10 +2025,32 @@ div.layerType2 > dl dt strong {
 
 div.layerType2 > dl dd {
   padding: 40px 30px;
+  background-color : #fff;
+}
+div.layerType2 > dl dd table.row{
+  border-collapse: collapse;
+  width:80%;
+  margin : 0 auto; /*테이블 가운데 정렬*/
+
 }
 
 div.layerType2 > dl dd table.row > tbody > tr > th {
   background: #bbc2cd;
+}
+
+div.layerType210 > dl dd table.row > tbody > tr > th{
+    background: #dfe6e9;
+    border : 1px solid #000;
+    padding: 8px;
+    text-align : center;
+    width:20%;
+}
+
+div.layerType210 > dl dd table.row > tbody > tr > td {
+    background: #fff;
+    border : 1px solid #000;
+    padding: 8px;
+
 }
 
 div.layerType2 .closePop,
