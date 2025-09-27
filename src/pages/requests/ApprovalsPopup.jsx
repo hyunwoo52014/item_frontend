@@ -1,12 +1,13 @@
 import React,{useState,useEffect} from 'react';
 import '../../assets/css/admin/common.css';
 import Modal from 'react-modal';
-import ApprovalsApproveModal from './ApprovalsApproveModal';
-import ApprovalsRejectModal from './ApprovalsRejectModal';
+import ApprovalsConfirmModal from './ApprovalsConfirmModal';
 import axios from 'axios';
 import '../../assets/css/admin/approvals.css';
+import ApprovalsConfirmeModal from './ApprovalsConfirmModal';
 
 const ApprovalsPopup=(props)=>{
+    // props.closeModal  > 사용 신청 혹은 반납 신청 팝업 닫기!
 
 
 	/* modal 관련 */
@@ -89,15 +90,7 @@ const ApprovalsPopup=(props)=>{
 
     /***************승인, 거절 모달******************************** */
 
-    const approvalModal = (
-        <ApprovalsApproveModal></ApprovalsApproveModal>
-    );
-
-    const rejectModal = (
-        <ApprovalsRejectModal></ApprovalsRejectModal>
-    );
-
-    const [approvalReactModalStatus, setApproapprovalReactModalStatus] = useState(
+    const [approvalConfirmModalStatus, setApprovalConfirmModalStatus] = useState(
         {
             status : "",
         }
@@ -131,7 +124,7 @@ const ApprovalsPopup=(props)=>{
 
         if(str === 1){
             //승인되었습니다.
-            setApproapprovalReactModalStatus(()=>(
+            setApprovalConfirmModalStatus(()=>(
                 {
                     status : "approval",
                 }
@@ -145,7 +138,7 @@ const ApprovalsPopup=(props)=>{
             ));
         }else if(str === 2){
             //거절되었습니다.
-            setApproapprovalReactModalStatus(()=>(
+            setApprovalConfirmModalStatus(()=>(
                 {
                     status : "reject",
                 }
@@ -195,12 +188,11 @@ const ApprovalsPopup=(props)=>{
                     </dd>
                 </dl>
             </div>
-            {approvalReactModalStatus.status &&
-            <Modal style={modalStyle} isOpen={modalwin.isopen} onRequestClose={closeModal} ariaHideApp={false} shouldCloseOnOverlayClick={false}  closeTimeoutMS={200} className="approval_modal_content-level2" overlayClassName="approval_modal_overlay-level2">
-                {approvalReactModalStatus.status === 'approval' ? approvalModal : rejectModal}
             
+            <Modal style={modalStyle} isOpen={modalwin.isopen} onRequestClose={closeModal} ariaHideApp={false} shouldCloseOnOverlayClick={false}  closeTimeoutMS={200} className="approval_modal_content-level2" overlayClassName="approval_modal_overlay-level2">
+                <ApprovalsConfirmeModal closeModal={closeModal} firstCloseModal={props.closeModal} status={approvalConfirmModalStatus.status}></ApprovalsConfirmeModal>
             </Modal>
-            }
+            
         </div>
     );//return
 };//ApprovalsPopup
