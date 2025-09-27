@@ -1,7 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import '../../assets/css/admin/common.css';
 import Modal from 'react-modal';
-import ApprovalsConfirmModal from './ApprovalsConfirmModal';
 import axios from 'axios';
 import '../../assets/css/admin/approvals.css';
 import ApprovalsConfirmeModal from './ApprovalsConfirmModal';
@@ -97,7 +96,7 @@ const ApprovalsPopup=(props)=>{
     );
     const clickApprovalsBtn = () => {
         // props.oneRowData 이걸 서버쪽으로 넘겨서 계산해야지
-        const str=1;
+        const str=2;
         /*
         axios.post("/api/approvals/clickApprovals",props.oneRowData)
         .then((res)=>{
@@ -114,7 +113,7 @@ const ApprovalsPopup=(props)=>{
                     {
                         status : "reject",
                     }
-                ));
+                ));W
             }//end if~else
         })
         .catch((err)=>{
@@ -128,22 +127,28 @@ const ApprovalsPopup=(props)=>{
                 {
                     status : "approval",
                 }
-            ));
+            ));//setApprovalConfirmModalStatus
 
             setModalwin((old)=>(
                 {
                     ...old,
                     isopen : true,
                 }
-            ));
+            ));//setModalwin
         }else if(str === 2){
             //거절되었습니다.
             setApprovalConfirmModalStatus(()=>(
                 {
                     status : "reject",
                 }
-            ));
-        }
+            ));//setApprovalConfirmModalStatus
+            setModalwin((old)=>(
+                {
+                    ...old,
+                    isopen : true,
+                }
+            ));//setModalwin
+        }//end if~else
         
         // return으로 돌아온 값이 2라면 잘 처리된거니까
         // 승인되었습니다. 팝업 띄우자
@@ -178,7 +183,7 @@ const ApprovalsPopup=(props)=>{
                         </table>
                         <div className="btn_areaC2 mt30">
                             <button className="btnType10 approval" onClick={clickApprovalsBtn}>승인</button>
-                            <button className="btnType10 reject">거절</button>
+                            <button className="btnType10 reject" onClick={clickApprovalsBtn}>거절</button>
                             <button className="btnType10 btnClose" onClick={props.closeModal}>닫기</button>
                         </div>
 
