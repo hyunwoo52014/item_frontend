@@ -6,14 +6,14 @@ const ApprovalsPopup=(props)=>{
     const [titleStr,setTitleStr] = useState({});
 
     const useRequestStr = {
-        className :"layerPop layerType2",
+        className :"layerPop10 layerType210",
         titleName : "IT 비품 사용 신청 처리",
         tableDateStr : "사용 요청일",
         purposeStr : "사용 목적",
     };//useRequestStr
 
     const returnRequestStr = {
-        className :"layerPop layerType2 return",
+        className :"layerPop10 layerType210 return",
         titleName : "IT 비품 반납 신청 처리",
         tableDateStr : "반납 요청일",
         purposeStr : "반납 목적",
@@ -68,18 +68,18 @@ const ApprovalsPopup=(props)=>{
                             <tbody>
                                 <tr>
                                     <th scope="row">{titleStr.tableDateStr}</th>
-                                    <td colSpan="3"><span>{props.oneRowData.order_date}</span></td>
+                                    <td colSpan="3"><span className="font_black">{props.oneRowData.order_date}</span></td>
                                 </tr>
-                                <tr><th>{commonStr.tableNameStr}</th><td><span>{props.oneRowData.name}</span></td></tr>
-                                <tr><th>{commonStr.tableEquiveCodeStr}</th><td><span>{props.oneRowData.category_code}-{props.oneRowData.product_detail_code}</span></td></tr>
-                                <tr><th>{commonStr.tableEquivStr}</th><td><span>{props.oneRowData.product_name}</span></td></tr>
-                                <tr><th>{titleStr.purposeStr}</th><td><span>{props.oneRowData.order_reason}</span></td></tr>
+                                <tr><th>{commonStr.tableNameStr}</th><td ><span className="font_black">{props.oneRowData.name}</span></td></tr>
+                                <tr><th>{commonStr.tableEquiveCodeStr}</th><td><span className="font_black">{props.oneRowData.category_code}-{props.oneRowData.product_detail_code}</span></td></tr>
+                                <tr><th>{commonStr.tableEquivStr}</th><td><span className="font_black">{props.oneRowData.product_name}</span></td></tr>
+                                <tr><th>{titleStr.purposeStr}</th><td><span className="font_black">{props.oneRowData.order_reason}</span></td></tr>
                             </tbody>
                         </table>
-                        <div className="btn_areaC mt30">
-                            <button className="btnType approval">승인</button>
-                            <button className="btnType reject">거절</button>
-                            <button className="btnType btnClose" onClick={props.closeModal}>닫기</button>
+                        <div className="btn_areaC2 mt30">
+                            <button className="btnType10 approval">승인</button>
+                            <button className="btnType10 reject">거절</button>
+                            <button className="btnType10 btnClose" onClick={props.closeModal}>닫기</button>
                         </div>
 
                         <div id="r_modalStatusBadgeBox" style={{textAlign:"center", margin:"10px 0", display:"none"}}>
