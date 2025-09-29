@@ -183,10 +183,10 @@ const Approvals = () => {
 													<td>{item.product_name}</td>
 													<td>{item.order_date}</td>
 													<td>
-														{item.product_state === "사용신청"?
-															(<BtnUseStyle onClick={()=>openModal(item.product_state, item)}>{item.product_state}</BtnUseStyle>) 
+														{item.product_state === "O"?
+															(<BtnUseStyle onClick={()=>openModal(item.product_state, item)}>{item.product_state_str}</BtnUseStyle>) 
 																: 
-															(<BtnReturnStyle onClick={()=>openModal(item.product_state, item)}>{item.product_state}</BtnReturnStyle>)	
+															(<BtnReturnStyle onClick={()=>openModal(item.product_state, item)}>{item.product_state_str}</BtnReturnStyle>)	
 														}
 													</td>
 												</tr>
