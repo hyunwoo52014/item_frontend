@@ -13,8 +13,9 @@ tr td:hover {
     justify-content: center;
     align-items: center;
     width: 100%;
+    cursor: pointer;
 }
 
 .history_pagination_li {
-    margin: 0 5px
+    margin: 0 5px;
 }
