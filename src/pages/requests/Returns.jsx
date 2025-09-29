@@ -3,7 +3,7 @@ import axios from 'axios';
 import { ReturnsTable } from './ReturnsTable.jsx';
 import SearchBar from './SearchBar.jsx';
 import Pagination from '../../components/common/Pagination.jsx';
-import { ApplyModal } from './ApplyModal.jsx';
+import ReturnsModal from './ReturnsModal.jsx';
 import Session from "react-session-api";
 
 
@@ -18,7 +18,7 @@ const Returns = () => {
     const [searchParam, setSearchParam] = useState({ productState: '' });
     const safeTotalPage = totalCount > 0 ? Math.ceil(totalCount / pageSize) : 1;
 
-    // API에서 반납 목록을 가져오는 함수
+    // 반납 목록 조회
     const fetchReturnsList = async () => {
         try {
             // 사용자 ID를 세션에서 가져옵니다.
@@ -38,8 +38,8 @@ const Returns = () => {
 
             // axios.get을 사용하여 API 호출
             const response = await axios.post(
-                "/requests/returns/returnsList", // 절대경로를 제거하고 상대경로로 변경
-                postData,
+                "/requests/returns/returnsList", // 상대경로로 변경
+                postData, // JSON 객체를 바로 전달
                 {
                     headers: {
                         "Content-Type": "application/x-www-form-urlencoded",
@@ -51,7 +51,7 @@ const Returns = () => {
             // 성공적으로 데이터를 받아왔을 때
             if (response.data) {
                 setList(response.data.returnsList);
-                setTotalCount(response.data.returnsCnt);
+                setTotalCount(response.data.totalCount || response.data.returnsCnt);
             }
         } catch (error) {
             console.error("데이터 로딩 실패:", error);
@@ -61,9 +61,7 @@ const Returns = () => {
     };
 
     // 페이지 변경 핸들러 함수
-    const handlePageChange = (page) => {
-        setCurrentPage(page);
-    };
+    const handlePageChange = (page) => setCurrentPage(page);
 
     // 검색 핸들러 함수
     const handleSearch = (newSearchKey) => {
@@ -75,20 +73,23 @@ const Returns = () => {
     const handleReturnAll = async () => {
         const userLoginId = sessionStorage.getItem("loginId");
         if (!userLoginId) {
-            alert("사용자 로그인이 필요합니다.");
+            alert("로그인 정보가 유효하지 않습니다. 다시 로그인해주세요.");
             return;
         }
 
         if (window.confirm("사용중인 모든 기기를 반납 신청하시겠습니까?")) {
+            // 1. 전송할 파라미터 객체 정의
             const param = { loginId: userLoginId };
+            // 2. URLSearchParams를 사용하여 폼 데이터 형식으로 변환
             const postData = new URLSearchParams(param);
 
             try {
                 const response = await axios.post(
                     "/requests/returns/returnAll",
-                    postData,
+                    postData, // <--- URLSearchParams 객체를 본문으로 전달
                     {
                         headers: {
+                            // 3. Content-Type을 폼 데이터 형식으로 명시
                             "Content-Type": "application/x-www-form-urlencoded",
                             Accept: "application/json",
                         },
@@ -99,7 +100,7 @@ const Returns = () => {
                     alert(response.data.resultMsg);
                     fetchReturnsList(); // 성공 시 목록 새로고침
                 } else {
-                    alert(response.data.resultMsg);
+                    alert(`처리 실패: ${response.data.resultMsg || '일괄 반납 신청에 실패하였습니다.'}`);
                 }
             } catch (error) {
                 console.error("일괄 반납 실패:", error);
@@ -109,15 +110,117 @@ const Returns = () => {
     };
 
     // 반납 상세 보기 핸들러 함수
-    const handleReturnDtl = (productCode, categoryCode) => {
-        // TODO: 반납신청 API 호출 로직을 여기에 작성하세요.
-        console.log("반납신청", productCode, categoryCode);
+    const handleReturnDtl = async (productCode, categoryCode) => {
+        const userLoginId = sessionStorage.getItem("loginId");
+        if (!userLoginId) {
+            alert("로그인 정보가 유효하지 않습니다. 다시 로그인해주세요.");
+            return;
+        }
+
+        if (window.confirm("선택한 장비를 반납 신청하시겠습니까?")) {
+            const param = {
+                loginId: userLoginId,
+                product_detail_code: productCode,
+                category_code: categoryCode
+            };
+
+            const postData = new URLSearchParams(param);
+
+            try {
+                const response = await axios.post(
+                    "/requests/returns/returnDtl",
+                    postData,
+                    {
+                        headers: {
+                            "Content-Type": "application/x-www-form-urlencoded",
+                            Accept: "application/json",
+                        },
+                    }
+                );
+
+                if (response.data.result === "SUCCESS") {
+                    alert(response.data.resultMsg || "반납 신청이 완료되었습니다.");
+                    fetchReturnsList(); // 목록 갱신
+                } else {
+                    alert(`반납 신청 실패: ${response.data.resultMsg || '오류가 발생했습니다.'}`);
+                }
+            } catch (error) {
+                console.error("반납 신청 실패:", error);
+                alert("반납 신청 처리 중 오류가 발생했습니다.");
+            }
+        }
     };
 
+
     // 취소 상세 보기 핸들러 함수
-    const handleCancelDtl = (productCode, categoryCode) => {
-        // TODO: 취소 API 호출 로직을 여기에 작성하세요.
-        console.log("취소 신청", productCode, categoryCode);
+    const handleCancelDtl = async (productCode, categoryCode) => {
+        const userLoginId = sessionStorage.getItem("loginId");
+        if (!userLoginId) {
+            alert("로그인 정보가 유효하지 않습니다. 다시 로그인해주세요.");
+            return;
+        }
+
+        if (window.confirm("선택한 장비의 반납 신청을 취소하시겠습니까?")) {
+            const param = {
+                loginId: userLoginId,
+                product_detail_code: productCode,
+                category_code: categoryCode
+            };
+
+            const postData = new URLSearchParams(param);
+
+            try {
+                const response = await axios.post(
+                    "/requests/returns/cancelDtl",
+                    postData,
+                    {
+                        headers: {
+                            "Content-Type": "application/x-www-form-urlencoded",
+                            Accept: "application/json",
+                        },
+                    }
+                );
+
+                if (response.data.result === "SUCCESS") {
+                    alert(response.data.resultMsg || "반납 신청 취소가 완료되었습니다.");
+                    fetchReturnsList(); // 목록 갱신
+                } else {
+                    alert(`반납 취소 실패: ${response.data.resultMsg || '오류가 발생했습니다.'}`);
+                }
+            } catch (error) {
+                console.error("반납 취소 실패:", error);
+                alert("반납 취소 처리 중 오류가 발생했습니다.");
+            }
+        }
+    };
+
+
+    // 모달 열기(개별 항목 클릭)
+    const handleItemDtl = (item) => {
+        // 1. 모달에 보여줄 데이터와 현재 상태를 포함하여 'modalData' 객체 하나로 통합합니다.
+        const assetStatusString =
+            item.product_state === 'Y' ? '사용중' :
+            item.product_state === 'R' ? '반납신청중' :
+            item.product_state === 'C' ? '사용신청중' : '기타';
+
+        setModalData({
+            assetName: item.product_name || 'N/A',
+            assetCode: item.product_detail_code || 'N/A',
+            user: item.user_name || item.loginId || 'N/A',
+            applicationDate: item.apply_date || '-',
+            startDate: item.start_date || '-',
+            reason: item.return_reason || '사유 없음',
+            currentStatus: assetStatusString,
+            product_detail_code: item.product_detail_code
+        });
+
+        // 2. 모달 상태를 열림으로 변경
+        setIsModalOpen(true);
+    };
+
+    // 리스트 갱신 (모달에서 반납/취소 후 호출)
+    const updateList = () => {
+        fetchReturnsList();
     };
 
     // `currentPage` 또는 `searchParam`이 변경될 때마다 데이터를 다시 가져옴
@@ -147,6 +250,7 @@ const Returns = () => {
                     })}
                     onReturnDtl={handleReturnDtl}
                     onCancelDtl={handleCancelDtl}
+                    onItemDtl={handleItemDtl}
                 />
             </div>
             <div className="d-flex justify-content-center">
@@ -163,7 +267,20 @@ const Returns = () => {
                     </div>
                 )}
             </div>
-            {isModalOpen && <ApplyModal data={modalData} onClose={() => setIsModalOpen(false)} />}
+            {isModalOpen && modalData && (
+                <ReturnsModal
+                    // isOpen={isModalOpen} 상태는 유지
+                    isOpen={isModalOpen}
+                    onClose={() => {
+                        setIsModalOpen(false);
+                        setModalData(null); // 모달 닫을 때 데이터도 초기화 (선택 사항이지만 권장)
+                    }}
+                    // modalData 객체 하나만 전달
+                    data={modalData}
+                    onUpdateList={fetchReturnsList}
+                />
+            )}
+
         </div>
     );
 };
