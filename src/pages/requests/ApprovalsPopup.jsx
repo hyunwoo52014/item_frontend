@@ -64,7 +64,7 @@ const ApprovalsPopup=(props)=>{
 
 
     const tempStr = (status) => {
-        if(status === "사용신청"){
+        if(status === "O"){
             setTitleStr(()=>(
                 {
                     className : useRequestStr.className,
@@ -73,7 +73,7 @@ const ApprovalsPopup=(props)=>{
                     purposeStr : useRequestStr.purposeStr,
                 }
             ));//setTitleStr
-        }else if(status === "반납신청"){
+        }else if(status === "R"){
             setTitleStr(()=>(
                 {
                     className : returnRequestStr.className,
@@ -94,65 +94,63 @@ const ApprovalsPopup=(props)=>{
             status : "",
         }
     );
-    const clickApprovalsBtn = () => {
+    const clickApprovalsBtn = (status) => {
         // props.oneRowData 이걸 서버쪽으로 넘겨서 계산해야지
-        const str=2;
-        /*
+
+        console.log("oneRowData========");
+        console.log(props.oneRowData);
+
+        if(status === "yes"){
+            props.oneRowData.approve = 'Y';
+        }else if(status === "no"){
+            props.oneRowData.approve='N';
+        }
+        console.log("oneRowData========222[[[====");
+        console.log(props.oneRowData);
         axios.post("/api/approvals/clickApprovals",props.oneRowData)
         .then((res)=>{
-            if(props.oneRowData === 'O' && res.data === 2){
+
+            console.log("clickApprovalse---------");
+            console.log(res);
+            if(props.oneRowData.approve='Y' && res.data === 2){
                 //승인되었습니다.
-                setApproapprovalReactModalStatus(()=>(
+                setApprovalConfirmModalStatus(()=>(
                     {
-                        status : "approval",
+                        status : status,
                     }
                 ));
-            }else if(props.oneRowData === 'R' && res.data === 2){
-                //거절되었습니다.
-                setApproapprovalReactModalStatus(()=>(
+                setModalwin((old)=>(
                     {
-                        status : "reject",
+                        ...old,
+                        isopen:true,
                     }
-                ));W
-            }//end if~else
+                ));
+                props.onSuccess(); //성공시 데이터 갱신(부모 쪽 리스트 갱신)
+            }else if(props.oneRowData.approve='N' && res.data === 2){
+                //거절되었습니다.
+                setApprovalConfirmModalStatus(()=>(
+                    {
+                        status : status,
+                    }
+                ));
+                setModalwin((old)=>(
+                    {
+                        ...old,
+                        isopen:true,
+                    }
+                ));
+
+                props.onSuccess();//성공시 데이터 갱신(부모 쪽 리스트 갱신)
+            }else{
+                console.log("프로그램 이상 발생 / 관리자에게 문의 필요!");
+                console.log(res);
+                alert("프로그램 이상 발생\n관리자에게 문의해주세요.");
+            }
         })
         .catch((err)=>{
 
         });
-        */
-
-        if(str === 1){
-            //승인되었습니다.
-            setApprovalConfirmModalStatus(()=>(
-                {
-                    status : "approval",
-                }
-            ));//setApprovalConfirmModalStatus
-
-            setModalwin((old)=>(
-                {
-                    ...old,
-                    isopen : true,
-                }
-            ));//setModalwin
-        }else if(str === 2){
-            //거절되었습니다.
-            setApprovalConfirmModalStatus(()=>(
-                {
-                    status : "reject",
-                }
-            ));//setApprovalConfirmModalStatus
-            setModalwin((old)=>(
-                {
-                    ...old,
-                    isopen : true,
-                }
-            ));//setModalwin
-        }//end if~else
         
-        // return으로 돌아온 값이 2라면 잘 처리된거니까
-        // 승인되었습니다. 팝업 띄우자
-
     }; //clickApprovalsBtn
     
 
@@ -182,8 +180,8 @@ const ApprovalsPopup=(props)=>{
                             </tbody>
                         </table>
                         <div className="btn_areaC2 mt30">
-                            <button className="btnType10 approval" onClick={clickApprovalsBtn}>승인</button>
-                            <button className="btnType10 reject" onClick={clickApprovalsBtn}>거절</button>
+                            <button className="btnType10 approval" onClick={()=>{clickApprovalsBtn("yes");}}>승인</button>
+                            <button className="btnType10 reject" onClick={()=>{clickApprovalsBtn("no");}}>거절</button>
                             <button className="btnType10 btnClose" onClick={props.closeModal}>닫기</button>
                         </div>
 
