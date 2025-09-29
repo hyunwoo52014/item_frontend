@@ -49,11 +49,6 @@ const Approvals = () => {
 	/* modal 관련 */
 	const modalStyle = {
 		content : {
-			top: "50%",
-			left: "50%",
-			right: "auto",
-			bottom: "auto",
-			transform: "translate(-50%, -50%)", // 👈 중앙 정렬
 			width: "850px",
 			height: "420px",
 			background: "#fff",
@@ -177,7 +172,7 @@ const Approvals = () => {
 								<tbody id="approvalsList" >
 									{showAllList.length === 0 ? 
 										<tr>
-											<td colSpan="5">조회된 데이터가 없습니다.</td>
+											<td colSpan="6">조회된 데이터가 없습니다.</td>
 										</tr>
 										:
 										currentItems.map((item, index) => (
@@ -188,10 +183,10 @@ const Approvals = () => {
 													<td>{item.product_name}</td>
 													<td>{item.order_date}</td>
 													<td>
-														{item.product_state === "사용신청"?
-															(<BtnUseStyle onClick={()=>openModal(item.product_state, item)}>{item.product_state}</BtnUseStyle>) 
+														{item.product_state === "O"?
+															(<BtnUseStyle onClick={()=>openModal(item.product_state, item)}>{item.product_state_str}</BtnUseStyle>) 
 																: 
-															(<BtnReturnStyle onClick={()=>openModal(item.product_state, item)}>{item.product_state}</BtnReturnStyle>)	
+															(<BtnReturnStyle onClick={()=>openModal(item.product_state, item)}>{item.product_state_str}</BtnReturnStyle>)	
 														}
 													</td>
 												</tr>
@@ -221,8 +216,8 @@ const Approvals = () => {
 				</li>
 			</ul>
 
-			<Modal style={modalStyle} overlayClassName="mask10" isOpen={modalwin.isopen} onRequestClose={closeModal} ariaHideApp={false} shouldCloseOnOverlayClick={false} shouldCloseOnEsc={false} closeTimeoutMS={200} >
-				<ApprovalsPopup closeModal={closeModal} action={modalwin.action} oneRowData={oneRowData}/>
+			<Modal style={modalStyle} overlayClassName="approval_modal_overlay-level1" isOpen={modalwin.isopen} onRequestClose={closeModal} ariaHideApp={false} shouldCloseOnOverlayClick={false} shouldCloseOnEsc={false} closeTimeoutMS={200} className="approval_modal_content-level1">
+				<ApprovalsPopup closeModal={closeModal} action={modalwin.action} oneRowData={oneRowData} onSuccess={()=>{getAllList();}}/>
 			</Modal>
 		</div>
     );
