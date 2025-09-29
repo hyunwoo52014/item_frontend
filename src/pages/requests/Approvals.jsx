@@ -217,7 +217,7 @@ const Approvals = () => {
 			</ul>
 
 			<Modal style={modalStyle} overlayClassName="approval_modal_overlay-level1" isOpen={modalwin.isopen} onRequestClose={closeModal} ariaHideApp={false} shouldCloseOnOverlayClick={false} shouldCloseOnEsc={false} closeTimeoutMS={200} className="approval_modal_content-level1">
-				<ApprovalsPopup closeModal={closeModal} action={modalwin.action} oneRowData={oneRowData}/>
+				<ApprovalsPopup closeModal={closeModal} action={modalwin.action} oneRowData={oneRowData} onSuccess={()=>{getAllList();}}/>
 			</Modal>
 		</div>
     );

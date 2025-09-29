@@ -125,6 +125,7 @@ const ApprovalsPopup=(props)=>{
                         isopen:true,
                     }
                 ));
+                props.onSuccess(); //성공시 데이터 갱신(부모 쪽 리스트 갱신)
             }else if(props.oneRowData.approve='N' && res.data === 2){
                 //거절되었습니다.
                 setApprovalConfirmModalStatus(()=>(
@@ -138,6 +139,8 @@ const ApprovalsPopup=(props)=>{
                         isopen:true,
                     }
                 ));
+
+                props.onSuccess();//성공시 데이터 갱신(부모 쪽 리스트 갱신)
             }else{
                 console.log("프로그램 이상 발생 / 관리자에게 문의 필요!");
                 console.log(res);
