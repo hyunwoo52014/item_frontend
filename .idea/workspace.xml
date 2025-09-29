@@ -4,122 +4,133 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="767c8228-90ae-45e3-96b9-c4e4b2b610ff" name="변경" comment="">
-<<<<<<< HEAD
-=======
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
->>>>>>> efa0c5966bf0c9001caa67ec7f9d35f2f325d42b
+    <list default="true" id="42874b8a-0fb1-4bbd-97c7-f1d9c9c5ef21" name="변경" comment="">
+      <change afterPath="$PROJECT_DIR$/src/assets/css/admin/approvals.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/css/notice/notice.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/asset/Inbound.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/asset/InboundModal.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/notice/NoticeDetail.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/notice/NoticePagination.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/requests/Apply.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/requests/ApplyPopup.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/requests/Approvals.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/requests/ApprovalsPopup.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/requests/History.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/requests/HistoryBody.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/requests/HistoryModal.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/requests/css_custom/forHistory.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/system/Accounts.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/system/Accounts.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/system/AccountsModal.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/system/RemainingDataModal.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/system/Rent.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/system/RentalList.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/system/RentalListPage.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/IntelliLang.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/sampletest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/my-app.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.jsx" afterDir="false" />
-<<<<<<< HEAD
-      <change beforePath="$PROJECT_DIR$/src/pages/requests/Returns.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/requests/Returns.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/requests/ReturnsTable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/requests/ReturnsTable.jsx" afterDir="false" />
-=======
->>>>>>> efa0c5966bf0c9001caa67ec7f9d35f2f325d42b
+      <change beforePath="$PROJECT_DIR$/src/assets/css/admin/common.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/css/admin/common.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/common/LeftMenu.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/LeftMenu.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/notice/Notice.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/notice/Notice.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/requests/ApplyModal.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/requests/SearchBar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/requests/SearchBar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/requests/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/sampletest/Postcode.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/sampletest/SamplePage1.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/sampletest/SamplePage11.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/sampletest/SamplePage12.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/sampletest/Samplepage1.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/sampletest/Samplepage10.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/sampletest/Samplepage11.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/sampletest/Samplepage11_topython.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/sampletest/Samplepage12.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/sampletest/Samplepage13.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/sampletest/Samplepage14.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/sampletest/Samplepage14permit.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/sampletest/Samplepage14submenu.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/sampletest/Samplepage15.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/sampletest/Samplepage15compo.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/sampletest/Samplepage15progress.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/sampletest/Samplepage16.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/sampletest/Samplepage16popup.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/sampletest/Samplepage2.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/sampletest/Samplepage3.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/sampletest/Samplepage4 old.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/sampletest/Samplepage4.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/sampletest/Samplepage4detailpopup.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/sampletest/Samplepage5 copy.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/sampletest/Samplepage5.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/sampletest/Samplepage6.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/sampletest/Samplepage7.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/sampletest/Samplepage7list.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/sampletest/Samplepage7list.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/sampletest/Samplepage7popup.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/sampletest/Samplepage7popup.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/sampletest/Samplepage8 2.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/sampletest/Samplepage8.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/sampletest/Samplepage8detailpopup.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/sampletest/Samplepage8detailpopup.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/sampletest/Samplepage8list.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/sampletest/Samplepage8list.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/sampletest/Samplepage8reserve.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/sampletest/Samplepage8reserve.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/sampletest/Samplepage9.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/sampletest/Samplepage9popup.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/sampletest/Selectcomponent.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/sampletest/samplepage2 copy.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/system/Notice.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/setupProxy.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/setupProxy.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="main" />
-      </map>
-    </option>
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="MarkdownSettingsMigration">
-    <option name="stateVersion" value="1" />
-  </component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 2
-}</component>
-  <component name="ProjectId" id="2qMolv3CYdh9HwRndvzYpOjHTnw" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-<<<<<<< HEAD
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Node.js.App.jsx.executor": "Run",
-    "ReactCreateComponentLastSelected": "arrowFunctionComponent",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "CSH__feature/returns",
-    "ignore.virus.scanning.warn.message": "true",
+    "git-widget-placeholder": "CSH__feature/returns 병합 중",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/test/item_frontend",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "npm.start.executor": "Run",
-    "npm.test.executor": "Run",
-    "project.structure.last.edited": "프로젝트",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "project.structure.last.edited": "모듈",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
     "to.speed.mode.migration.done": "true",
-    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\IntelliJ IDEA 2025.2\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
     "vue.rearranger.settings.migration": "true"
-=======
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ReactCreateComponentLastSelected&quot;: &quot;arrowFunctionComponent&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;CSH__250923__returns__front&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/reactWorkspace/my-app/src/pages/requests&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;npm.start.executor&quot;: &quot;Run&quot;,
-    &quot;npm.test.executor&quot;: &quot;Run&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;프로젝트&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\IntelliJ IDEA 2025.2\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
->>>>>>> efa0c5966bf0c9001caa67ec7f9d35f2f325d42b
   }
-}</component>
+}]]></component>
   <component name="ReactDesignerToolWindowState">
     <option name="myId2Visible">
       <map>
         <entry key="com.intellij.reactbuddy.reactComponents" value="false" />
         <entry key="com.intellij.reactbuddy.reactInspector" value="false" />
-        <entry key="com.intellij.reactbuddy.storybook" value="false" />
       </map>
     </option>
-  </component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\reactWorkspace\my-app\src\pages\requests" />
-      <recent name="D:\reactWorkspace\my-app\src\pages\sampletest" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\reactWorkspace\my-app\src\pages\sampletest" />
-    </key>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -129,65 +140,18 @@
       </set>
     </attachedChunks>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
-  <component name="SvnConfiguration">
-    <configuration>C:\Users\dbserver\AppData\Roaming\Subversion</configuration>
-  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="디폴트 작업">
-      <changelist id="767c8228-90ae-45e3-96b9-c4e4b2b610ff" name="변경" comment="" />
-      <created>1705991131692</created>
+      <changelist id="42874b8a-0fb1-4bbd-97c7-f1d9c9c5ef21" name="변경" comment="" />
+      <created>1759133986689</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1705991131692</updated>
-      <workItem from="1734481966771" duration="344000" />
-      <workItem from="1734482340205" duration="78000" />
-      <workItem from="1757642316676" duration="581000" />
-      <workItem from="1757642934653" duration="941000" />
-      <workItem from="1757643935567" duration="2293000" />
-      <workItem from="1757648022937" duration="11920000" />
-      <workItem from="1757894123847" duration="21857000" />
-      <workItem from="1757980787652" duration="3892000" />
-      <workItem from="1757991253365" duration="5249000" />
-      <workItem from="1758068741973" duration="11828000" />
-      <workItem from="1758153874791" duration="11959000" />
-      <workItem from="1758240455325" duration="4828000" />
-      <workItem from="1758498618650" duration="1804000" />
-      <workItem from="1758501133331" duration="8799000" />
-      <workItem from="1758585997776" duration="12039000" />
-      <workItem from="1758614225799" duration="4046000" />
-      <workItem from="1758672090557" duration="12402000" />
+      <updated>1759133986689</updated>
+      <workItem from="1759133998019" duration="877000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="CSH_250923_returns_front" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
-  <component name="XSLT-Support.FileAssociations.UIState">
-    <expand />
-    <select />
   </component>
 </project>

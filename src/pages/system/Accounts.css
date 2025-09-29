@@ -1,0 +1,175 @@
+a:hover {
+    color: gold;
+}
+
+tr.row:hover {
+    background-color: gold;
+}
+
+.samplePageTable {
+    border-collapse: collapse;
+    border: 1px #50bcdf;
+    width: 100%;
+}
+
+.samplePageTable2 {
+    border: 0px;
+    border-color: blue;
+}
+
+.samplePageTable3 {
+    font-size: 100%;
+    text-align: left;
+}
+
+.samplePageSelect1 {
+    width: 150px;
+}
+
+.samplePageInput1 {
+    width: 55%;
+}
+
+.modal-content th {
+    padding: 5px 10px;
+    font-weight: bold;
+    text-align: left;
+}
+
+.modal-content td {
+    padding: 2px 5px;
+}
+
+.modal-content input[type="text"],
+.modal-content textarea {
+    width: 100%;
+    border: 1px solid #bbc2cd;
+    padding: 5px;
+}
+
+.modal-button {
+    padding: 5px;
+    text-align: right;
+}
+
+.modal-button button {
+    margin-left: 5px;
+    padding: 2px 10px;
+}
+
+.filepreview {
+    width: 100px;
+    height: 100px;
+}
+
+ul[role="navigation"] {
+    display: flex;
+    /* Flexbox를 사용하여 가로로 배치 */
+    justify-content: center;
+    /* 가운데 정렬 */
+    list-style: none;
+    /* 기본 리스트 스타일 제거 */
+    padding: 0;
+    margin: 0;
+}
+
+li.pageItem,
+li.pageLabelBtn {
+    margin: 0 5px;
+    /* 각 페이지 번호 사이 간격 */
+}
+
+li a {
+    text-decoration: none;
+    /* 링크 밑줄 제거 */
+    padding: 10px 15px;
+    /* 적절한 padding 추가 */
+    /* border: 1px solid #ccc; */
+    /* 테두리 추가 */
+    border-radius: 5px;
+    /* 모서리 둥글게 */
+}
+
+li a:hover {
+    background-color: #f0f0f0;
+    /* 호버 시 배경 색 변경 */
+}
+
+.btn-active {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    cursor: pointer;
+}
+
+.btn-inactive {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    cursor: pointer;
+}
+
+.currentPageCss {
+    text-align: center;
+    color: white;
+    backgroundcolor: blue;
+}
+
+.pageLabelBtn {
+    margin: 0 15px;
+    font-size: 20px;
+    color: yellow;
+}
+
+.pageItem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    text-align: center;
+}
+
+.pageNaviCss {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style-type: none;
+    padding: 10px;
+}
+
+.modalStyle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background-color: white;
+    right: auto;
+    bottom: auto;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    transform: translate(-50%, -50%);
+    width: 1000px;
+    height: 800px;
+}
+
+.modalOverlay {
+    background-color: rgba(0, 0, 0, 0.5); /* 어두운 반투명 배경 */
+    position: fixed;      /* 화면 전체에 고정 */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+}
+
+.table-in-modal {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+    padding: 10px;
+}
