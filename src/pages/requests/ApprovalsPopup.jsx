@@ -140,7 +140,7 @@ const ApprovalsPopup=(props)=>{
                     }
                 ));
 
-                props.onSuccess();//성공시 데이터 갱신(부모 쪽 리스트 갱신)
+                props.onSuccess(); //거절시 데이터 갱신(부모 쪽 리스트 갱신)
             }else{
                 console.log("프로그램 이상 발생 / 관리자에게 문의 필요!");
                 console.log(res);
