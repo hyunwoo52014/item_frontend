@@ -172,7 +172,7 @@ const Approvals = () => {
 								<tbody id="approvalsList" >
 									{showAllList.length === 0 ? 
 										<tr>
-											<td colSpan="5">조회된 데이터가 없습니다.</td>
+											<td colSpan="6">조회된 데이터가 없습니다.</td>
 										</tr>
 										:
 										currentItems.map((item, index) => (
