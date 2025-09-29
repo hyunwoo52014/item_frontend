@@ -36,7 +36,7 @@ const ApprovalsConfirmeModal = (props) => {
     useEffect(()=>{
         tempStrFunc();
     },[]);
-
+/**/
     
     return (
         <div>
