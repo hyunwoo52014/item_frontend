@@ -1,0 +1,117 @@
+.find-wrap{
+    max-width: 720px;
+    margin: 56px auto;
+    padding: 24px;
+    border-radius: 20px;
+    background: linear-gradient(180deg, rgba(255,255,255,.02) 0%, rgba(255,255,255,.01) 100%);
+}
+
+.find-header{
+    display: flex; align-items: center !important; justify-content: center;
+    margin-bottom: 18px;
+}
+.find-title h2{
+    font-size: 20px; font-weight: 700; letter-spacing: .2px; margin: 0;
+}
+
+/* 탭 + 버튼*/
+.tabs{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px; margin: 12px 0 20px;
+    padding: 6px; border-radius: 12px;
+}
+
+.tab-btn{
+    border: 1px solid transparent;
+    background: transparent;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .18s ease;
+}
+
+.tab-btn[active].tab-btn,
+.tab-btn.active{
+    background: #2178ff;
+    color: #fff;
+    border-color: rgba(79,124,255,.35);
+    cursor: default;
+}
+.tab-btn[disabled].tab-btn{
+    background: transparent !important;
+    color: #fff;
+    border-color: transparent !important;
+    background-color: #2178ff !important;
+    cursor: default;
+}
+
+.form { display: grid; gap: 14px; }
+.field { display: grid; gap: 6px; grid-template-columns: 90px 1fr; column-gap: 12px;align-items: center; margin-bottom:15px;}
+.label { display: block !important; margin: 0 0 6px !important; font-size: 20px !important; color: #1f2937 !important; }
+
+.input {
+    width: 500px;
+    /*background: #0c1330;*/
+    color: #0f0f0f;
+    border: 1px solid #1f2a44;
+    border-radius: 10px;
+    outline: none;
+    padding: 12px 14px;
+    transition: border-color .18s ease, box-shadow .18s ease, background .18s ease;
+}
+.input::placeholder { color: #7b86a8; }
+
+.input:focus {
+    border-color: #8ab4ff;
+    box-shadow: 0 0 0 3px rgba(138,180,255,.15);
+}
+.btn{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 14px;
+    border: 1px solid #d1d5db;
+    background: #ffffff;
+    color: #111827;
+    transition: transform .05s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
+}
+.btn:hover{ background:#f3f4f6; border-color:#9ca3af; }
+.btn:active{ transform: translateY(1px); }
+.btn:focus-visible{ outline:2px solid #3b82f6; outline-offset:2px; }
+
+/* 기본 파란색 (인증번호 보내기) */
+.btn-primary{
+    background: #2563eb;
+    color: #ffffff;
+    border-color: #2563eb;
+    box-shadow: 0 6px 18px rgba(37,99,235,0.25);
+}
+.btn-primary:hover{ background:#1d4ed8; border-color:#1d4ed8; }
+.btn-primary:active{ background:#1e40af; border-color:#1e40af; }
+
+/* 취소: 연한 테두리 + 투명 배경 (확실히 구분) */
+.btn-cancel, .btn-cancle{
+    background: transparent;
+    color: #374151;
+    border-color: #d1d5db;
+}
+.btn-cancel:hover, .btn-cancel:hover{
+    background:#f9fafb;
+    border-color:#1e40af;
+}
+.btn-cancel:active, .btn-cancel:active{
+    background:#f3f4f6;
+}
+
+/* 버튼 간 간격 */
+.btn + .btn{ margin-left: 8px; }
+
+.result-card {
+    display: block !important; margin-top: 20px !important; font-size: 20px !important; color: #1f2937 !important;
+}
