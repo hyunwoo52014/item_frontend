@@ -1,35 +1,47 @@
 /* 1. 모달 오버레이: 화면 전체를 덮고 모달을 중앙에 배치 */
 .layerPop.layerType2 {
-    position: absolute;
-    padding: 0;
-    margin: 0;
+    position: fixed;        /*화면 중앙 정렬*/
+    top: 50%;               /* 화면 중앙 세로 기준 */
+    left: 50%;              /* 화면 중앙 가로 기준 */
+    transform: translate(-50%, -50%);  /* 정확히 중앙으로 이동 */
+    width: 700px;
+    min-height: 300px;      /* 너무 작아지지 않도록 */
+    max-height: 50vh;        /* 화면의 50%를 최대 높이로 */
+    height: auto;            /* 내용에 맞게 높이 자동 조절 */
+    --padding: 10px;        /*모달 내부 여백*/
     border: 3px solid #3e4463;
     background-color: #f3f3f3;
     z-index: 9999;
     box-shadow: 2px 2px 3px #666;
-    height: 450px;
-
-    width: 700px;
-    top: 250.5px;
-    left: 610px;
-    display: block;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;        /* 전체 모달에서는 스크롤 제거 */
+    --overflow-y: auto; /* 내용이 길어지면 세로 스크롤 가능 */
 }
 
-/* 2. 모달 헤더 */
+/* 2. 내용 영역 */
+.layerPop.layerType2 .content {
+    height: auto;
+    max-height: calc(80vh - 100px); /* 헤더 + 푸터 높이를 제외한 최대 높이 */
+    overflow-y: auto;              /* 내용이 길면 스크롤 */
+    padding-right: 10px;            /* 스크롤 생길 때 여백 */
+}
+
+/* 3. 모달 헤더 */
 .layerPop.layerType2 .modal-header {
-    min-height: 16.42857143px;
-    padding: 15px;
+    padding: 10px 15px;
     border-bottom: 1px solid #e5e5e5;
 }
 
-/* 3. 모달 콘텐츠 */
+/* 4. 모달 콘텐츠 */
 .layerPop.layerType2 .modal-content {
     position: relative;
+    padding: 10px 15px;
     background-color: #fff;
-    background-clip: padding-box;
     border-radius: 6px;
     outline: 0;
 }
+
 
 /* 4. 버튼 공통 */
 .layerPop.layerType2 button.btn-primary,

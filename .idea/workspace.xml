@@ -5,12 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="42874b8a-0fb1-4bbd-97c7-f1d9c9c5ef21" name="변경" comment="2025-09-29 dev 통합">
-      <change afterPath="$PROJECT_DIR$/item_frontend.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/requests/Returns.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/requests/Returns.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/requests/ReturnsPagination.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/requests/ReturnsPagination.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/requests/ReturnsPagination.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/requests/ReturnsPagination.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/requests/SearchBar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/requests/SearchBar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/requests/ReturnsModal.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/requests/ReturnsModal.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,7 +100,7 @@
       <option name="presentableId" value="Default" />
       <updated>1759133986689</updated>
       <workItem from="1759133998019" duration="1956000" />
-      <workItem from="1759193027069" duration="9879000" />
+      <workItem from="1759193027069" duration="13090000" />
     </task>
     <task id="LOCAL-00001" summary="2025-09-29 dev 통합">
       <option name="closed" value="true" />
