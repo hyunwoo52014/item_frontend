@@ -5,6 +5,7 @@ import SearchBar from './SearchBar.jsx';
 import Pagination from '../../components/common/Pagination.jsx';
 import ReturnsModal from './ReturnsModal.jsx';
 import Session from "react-session-api";
+import ReturnsPagination from "./ReturnsPagination";
 
 
 const Returns = () => {
@@ -17,6 +18,9 @@ const Returns = () => {
     const [modalData, setModalData] = useState(null);
     const [searchParam, setSearchParam] = useState({ productState: '' });
     const safeTotalPage = totalCount > 0 ? Math.ceil(totalCount / pageSize) : 1;
+    //const totalPages = Math.ceil(totalCount / pageSize);
+    const totalPages = totalCount > 0 ? Math.ceil(totalCount / pageSize) : 1;
+    console.log('totalPages in Returns.jsx:', totalPages); // 확인
 
     // 반납 목록 조회
     const fetchReturnsList = async () => {
@@ -50,6 +54,10 @@ const Returns = () => {
 
             // 성공적으로 데이터를 받아왔을 때
             if (response.data) {
+
+                // 로그 추가: totalCount 값 확인
+                console.log('fetchReturnsList setTotalCount:', response.data.totalCount);
+
                 setList(response.data.returnsList);
                 setTotalCount(response.data.totalCount || response.data.returnsCnt);
             }
@@ -225,6 +233,12 @@ const Returns = () => {
 
     // `currentPage` 또는 `searchParam`이 변경될 때마다 데이터를 다시 가져옴
     useEffect(() => {
+
+        // 상태/계산값 확인
+        console.log('totalCount:', totalCount, 'pageSize:', pageSize, 'totalPages:', totalPages);
+
+        console.log('useEffect totalPages:', Math.ceil(totalCount / pageSize));
+
         fetchReturnsList();
     }, [currentPage, searchParam.productState]);
 
@@ -253,18 +267,13 @@ const Returns = () => {
                     onItemDtl={handleItemDtl}
                 />
             </div>
-            <div className="d-flex justify-content-center">
+            <div style={{ textAlign: 'center', marginTop: '20px' }}>
                 {totalCount > 0 && (
-                    <div className="paging_area">
-                        <Pagination
-                            currentPage={currentPage}
-                            // totalCount가 0일 때 totalPage가 0이 아닌 1로 계산되도록 수정
-                            totalPage={safeTotalPage}
-                            pageSize={pageSize}
-                            blockSize={5} // 한 번에 보여줄 페이지 블록 수
-                            onClick={handlePageChange}
-                        />
-                    </div>
+                    <ReturnsPagination
+                        currentPage={currentPage}
+                        totalPages={totalPages}
+                        onPageChange={handlePageChange}
+                    />
                 )}
             </div>
             {isModalOpen && modalData && (

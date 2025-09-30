@@ -1,62 +1,39 @@
-/* ReturnsPagination.css */
-/* ReturnsPagination.jsx와 동일한 폴더에 위치해야 합니다. */
-
-.paging_area {
-    height: 33px;
-    padding: 0 5px;
-    line-height: 33px;
-    border: 1px solid #bbc2cd;
-    vertical-align: middle;
-    background: #dce1e6;
+.returns-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    gap: 4px;
 }
 
-.paging {
-    height: 23px;
-    text-align: center;
+.returns-pagination button {
+    background-color: #f0f0f0;
+    color: #333;
+    border: 1px solid #ccc;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 14px;
 }
 
-.paging a {
-    display: inline-block;
-    width: 30px;
-    height: 27px;
-    line-height: 27px;
-    text-align: center;
-    vertical-align: middle;
-    background: url('/src/assets/images/admin/comm/set_btn.png') -396px -150px no-repeat;
+.returns-pagination button:hover:not(:disabled) {
+    background-color: #e0eaff;
 }
 
-.paging a.first {
-    width: 28px;
-    background-position: -287px -150px;
-}
-
-.paging a.pre {
-    width: 28px;
-    background-position: -320px -150px;
-    margin-right: 10px;
-}
-
-.paging a.next {
-    width: 28px;
-    background-position: -439px -150px;
-    margin-left: 10px;
-}
-
-.paging a.last {
-    width: 28px;
-    background-position: -472px -150px;
-}
-
-.paging span {
-    display: inline-block;
-}
-
-.paging strong {
-    display: inline-block;
-    width: 28px;
-    height: 27px;
-    line-height: 27px;
-    text-align: center;
+.returns-pagination button.active {
+    background-color: #007bff;
     color: #fff;
-    background: url('/src/assets/images/admin/comm/set_btn.png') -362px -150px no-repeat;
+    font-weight: bold;
+}
+
+.returns-pagination button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.returns-pagination .arrow {
+    font-size: 18px;
+    padding: 6px 10px;
+    font-weight: bold;
 }

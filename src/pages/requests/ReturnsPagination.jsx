@@ -1,88 +1,48 @@
-import React from 'react';
-import './ReturnsPagination.css'; // 새로 만든 CSS 파일을 임포트합니다.
+import React from "react";
+//import Pagination from '../../components/common/Pagination.jsx';
+import './ReturnsPagination.css';
 
-const ReturnsPagination = ({
-                               currentPage,
-                               totalPage,
-                               pageSize,
-                               blockSize,
-                               onClick,
-                           }) => {
+const ReturnsPagination = (props) => {
+
+    // props 구조 분해
+    const { currentPage, totalPages, onPageChange } = props;
+
+    console.log('Rendering ReturnsPagination', { currentPage, totalPages });
+
+    if (!totalPages || totalPages < 1) return null; // 페이지가 없으면 렌더링 안함
+
     const pageNumbers = [];
-    const maxPagesToShow = blockSize; // blockSize를 페이지 블록 수로 사용합니다.
-
-    if (totalPage <= 1) {
-        return null;
-    }
-
-    const currentBlock = Math.ceil(currentPage / maxPagesToShow);
-    const startPage = (currentBlock - 1) * maxPagesToShow + 1;
-    const endPage = Math.min(startPage + maxPagesToShow - 1, totalPage);
-
-    for (let i = startPage; i <= endPage; i++) {
+    for (let i = 1; i <= totalPages; i++) {
         pageNumbers.push(i);
     }
 
+    const handlePrev = () => {
+        if (currentPage > 1) onPageChange(currentPage - 1);
+    };
+
+    const handleNext = () => {
+        if (currentPage < totalPages) onPageChange(currentPage + 1);
+    };
+
     return (
-        <div className="paging">
-            {/* 첫 페이지로 이동하는 버튼 */}
-            <a
-                href="#"
-                className="first"
-                onClick={(e) => {
-                    e.preventDefault();
-                    onClick(1);
-                }}
-            ></a>
-            {/* 이전 페이지로 이동하는 버튼 */}
-            <a
-                href="#"
-                className="pre"
-                onClick={(e) => {
-                    e.preventDefault();
-                    if (currentPage > 1) {
-                        onClick(currentPage - 1);
-                    }
-                }}
-            ></a>
-            <span>
-        {pageNumbers.map((page) => (
-            currentPage === page ? (
-                <strong key={page}>{page}</strong>
-            ) : (
-                <a
-                    href="#"
+        <div className="returns-pagination">
+            <button className="arrow" onClick={handlePrev} disabled={currentPage === 1}>
+                &lt;
+            </button>
+
+            {pageNumbers.map(page => (
+                <button
                     key={page}
-                    onClick={(e) => {
-                        e.preventDefault();
-                        onClick(page);
-                    }}
+                    className={currentPage === page ? 'active' : ''}
+                    onClick={() => onPageChange(page)}
                 >
                     {page}
-                </a>
-            )
-        ))}
-      </span>
-            {/* 다음 페이지로 이동하는 버튼 */}
-            <a
-                href="#"
-                className="next"
-                onClick={(e) => {
-                    e.preventDefault();
-                    if (currentPage < totalPage) {
-                        onClick(currentPage + 1);
-                    }
-                }}
-            ></a>
-            {/* 마지막 페이지로 이동하는 버튼 */}
-            <a
-                href="#"
-                className="last"
-                onClick={(e) => {
-                    e.preventDefault();
-                    onClick(totalPage);
-                }}
-            ></a>
+                </button>
+            ))}
+
+            <button className="arrow" onClick={handleNext} disabled={currentPage === totalPages}>
+                &gt;
+            </button>
         </div>
     );
 };
