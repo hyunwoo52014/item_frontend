@@ -134,7 +134,7 @@ const Approvals = () => {
 
 	/* 검색 기능에 사용 */
 	const [searchStr, setSearchStr] = useState("all"); //전체, IT 장비, 이름 중 선택 // 초기값 : "전체"
-	const [searchWordStr, setSearchWordStr] = useState(); //검색어 입력, 신청 날짜도 이거 사용
+	const [searchWordStr, setSearchWordStr] = useState(""); //검색어 입력, 신청 날짜도 이거 사용
 
 
 	/* 검색 버튼이 클릭되었을 때 동작 */
@@ -147,16 +147,14 @@ const Approvals = () => {
 		//searchStrJson을 넘기면 되지
 		axios.post("/api/approvals/search",searchStrJson)
 		.then((res)=>{
-
+			console.log(res);
 		})
 		.catch((err)=>{
+			console.log(err.config);
+			console.log(err.response?.data);
 
 		});
-		console.log("searchWordStr---------");
-		console.log(searchStr);
-		console.log(searchWordStr);
-		
-
+	
 		setSearchWordStr(""); //검색창 초기화
 
 	}//clickSearchBtnFunc
