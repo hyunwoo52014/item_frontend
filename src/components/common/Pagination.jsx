@@ -8,6 +8,7 @@ const Pagination = ({
   const currentBlock = Math.ceil(currentPage / blockSize);
   const lastBlock = Math.ceil(totalPage / blockSize);
   const startPage = blockSize * (currentBlock - 1) + 1;
+
   //console.log('currentPage:::' + currentPage);
   //console.log('startPage:::' + startPage);
   let blocktlength = Math.ceil(totalPage / pageSize);
