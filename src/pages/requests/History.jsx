@@ -1,9 +1,10 @@
 import React, {useEffect, useState, createContext} from "react";
-import HistoryBody from "./HistoryBody";
+import HistoryBody from "../../components/history/HistoryBody";
 import ReactPaginate from "react-paginate";
 import axios from "axios";
-import HistoryModal from "./HistoryModal";
+import HistoryModal from "../../components/history/HistoryModal";
 import customCss from "./css_custom/forHistory.css";
+import HistorySearchAdmin from "../../components/history/HistorySearchAdmin";
 
 //Context 생성, 기본값 provider가 없을 시 사용
 export const HistoryModalContext = createContext({
@@ -15,9 +16,10 @@ const History = () => {
 
 
     const [searchElement, setSearchElement] = useState({
-        searchSel : "",
+        searchMajorSel : "",
+        searchSubSel : "",
         searchTitle : "",
-        searchStatus : "",
+        pageSize : 5,
     });
 
     const [responseDataList, setResponseDataList] = useState({
@@ -29,13 +31,15 @@ const History = () => {
         statusText : "",
     });
 
+    const [subCategoryElementList, setSubCategoryElementList] = useState([]);
+
     const [modalState, setModalState] = useState({
         modalId : "history-modal",
         isOpen : false,
         payload : {},
     })
 
-    const changeElement = (e,value) => {
+    const changeElement = (e) => {
         setSearchElement((prev) => (
             {
                 ...prev,
@@ -43,13 +47,14 @@ const History = () => {
             }
         ));
     }
+
     const searchHandler = async (currentPage = 1) => {
         currentPage = currentPage || 1;
 
         const param = new URLSearchParams({
-            pageSize : 5,
+            pageSize : searchElement.pageSize,
             currentPage : currentPage,
-            searchSel : searchElement.searchSel,
+            searchMajorSel : searchElement.searchMajorSel,
             searchTitle : searchElement.searchTitle,
         });
 
@@ -84,17 +89,37 @@ const History = () => {
         searchHandler(parseInt(e.selected) + 1);
     }
 
-    const historyDetail = () => {
-
-    }
-
-    const deleteProduct = () => {
-
-    }
-
     useEffect(() => {
         searchHandler();
     },[]);
+
+    useEffect(() => {
+        const selectElement = document.getElementById('searchSubSel');
+
+        if(searchElement.searchMajorSel !== '') {
+            const param = new URLSearchParams();
+            param.append("flag", searchElement.searchMajorSel);
+
+            axios.post("/requests/subCategoryList", param)
+                .then(res => {
+                    setSubCategoryElementList(res.data);
+                    selectElement.style.display = "inline-block";
+                    setSearchElement((prev) => (
+                        {
+                            ...prev,
+                            searchSubSel: res.data[0]
+                        }
+                    ))
+                })
+                .catch(err => {
+                    console.log("요청 에러");
+                });
+        } else {
+            setSubCategoryElementList([]);
+            selectElement.style.display = "none";
+        }
+
+    }, [searchElement.searchMajorSel]);
 
 
     return (
@@ -115,27 +140,8 @@ const History = () => {
 
                                 <p className="conTitle">
                                     <span>IT 자산관리</span>
-                                    <span className="fr">
-                                        <select id="searchSel" name="searchSel" style={{width: "100px"}}
-                                                onChange={changeElement}
-                                        >
-                                          <option value="" defaultValue>전체</option>
-                                          <option value="team">소속</option>
-                                          <option value="name">대여인</option>
-                                          <option value="itProduct">IT 장비</option>
-                                          <option value="status">상태</option>
-                                        </select>
-                                        <select id="searchStatus" name="searchStatus" style={{width: "100px", display: "none"}} onChange={changeElement}>
-                                          <option value="" defaultValue>전체</option>
-                                          <option value="Y">승인</option>
-                                          <option value="N">반려</option>
-                                        </select>
-                                        <input type="text" style={{width: "300px", height: "25px"}} id="searchTitle"
-                                               name="searchTitle" onChange={changeElement}/>
-                                        <a href="" className="btnType blue" id="btnSearchword" name="searchword" onClick={searchClickButton}>
-                                            <span>검 색</span>
-                                        </a>
-                                    </span>
+                                    <HistorySearchAdmin changeElement={changeElement} subCategoryElementList={subCategoryElementList}
+                                                        searchElement={searchElement} searchClickButton={searchClickButton}/>
                                 </p>
 
                                 <div id="divEqList">
@@ -168,6 +174,7 @@ const History = () => {
                                     <ReactPaginate
                                         containerClassName={"history_pagination"}
                                         pageClassName={"history_pagination_li"}
+                                        activeClassName={"active"}
                                         breakLabel="..."
                                         nextLabel="다음 >"
                                         onPageChange={changePageEvent}

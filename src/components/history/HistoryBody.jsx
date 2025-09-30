@@ -1,5 +1,5 @@
 import React, {useState, useContext, useEffect} from "react";
-import {HistoryModalContext} from "./History";
+import {HistoryModalContext} from "../../pages/requests/History";
 import axios from "axios";
 
 const HistoryBody = ({historyList}) => {

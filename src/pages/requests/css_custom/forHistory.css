@@ -19,3 +19,9 @@ tr td:hover {
 .history_pagination_li {
     margin: 0 5px;
 }
+
+.history_pagination_li.active{
+    text-decoration: underline;
+    font-weight: bold;
+    color: black;
+}
