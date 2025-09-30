@@ -171,3 +171,19 @@ background: rgba(0, 0, 0, 0.30) !important; /* 화면 전체 연하게 어둡게
   border-color: #495057;      /* 테두리를 조금 더 진하게 */
   transform: scale(0.95);     /* 살짝 눌린 듯한 느낌 */
 }
+
+
+.paging_area_approval {
+  height: 33px;
+  padding: 0 5px;
+  line-height: 33px;
+  border: 1px solid #bbc2cd;
+  background: #dce1e6;
+
+  display: flex;             /* flex 컨테이너 */
+  justify-content: center;   /* 가로 가운데 */
+  align-items: center;       /* 세로 가운데 */
+}
+
+
+

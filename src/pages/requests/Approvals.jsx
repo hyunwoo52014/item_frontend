@@ -98,6 +98,7 @@ const Approvals = () => {
 	//select 전체 받아오는 json 형태의 list 필요
 	const [showAllList, setShowAllList] = useState([]);
 
+
     //페이지 관련 json 필요 (현재 페이지, 전체 목록 갯수)
     const paginationJSON = {
 		itemPerPage : 10, // 한 페이지당 출력할 행 수
@@ -135,6 +136,7 @@ const Approvals = () => {
 	/* 검색 기능에 사용 */
 	const [searchStr, setSearchStr] = useState("all"); //전체, IT 장비, 이름 중 선택 // 초기값 : "전체"
 	const [searchWordStr, setSearchWordStr] = useState(""); //검색어 입력, 신청 날짜도 이거 사용
+	const [filteredList, setFilteredList] = useState([]); //front단에서 검색할 때 사용
 
 
 	/* 검색 버튼이 클릭되었을 때 동작 */
@@ -152,12 +154,15 @@ const Approvals = () => {
 		.catch((err)=>{
 			console.log(err.config);
 			console.log(err.response?.data);
-
 		});
 	
 		setSearchWordStr(""); //검색창 초기화
-
 	}//clickSearchBtnFunc
+
+	const searchFunc=(e)=>{
+
+	}//end searchFunc
+
     return (
         <div id="container">
 			<ul>
@@ -179,7 +184,7 @@ const Approvals = () => {
 						<p className="conTitle">
 							<span>결재</span>
 							<span className="fr">
-								<select id="searchKey" name="searchKey" style={{width:"100px", marginRight:"10px"}} className="searchOption_approval" onChange={(e)=>setSearchStr(e.target.value)}>
+								<select id="searchKey" name="searchKey" style={{width:"100px", marginRight:"10px"}} className="searchOption_approval" onChange={(e)=>{setSearchStr(e.target.value); setSearchWordStr("");}}>
 									<option value="all">전체</option>
 									<option value="itCode">장비 코드</option>
 									<option value="name">이름</option>
@@ -235,7 +240,7 @@ const Approvals = () => {
 							</table>
 						</div>
 						<br/>
-						<div className="paging_area">
+						<div className="paging_area_approval">
                                 <ReactPaginate
 										previousLabel = {"← 이전"}
 										nextLabel={"다음 →"}
