@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="42874b8a-0fb1-4bbd-97c7-f1d9c9c5ef21" name="변경" comment="2025-09-29 dev 통합">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/requests/ReturnsModal.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/requests/ReturnsModal.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/requests/ReturnsModal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/requests/ReturnsModal.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,10 +28,10 @@
     &quot;accountId&quot;: &quot;02d74745-9778-43e4-879c-744b5e02881d&quot;
   }
 }</component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 7
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="33OfQRThb6ssVGoSI4k79Q0PKUE" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -56,6 +56,7 @@
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
     "to.speed.mode.migration.done": "true",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\IntelliJ IDEA 2025.2\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
