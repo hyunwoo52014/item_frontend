@@ -112,7 +112,7 @@ const ApprovalsPopup=(props)=>{
 
             console.log("clickApprovalse---------");
             console.log(res);
-            if(props.oneRowData.approve='Y' && res.data === 2){
+            if(props.oneRowData.approve ==='Y' && res.data === 2){
                 //승인되었습니다.
                 setApprovalConfirmModalStatus(()=>(
                     {
@@ -126,7 +126,7 @@ const ApprovalsPopup=(props)=>{
                     }
                 ));
                 props.onSuccess(); //성공시 데이터 갱신(부모 쪽 리스트 갱신)
-            }else if(props.oneRowData.approve='N' && res.data === 2){
+            }else if(props.oneRowData.approve ==='N' && res.data === 2){
                 //거절되었습니다.
                 setApprovalConfirmModalStatus(()=>(
                     {
@@ -192,7 +192,7 @@ const ApprovalsPopup=(props)=>{
                 </dl>
             </div>
             
-            <Modal style={modalStyle} isOpen={modalwin.isopen} onRequestClose={closeModal} ariaHideApp={false} shouldCloseOnOverlayClick={false}  closeTimeoutMS={200} className="approval_modal_content-level2" overlayClassName="approval_modal_overlay-level2">
+            <Modal style={modalStyle} isOpen={modalwin.isopen} onRequestClose={closeModal} ariaHideApp={false} shouldCloseOnOverlayClick={false}  shouldCloseOnEsc={false} closeTimeoutMS={200} className="approval_modal_content-level2" overlayClassName="approval_modal_overlay-level2">
                 <ApprovalsConfirmeModal closeModal={closeModal} firstCloseModal={props.closeModal} status={approvalConfirmModalStatus.status}></ApprovalsConfirmeModal>
             </Modal>
             
