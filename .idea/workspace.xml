@@ -7,7 +7,7 @@
     <list default="true" id="42874b8a-0fb1-4bbd-97c7-f1d9c9c5ef21" name="변경" comment="2025-09-29 dev 통합">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/requests/Returns.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/requests/Returns.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/requests/SearchBar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/requests/SearchBar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/requests/ReturnsModal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/requests/ReturnsModal.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
