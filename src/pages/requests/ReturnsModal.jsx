@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './ReturnsModal.css';
 import axios from 'axios';
 
 // 상세보기 모달
 const ReturnsModal = ({ isOpen, onClose, data, onUpdateList }) => {
+
+    const [requestInfo, setRequestInfo] = useState({ productDetailCode: '', loginId: '' });
 
     // 모달이 닫혀 있거나 데이터가 없으면 렌더링하지 않음
     if (!isOpen || !data || Object.keys(data).length === 0) return null;
@@ -23,6 +25,7 @@ const ReturnsModal = ({ isOpen, onClose, data, onUpdateList }) => {
     // 상태별 플래그
     const isReturning = currentStatus === '사용중';          // 반납 버튼 있음.
     const isPending = currentStatus === '반납신청중' || currentStatus === '사용신청중'; // 취소 버튼 있음.
+
 
     // 개별 장비 반납/취소 처리
     const handleReturnOne = async () => {
@@ -87,7 +90,7 @@ const ReturnsModal = ({ isOpen, onClose, data, onUpdateList }) => {
         if (window.confirm("선택한 장비의 반납 신청을 취소하시겠습니까?")) {
             const param = {
                 loginId: userLoginId,
-                product_detail_code: data.product_detail_code
+                productDetailCode: data.product_detail_code
             };
 
             const postData = new URLSearchParams(param);
