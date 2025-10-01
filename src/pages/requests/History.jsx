@@ -107,7 +107,7 @@ const History = () => {
                             <div className="content">
 
                                 <p className="Location">
-                                    <a href="../dashboard/dashboard.do" className="btn_set home">메인으로</a>
+                                    <a href="../dashboard" className="btn_set home">메인으로</a>
                                     <span className="btn_nav bold">신청/반납</span>
                                     <span className="btn_nav bold">사용 히스토리</span>
                                     <a href={window.location.pathname} className="btn_set refresh">새로고침</a>

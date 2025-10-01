@@ -3,6 +3,10 @@ import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import Session from "react-session-api";
 import logo_img from "../assets/images/admin/login/logo_img.png";
+import { GoogleLogin } from "@react-oauth/google"
+/*import { jwtDecode } from "jwt-decode";*/
+import googleLogo from "../assets/images/site/google_logo.svg";
+
 
 const Login = () => {
     useEffect(() => {
@@ -117,6 +121,13 @@ const Login = () => {
             });
     };
 
+    // 구글 리다이렉트
+    const handleGoogleRedirect = () => {
+        // 백엔드가 구글 동의화면으로 리다이렉트 시켜줌
+        window.location.href ="http://localhost/api/googleLogin";
+    };
+
+
     return (
         <>
             <div id="background_board">
@@ -165,18 +176,20 @@ const Login = () => {
                             </p>
                             <p className="member_info">
                                 <input id="saveId" type="checkbox"
-                                       checked={rememberId} onChange={(e) => setRememberId(e.terget.checked)}/>
+                                       checked={rememberId} onChange={(e) => setRememberId(e.target.checked)}/>
                                 <span className="id_save"> ID저장 </span>
                             </p>
                             <div>
-                                <Link id="RegisterBtn" to ="/register" name="modal">
+                                <Link id="RegisterBtn" to="/register" name="modal">
                                     <strong> [회원가입] </strong>
                                 </Link>
                                 <Link to={"/find"}>
                                     <strong> [아이디 / 비밀번호 찾기] </strong>
                                 </Link>
                                 <Link to="/somewhere">
-                      <span onClick={(e)=>{ e.preventDefault(); }}>
+                      <span onClick={(e) => {
+                          e.preventDefault();
+                      }}>
                         left
                       </span>
                                 </Link>
@@ -184,6 +197,35 @@ const Login = () => {
                             <a className="btn_login" id="btn_login" onClick={fLoginProc}>
                                 <strong> Login </strong>
                             </a>
+                            {/* 구글 로그인 */}
+                            <div style={{ marginTop: "70px", textAlign: "center" }}>
+                                <button
+                                    type="button"
+                                    onClick={handleGoogleRedirect}
+                                    style={{
+
+                                        display: "flex",
+                                        alignItems: "center",
+                                        justifyContent: "center",
+                                        width: "325px",
+                                        height: "52px",
+                                        backgroundColor: "#fff",
+                                        border: "1px solid #ccc",
+                                        borderRadius: "5rem",
+                                        cursor: "pointer",
+                                        fontSize: "16px",
+                                        fontWeight: "bold",
+                                        gap: "8px",
+                                    }}
+                                >
+                                    <img
+                                        src={googleLogo} alt="google"
+                                        alt="google"
+                                        style={{ width: "20px", height: "20px" }}
+                                    />
+                                    구글 로그인
+                                </button>
+                            </div>
                         </fieldset>
                     </div>
                 </div>

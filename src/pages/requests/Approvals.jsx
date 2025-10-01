@@ -144,7 +144,7 @@ const Approvals = () => {
 				<li className="contents">
 					<div className="content">
                         <p className="Location">
-                            <a href="../dashboard/dashboard.do" className="btn_set home">메인으로</a>
+                            <a href="../dashboard" className="btn_set home">메인으로</a>
                             <span className="btn_nav bold">신청/반납</span>
                             <span className="btn_nav bold">사용신청</span>
                             <a href="/requests/apply" className="btn_set refresh"></a>
