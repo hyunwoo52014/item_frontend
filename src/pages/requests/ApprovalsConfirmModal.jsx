@@ -5,8 +5,7 @@ const ApprovalsConfirmeModal = (props) => {
     // props.status > 여기서 승인 된건지 거절된건지 선택할 수 있지.
     // props.closeModal > modal 닫기
     // props.firstCloseModal > 첫번째 modal 닫기
-    console.log("confirmModal=-============");
-    console.log(props);
+
     const approvalStr = {
         fullBorderLineClassName : "wrap_modal_approval",
         titleClassName : "approval_modal",
@@ -23,8 +22,7 @@ const ApprovalsConfirmeModal = (props) => {
 
     const [tempStr,setTempStr] = useState({});
     const tempStrFunc = () => {
-        console.log("ApprovalsConfirmModal....................");
-        console.log(props);
+
         if(props.status === "yes"){
             setTempStr(approvalStr);
         }else if(props.status === "no"){
