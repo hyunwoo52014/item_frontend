@@ -88,10 +88,12 @@ const ReturnsModal = ({ isOpen, onClose, data, onUpdateList }) => {
             return;
         }
 
+
         if (window.confirm("선택한 장비의 반납 신청을 취소하시겠습니까?")) {
             const param = {
                 loginId: userLoginId,
-                productDetailCode: data.product_detail_code
+                productDetailCode: data.product_detail_code,
+                categoryCode: data.category_code
             };
 
             const postData = new URLSearchParams(param);

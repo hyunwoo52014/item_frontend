@@ -174,14 +174,16 @@ const Returns = () => {
         if (!userLoginId) return alert("로그인 정보가 유효하지 않습니다. 다시 로그인해주세요.");
         if (!window.confirm("선택한 장비의 반납 신청을 취소하시겠습니까?")) return;
 
-        const param = { loginId: userLoginId, product_detail_code: productCode, category_code: categoryCode };
+        const param = {
+            loginId: userLoginId,
+            product_detail_code: productCode,
+            category_code: categoryCode };
         const postData = new URLSearchParams(param);
 
         try {
             const response = await axios.post(
                 "/requests/returns/cancelDtl",
-                postData,
-                { headers: { "Content-Type": "application/x-www-form-urlencoded", Accept: "application/json" } }
+                postData
             );
 
             if (response.data.result === "SUCCESS") {
@@ -235,6 +237,7 @@ const Returns = () => {
                             detail.product_state === 'R' ? '반납신청중' :
                                 detail.product_state === 'C' ? '사용신청중' : '기타',
                     product_detail_code: detail.product_detail_code,
+                    category_code: detail.category_code,
                 });
 
                 // 모달 상태를 열림으로 변경
