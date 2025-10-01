@@ -44,6 +44,7 @@ const ReturnsModal = ({ isOpen, onClose, data, onUpdateList }) => {
             const param = {
                 loginId: userLoginId,
                 productDetailCode: data.product_detail_code,
+                categoryCode: data.category_code
             };
 
             const postData = new URLSearchParams(param);
