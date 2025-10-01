@@ -5,6 +5,7 @@ import axios from "axios";
 import HistoryModal from "../../components/history/HistoryModal";
 import customCss from "./css_custom/forHistory.css";
 import HistorySearchAdmin from "../../components/history/HistorySearchAdmin";
+import HistorySearchUser from "../../components/history/HistorySearchUser";
 
 //Context 생성, 기본값 provider가 없을 시 사용
 export const HistoryModalContext = createContext({
@@ -14,14 +15,15 @@ export const HistoryModalContext = createContext({
 
 const History = () => {
 
-
+    // 모든 자식 컴포넌트에서 사용할 공용 변수들만 선언
+    // 검색에 사용할 요소
     const [searchElement, setSearchElement] = useState({
         searchMajorSel : "",
         searchSubSel : "",
         searchTitle : "",
         pageSize : 5,
     });
-
+    // 검색 응답 받을 시 사용할 요소
     const [responseDataList, setResponseDataList] = useState({
         currentPage : 0,
         historyCnt : 0,
@@ -31,14 +33,20 @@ const History = () => {
         statusText : "",
     });
 
-    const [subCategoryElementList, setSubCategoryElementList] = useState([]);
+    // 현재 페이지
+    const [currentPage, setCurrentPage] = useState(0);
 
+    // 유저 타입 받기
+    const [userType, setUserType] = useState('');
+
+    // 모달창 상태 정보
     const [modalState, setModalState] = useState({
         modalId : "history-modal",
         isOpen : false,
         payload : {},
     })
 
+    // 자바스크립트 객체 값 변경 저장용 공용 함수
     const changeElement = (e) => {
         setSearchElement((prev) => (
             {
@@ -48,78 +56,28 @@ const History = () => {
         ));
     }
 
-    const searchHandler = async (currentPage = 1) => {
-        currentPage = currentPage || 1;
 
-        const param = new URLSearchParams({
-            pageSize : searchElement.pageSize,
-            currentPage : currentPage,
-            searchMajorSel : searchElement.searchMajorSel,
-            searchTitle : searchElement.searchTitle,
-        });
-
-        await axios.post("/requests/historyList",param)
-            .then(res => {
-                setResponseDataList({
-                    currentPage : res.data.currentPage,
-                    historyCnt : res.data.historyCnt,
-                    historyList : res.data.historyList,
-                    pageSize : res.data.pageSize,
-                    status : res.status,
-                    statusText : res.statusText,
-                });
-            })
-            .catch((err)=>{
-                setResponseDataList((prev)=>(
-                    {
-                        ...prev,
-                        historyCnt: 0,
-                        historyList: [],
-                    }
-                ));
-            });
-    }
-
-    const searchClickButton = (e) => {
+    // 검색 실행 이벤트 선언, 자식에서 구현 후 실행
+    const searchDataEvent = (e, searchHandler) => {
         e.preventDefault();
         searchHandler();
     }
 
-    const changePageEvent = (e)=> {
-        searchHandler(parseInt(e.selected) + 1);
+    // 네비게이션 값 변경시 수행해야할 함수, 자식에서 구현 후 실행
+    const changePageEvent = (e) => {
+        const currentPage = parseInt(e.selected) + 1;
+        setCurrentPage(currentPage);
     }
 
+    // 유저 타입 가져오는 함수, 최초실행시만
     useEffect(() => {
-        searchHandler();
+        const storedUserTypeData = sessionStorage.getItem("userType");
+
+        if(storedUserTypeData === "A"){
+            setUserType(storedUserTypeData);
+        }
     },[]);
 
-    useEffect(() => {
-        const selectElement = document.getElementById('searchSubSel');
-
-        if(searchElement.searchMajorSel !== '') {
-            const param = new URLSearchParams();
-            param.append("flag", searchElement.searchMajorSel);
-
-            axios.post("/requests/subCategoryList", param)
-                .then(res => {
-                    setSubCategoryElementList(res.data);
-                    selectElement.style.display = "inline-block";
-                    setSearchElement((prev) => (
-                        {
-                            ...prev,
-                            searchSubSel: res.data[0]
-                        }
-                    ))
-                })
-                .catch(err => {
-                    console.log("요청 에러");
-                });
-        } else {
-            setSubCategoryElementList([]);
-            selectElement.style.display = "none";
-        }
-
-    }, [searchElement.searchMajorSel]);
 
 
     return (
@@ -140,8 +98,17 @@ const History = () => {
 
                                 <p className="conTitle">
                                     <span>IT 자산관리</span>
-                                    <HistorySearchAdmin changeElement={changeElement} subCategoryElementList={subCategoryElementList}
-                                                        searchElement={searchElement} searchClickButton={searchClickButton}/>
+                                    {
+                                        userType === "A" ?
+                                            <HistorySearchAdmin searchElement={searchElement} updateElement={setSearchElement}
+                                                                getResponseElement={setResponseDataList} changeElement={changeElement}
+                                                                searchDataEvent={searchDataEvent} currentPage={currentPage}
+                                            />
+                                            :
+                                            <HistorySearchUser  />
+                                    }
+
+
                                 </p>
 
                                 <div id="divEqList">
