@@ -195,8 +195,6 @@ const Approvals = () => {
 			})//filter
 		)//setFilteredList
 
-		console.log("tmpStr============="+tmpStr);
-		console.log(filteredList);
 	}//end searchFunc
 
     return (
