@@ -120,42 +120,37 @@ const Returns = () => {
     // 반납 상세 보기 핸들러 함수
     const handleReturnDtl = async (productCode, categoryCode) => {
         const userLoginId = sessionStorage.getItem("loginId");
-        if (!userLoginId) {
-            alert("로그인 정보가 유효하지 않습니다. 다시 로그인해주세요.");
-            return;
-        }
+        if (!userLoginId) return alert("로그인 정보가 유효하지 않습니다. 다시 로그인해주세요.");
 
-        if (window.confirm("선택한 장비를 반납 신청하시겠습니까?")) {
-            const param = {
-                loginId: userLoginId,
-                product_detail_code: productCode,
-                category_code: categoryCode
-            };
+        if (!window.confirm("선택한 장비를 반납 신청하시겠습니까?")) return;
 
-            const postData = new URLSearchParams(param);
+        const param = { loginId: userLoginId, product_detail_code: productCode, category_code: categoryCode };
+        const postData = new URLSearchParams(param);
 
-            try {
-                const response = await axios.post(
-                    "/requests/returns/returnDtl",
-                    postData,
-                    {
-                        headers: {
-                            "Content-Type": "application/x-www-form-urlencoded",
-                            Accept: "application/json",
-                        },
-                    }
+        try {
+            const response = await axios.post(
+                "/requests/returns/returnDtl",
+                postData,
+                { headers: { "Content-Type": "application/x-www-form-urlencoded", Accept: "application/json" } }
+            );
+
+            if (response.data.result === "SUCCESS") {
+                alert(response.data.resultMsg || "반납 신청이 완료되었습니다.");
+
+                // 개별 항목만 상태 업데이트
+                setList(prevList =>
+                    prevList.map(item =>
+                        item.product_detail_code === productCode && item.category_code === categoryCode
+                            ? { ...item, product_state: "R" } // 반납 신청 상태로 변경
+                            : item
+                    )
                 );
-
-                if (response.data.result === "SUCCESS") {
-                    alert(response.data.resultMsg || "반납 신청이 완료되었습니다.");
-                    fetchReturnsList(); // 목록 갱신
-                } else {
-                    alert(`반납 신청 실패: ${response.data.resultMsg || '오류가 발생했습니다.'}`);
-                }
-            } catch (error) {
-                console.error("반납 신청 실패:", error);
-                alert("반납 신청 처리 중 오류가 발생했습니다.");
+            } else {
+                alert(`반납 신청 실패: ${response.data.resultMsg || '오류가 발생했습니다.'}`);
             }
+        } catch (error) {
+            console.error("반납 신청 실패:", error);
+            alert("반납 신청 처리 중 오류가 발생했습니다.");
         }
     };
 
@@ -163,68 +158,81 @@ const Returns = () => {
     // 취소 상세 보기 핸들러 함수
     const handleCancelDtl = async (productCode, categoryCode) => {
         const userLoginId = sessionStorage.getItem("loginId");
-        if (!userLoginId) {
-            alert("로그인 정보가 유효하지 않습니다. 다시 로그인해주세요.");
-            return;
-        }
+        if (!userLoginId) return alert("로그인 정보가 유효하지 않습니다. 다시 로그인해주세요.");
+        if (!window.confirm("선택한 장비의 반납 신청을 취소하시겠습니까?")) return;
 
-        if (window.confirm("선택한 장비의 반납 신청을 취소하시겠습니까?")) {
-            const param = {
-                loginId: userLoginId,
-                product_detail_code: productCode,
-                category_code: categoryCode
-            };
+        const param = { loginId: userLoginId, product_detail_code: productCode, category_code: categoryCode };
+        const postData = new URLSearchParams(param);
 
-            const postData = new URLSearchParams(param);
+        try {
+            const response = await axios.post(
+                "/requests/returns/cancelDtl",
+                postData,
+                { headers: { "Content-Type": "application/x-www-form-urlencoded", Accept: "application/json" } }
+            );
 
-            try {
-                const response = await axios.post(
-                    "/requests/returns/cancelDtl",
-                    postData,
-                    {
-                        headers: {
-                            "Content-Type": "application/x-www-form-urlencoded",
-                            Accept: "application/json",
-                        },
-                    }
+            if (response.data.result === "SUCCESS") {
+                alert(response.data.resultMsg || "반납 신청 취소가 완료되었습니다.");
+
+                // 개별 항목만 상태 업데이트
+                setList(prevList =>
+                    prevList.map(item =>
+                        item.product_detail_code === productCode && item.category_code === categoryCode
+                            ? { ...item, product_state: "Y" } // 사용중 상태로 복원
+                            : item
+                    )
                 );
-
-                if (response.data.result === "SUCCESS") {
-                    alert(response.data.resultMsg || "반납 신청 취소가 완료되었습니다.");
-                    fetchReturnsList(); // 목록 갱신
-                } else {
-                    alert(`반납 취소 실패: ${response.data.resultMsg || '오류가 발생했습니다.'}`);
-                }
-            } catch (error) {
-                console.error("반납 취소 실패:", error);
-                alert("반납 취소 처리 중 오류가 발생했습니다.");
+            } else {
+                alert(`반납 취소 실패: ${response.data.resultMsg || '오류가 발생했습니다.'}`);
             }
+        } catch (error) {
+            console.error("반납 취소 실패:", error);
+            alert("반납 취소 처리 중 오류가 발생했습니다.");
         }
     };
 
 
     // 모달 열기(개별 항목 클릭)
-    const handleItemDtl = (item) => {
-        // 1. 모달에 보여줄 데이터와 현재 상태를 포함하여 'modalData' 객체 하나로 통합합니다.
-        const assetStatusString =
-            item.product_state === 'Y' ? '사용중' :
-            item.product_state === 'R' ? '반납신청중' :
-            item.product_state === 'C' ? '사용신청중' : '기타';
+    const handleItemDtl = async (item) => {
+        try {
+            const param = {
+                product_detail_code: item.product_detail_code,
+                category_code: item.category_code
+            };
+            const postData = new URLSearchParams(param);
 
-        setModalData({
-            assetName: item.product_name || 'N/A',
-            assetCode: item.product_detail_code || 'N/A',
-            user: item.user_name || item.loginId || 'N/A',
-            applicationDate: item.apply_date || '-',
-            startDate: item.start_date || '-',
-            reason: item.return_reason || '사유 없음',
-            currentStatus: assetStatusString,
-            product_detail_code: item.product_detail_code
-        });
+            const response = await axios.post(
+                "/requests/returns/stateDetail",
+                postData,
+                { headers: { "Content-Type": "application/x-www-form-urlencoded", Accept: "application/json" } }
+            );
 
-        // 2. 모달 상태를 열림으로 변경
-        setIsModalOpen(true);
+            if (response.data) {
+                const detail = response.data;
+
+                setModalData({
+                    assetName: item.product_name || 'N/A', // 리스트에서 받음
+                    assetCode: detail.product_detail_code || 'N/A',
+                    user: detail.user_name || detail.loginID || 'N/A',
+                    applicationDate: detail.apply_date || '-',
+                    startDate: detail.start_date || '-',
+                    reason: detail.return_reason || '사유 없음',
+                    currentStatus:
+                        detail.product_state === 'Y' ? '사용중' :
+                            detail.product_state === 'R' ? '반납신청중' :
+                                detail.product_state === 'C' ? '사용신청중' : '기타',
+                    product_detail_code: detail.product_detail_code,
+                });
+
+                // 모달 상태를 열림으로 변경
+                setIsModalOpen(true);
+            }
+        } catch (error) {
+            console.error("상세조회 실패:", error);
+            alert("상세 데이터 불러오기 실패");
+        }
     };
+
 
     // 리스트 갱신 (모달에서 반납/취소 후 호출)
     const updateList = () => {
