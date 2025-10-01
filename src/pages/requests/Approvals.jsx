@@ -98,6 +98,11 @@ const Approvals = () => {
 	//select 전체 받아오는 json 형태의 list 필요
 	const [showAllList, setShowAllList] = useState([]);
 
+	//onload 형태
+	useEffect(()=>{
+		getAllList();
+	},[]);
+
 
     //페이지 관련 json 필요 (현재 페이지, 전체 목록 갯수)
     const paginationJSON = {
@@ -109,11 +114,16 @@ const Approvals = () => {
 	/* 검색 기능에 사용 */
 	const [searchStr, setSearchStr] = useState("all"); //전체, IT 장비, 이름 중 선택 // 초기값 : "전체"
 	const [searchWordStr, setSearchWordStr] = useState(""); //검색어 입력, 신청 날짜도 이거 사용
-	const [filteredList, setFilteredList] = useState([]); //front단에서 검색할 때 사용
-	const [randeringList, setRanderingList] = useState(showAllList);
+	const [filteredList, setFilteredList] = useState(showAllList); //front단에서 검색할 때 사용
+	//const [randeringList, setRanderingList] = useState(showAllList);
 	useEffect(()=>{
-		searchWordStr === "" ? setRanderingList(showAllList) : setRanderingList(filteredList);
-	},[showAllList, filteredList,searchWordStr]);
+		if(searchStr === "all" || searchWordStr === ""){
+			setFilteredList(showAllList);
+		}else{
+			searchFunc(searchWordStr);
+		}
+		
+	},[showAllList, searchStr]);
 
 	//현재 페이지
 	const [currentPage, setCurrentPage] = useState(0);
@@ -121,7 +131,7 @@ const Approvals = () => {
 	const startPage = currentPage * paginationJSON.itemPerPage;
 
 	//한 페이지 데이터 계산
-	const currentItems = randeringList.slice(startPage, startPage + paginationJSON.itemPerPage);
+	const currentItems = filteredList.slice(startPage, startPage + paginationJSON.itemPerPage);
 
 
 
@@ -132,17 +142,15 @@ const Approvals = () => {
         axios.get("/api/approvals/showList")
         .then((res)=>{
             setShowAllList(res.data);
-        })
+		})
         .catch((err)=>{
-            
+			console.log(err.config);
+			console.log(err.response?.data);
         });//end axios
 
-    }//getAllList
 
-	//onload 형태
-	useEffect(()=>{
-		getAllList();
-	},[]);
+
+    }//end getAllList
 
 
 	
@@ -169,14 +177,16 @@ const Approvals = () => {
 		setSearchWordStr(""); //검색창 초기화
 	}//clickSearchBtnFunc
 
-	const searchFunc=(writtenWord)=>{
+	const searchFunc=(writtenWord, str)=>{
 		let result;
 		let tmpStr;
-
+		if(searchStr !== "all" && searchWordStr === "" && str==="btnclick"){
+			alert("검색어를 입력해주세요.");	
+		}//end if
 
 		setFilteredList(
 			showAllList.filter(item=>{
-				//여기에 switch ~ case 넣으면 딱일 것 같은데
+				
 				switch(searchStr){
 					case "itCode" :
 						tmpStr=(item.category_code+"-"+item.product_detail_code).toLowerCase();
@@ -229,12 +239,12 @@ const Approvals = () => {
 								:
 								<input type="text" value={searchWordStr} style={{width:"250px", height:"30px", marginRight:"10px"}} className="searchOption_approval" id="searchword" name="searchword" onChange={(e)=>{setSearchWordStr(e.target.value); searchFunc(e.target.value);}} readOnly={searchStr === "all"} placeholder={searchStr === "all"?"":"검색어를 입력하세요."} disabled={searchStr==="all"}/>
 								}
-								<button className="searchBtn_approval" onClick={(e)=>{searchFunc(searchWordStr)}}><span>검 색</span></button>
+								<button className="searchBtn_approval" onClick={(e)=>{searchFunc(searchWordStr,"btnclick")}}><span>검 색</span></button>
 							</span>
 						</p>
 
 						<div id="divProductList">
-							<div><span className="bold">총 개수 : </span>{"\u00A0"}{showAllList.length} {"\u00A0\u00A0\u00A0\u00A0\u00A0"} <span className="bold">검색 개수 : </span>{"\u00A0"}{randeringList.length} </div>
+							<div><span className="bold">총 개수 : </span>{"\u00A0"}{showAllList.length} {"\u00A0\u00A0\u00A0\u00A0\u00A0"} <span className="bold">검색 개수 : </span>{"\u00A0"}{filteredList.length} </div>
 							<table className="col">
 								<thead>
 									<tr>
@@ -247,7 +257,7 @@ const Approvals = () => {
 									</tr>
 								</thead>
 								<tbody id="approvalsList" >
-									{randeringList.length === 0 ? 
+									{filteredList.length === 0 ? 
 										<tr>
 											<td colSpan="6">조회된 데이터가 없습니다.</td>
 										</tr>
@@ -280,7 +290,7 @@ const Approvals = () => {
 										previousLabel = {"← 이전"}
 										nextLabel={"다음 →"}
 										breakLabel={"..."}
-										pageCount={Math.ceil(randeringList.length / paginationJSON.itemPerPage)} // 총 페이지 수
+										pageCount={Math.ceil(filteredList.length / paginationJSON.itemPerPage)} // 총 페이지 수
 										marginPagesDisplayed={1}
 										pageRangeDisplayed={5}
 										onPageChange={({ selected }) => setCurrentPage(selected)} // 페이지 변경
