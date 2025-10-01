@@ -214,8 +214,8 @@ const Returns = () => {
                     assetName: item.product_name || 'N/A', // 리스트에서 받음
                     assetCode: detail.product_detail_code || 'N/A',
                     user: detail.user_name || detail.loginID || 'N/A',
-                    applicationDate: detail.apply_date || '-',
-                    startDate: detail.start_date || '-',
+                    applicationDate: detail.order_date  || '-',
+                    startDate: detail.rental_date || '-',
                     reason: detail.return_reason || '사유 없음',
                     currentStatus:
                         detail.product_state === 'Y' ? '사용중' :
