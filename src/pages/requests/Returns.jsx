@@ -139,10 +139,11 @@ const Returns = () => {
 
                 // 개별 항목만 상태 업데이트
                 setList(prevList =>
-                    prevList.map(item =>
-                        item.product_detail_code === productCode && item.category_code === categoryCode
-                            ? { ...item, product_state: "R" } // 반납 신청 상태로 변경
-                            : item
+                    prevList.map(i =>
+                        i.product_detail_code === modalData.product_detail_code &&
+                        i.category_code === modalData.category_code
+                            ? { ...i, product_state: "R" } // 또는 "Y"
+                            : i
                     )
                 );
             } else {
