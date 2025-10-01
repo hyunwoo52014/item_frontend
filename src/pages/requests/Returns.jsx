@@ -22,6 +22,14 @@ const Returns = () => {
     const totalPages = totalCount > 0 ? Math.ceil(totalCount / pageSize) : 1;
     console.log('totalPages in Returns.jsx:', totalPages); // 확인
 
+
+    // 새로고침 핸들러 함수: 검색 조건을 초기화하고 목록을 갱신합니다.
+    const handleRefresh = () => {
+        // handleSearch를 호출하여 검색 파라미터를 빈 값("")으로 초기화하고
+        // 페이지를 1로 되돌립니다.
+        handleSearch("");
+    };
+
     // 반납 목록 조회
     const fetchReturnsList = async () => {
         try {
@@ -40,6 +48,8 @@ const Returns = () => {
 
             const postData = new URLSearchParams(param);
 
+            console.log("새로고침 요청 파라미터:", param); // 파라미터 확인
+
             // axios.get을 사용하여 API 호출
             const response = await axios.post(
                 "/requests/returns/returnsList", // 상대경로로 변경
@@ -51,6 +61,8 @@ const Returns = () => {
                     },
                 }
             );
+
+            console.log("새로고침 API 응답 데이터:", response.data); // 응답 데이터 확인
 
             // 성공적으로 데이터를 받아왔을 때
             if (response.data) {
@@ -139,10 +151,11 @@ const Returns = () => {
 
                 // 개별 항목만 상태 업데이트
                 setList(prevList =>
-                    prevList.map(item =>
-                        item.product_detail_code === productCode && item.category_code === categoryCode
-                            ? { ...item, product_state: "R" } // 반납 신청 상태로 변경
-                            : item
+                    prevList.map(i =>
+                        i.product_detail_code === modalData.product_detail_code &&
+                        i.category_code === modalData.category_code
+                            ? { ...i, product_state: "R" } // 또는 "Y"
+                            : i
                     )
                 );
             } else {
@@ -214,8 +227,8 @@ const Returns = () => {
                     assetName: item.product_name || 'N/A', // 리스트에서 받음
                     assetCode: detail.product_detail_code || 'N/A',
                     user: detail.user_name || detail.loginID || 'N/A',
-                    applicationDate: detail.apply_date || '-',
-                    startDate: detail.start_date || '-',
+                    applicationDate: detail.order_date  || '-',
+                    startDate: detail.rental_date || '-',
                     reason: detail.return_reason || '사유 없음',
                     currentStatus:
                         detail.product_state === 'Y' ? '사용중' :
@@ -256,12 +269,21 @@ const Returns = () => {
                 <a href="../dashboard/dashboard.do" className="btn_set home">메인으로</a>
                 <span className="btn_nav bold">신청/반납</span>
                 <span className="btn_nav bold">반납일괄 신청</span>
-                <a href="/requests/returns" className="btn_set refresh">새로고침</a>
+                <a
+                    href="#" // 클릭 가능하게 만듦
+                    className="btn_set refresh"
+                    onClick={(e) => {
+                        e.preventDefault(); // 기본 <a> 동작(페이지 이동) 방지
+                        handleRefresh();// 데이터 새로고침 함수 호출
+                    }}
+                >
+                    새로고침
+                </a>
             </p>
 
             <p className="conTitle">
                 <span>내 장비 관리</span>
-                <SearchBar onSearch={handleSearch} onReturnAll={handleReturnAll} />
+                <SearchBar onSearch={handleSearch} onReturnAll={handleReturnAll} currentProductState={searchParam.productState} />
             </p>
 
             <div id="divReturnsList">
