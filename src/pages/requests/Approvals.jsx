@@ -213,7 +213,7 @@ const Approvals = () => {
 				<li className="contents">
 					<div className="content">
                         <p className="Location">
-                            <a href="../dashboard/dashboard.do" className="btn_set home">메인으로</a>
+                            <a href="../dashboard" className="btn_set home">메인으로</a>
                             <span className="btn_nav bold">신청/반납</span>
                             <span className="btn_nav bold">사용신청</span>
 							<button aria-label="새로고침" onClick={() => window.location.reload()} className="btn_set_approval refresh_approval">
