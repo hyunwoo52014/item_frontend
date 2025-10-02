@@ -43,17 +43,35 @@ const SearchBar = ({ onSearch, onReturnAll, currentProductState }) => {
 
             {/* '일괄 반납 신청' 버튼 렌더링 조건을 부모로부터 받은 상태로 제어 */}
             {displayValue === 'Y' && (
-                <a
-                    className="btnType blue"
-                    id="returnAllBtn"
-                    href="#"
-                    onClick={(e) => {
-                        e.preventDefault(); // 기본 <a> 동작 방지
-                        onReturnAll(); // 부모 컴포넌트의 일괄 반납 함수 호출
-                    }}
-                >
-                    <span>일괄 반납 신청</span>
-                </a>
+                <span style={{ display: 'inline-block', marginLeft: '3px' }}>
+                    <a
+                        className="modalBtn btn-primary"
+                        id="returnAllBtn"
+                        href="#"
+                        onClick={(e) => {
+                            e.preventDefault(); // 기본 <a> 동작 방지
+                            onReturnAll(); // 부모 컴포넌트의 일괄 반납 함수 호출
+                        }}
+                        style={{
+                            display: 'inline-block',      // inline-block으로 버튼처럼
+                            width: '120px',               // 버튼 너비
+                            height: '30px',               // 버튼 높이
+                            lineHeight: '30px',           // 글자 수직 가운데 정렬
+                            textAlign: 'center',          // 글자 가운데 정렬
+                            borderRadius: '3px',         // 둥근 모서리
+                            backgroundColor: '#f57324',   // 파란색 배경
+                            color: '#fff',                // 글자 색 흰색
+                            textDecoration: 'none',       // underline 제거
+                            fontSize: '0.9rem',           // 글자 크기
+                            fontWeight: '600',            // 글자 굵기
+                            letterSpacing: '1px',         // 글자 간격
+                            cursor: 'pointer',            // 마우스 커서
+                            padding: '0 10px',            // 가로 패딩
+                        }}
+                    >
+                        <span>일괄 반납 신청</span>
+                    </a>
+                </span>
             )}
         </span>
     );

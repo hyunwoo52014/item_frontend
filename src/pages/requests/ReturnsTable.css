@@ -1,0 +1,64 @@
+/* ---------------------------------------------------------------------- */
+/* 상태 버튼 (ReturnsTable 내부) 스타일 */
+/* ---------------------------------------------------------------------- */
+
+/* 공통: 모든 커스텀 버튼에 대한 기본 스타일 (색상, 그림자, 패딩 등) */
+.btnCustom {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 3px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2); /* 그림자 강화 */
+    letter-spacing: 0.5px;
+    cursor: pointer;
+}
+
+/* ⚠️ 수정된 부분: 고정 너비는 오직 테이블 내부의 버튼(<td> 안에 있는 .btnCustom)에만 적용 */
+.col tbody td .btnCustom {
+    /* 테이블 내 상태 버튼 고정 너비 및 정렬 */
+    width: 100px;
+    text-align: center;
+    padding: 6px 0; /* width가 고정되었으므로 좌우 패딩 제거 */
+}
+
+/* 색상별 스타일 */
+.btnCustom.blue {
+    background: #453de8;
+    color: #fff;
+}
+.btnCustom.green {
+    background: #43e97b;
+    color: #fff;
+}
+.btnCustom.orange {
+    background: #f57324;
+    color: #fff;
+}
+.btnCustom.gray {
+    background: #a6a8ad;
+    color: #fff;
+}
+
+/* ---------------------------------------------------------------------- */
+/* 테이블 외부 Search Bar / 일괄 버튼 정렬 관련 스타일 (외부 레이아웃 문제 해결) */
+/* ---------------------------------------------------------------------- */
+
+/* Select Box와 버튼을 감싸는 컨테이너에 Flex를 적용하여 수평 정렬을 복구합니다. */
+.fr.search-bar-wrapper {
+    display: flex;
+    align-items: center; /* 세로 중앙 정렬 */
+    gap: 8px;
+}
+
+/* Select Box의 스타일을 명확히 정의합니다. */
+.form-select-custom {
+    width: 100px;
+    height: 36px; /* 버튼과 높이를 맞추기 위해 30px에서 36px로 조정 (일반 버튼 높이) */
+    line-height: 36px;
+    padding: 0 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}

@@ -1,4 +1,5 @@
 import React from 'react';
+import './ReturnsTable.css';
 
 export const ReturnsTable = ({list, onItemDtl}) => {
 
@@ -8,13 +9,13 @@ export const ReturnsTable = ({list, onItemDtl}) => {
 
         switch (state) {
             case 'Y':
-                return { label: '사용중', className: 'btnType blue' };
+                return { label: '사용중', className: 'blue' };
             case 'O':
-                return { label: '사용신청중', className: 'btnType green' };
+                return { label: '사용신청중', className: 'green' };
             case 'R':
-                return { label: '반납신청중', className: 'btnType orange' };
+                return { label: '반납신청중', className: 'orange' };
             default:
-                return { label: '알수없음', className: 'btnType gray' };
+                return { label: '알수없음', className: 'gray' };
         }
     };
 
@@ -43,7 +44,7 @@ export const ReturnsTable = ({list, onItemDtl}) => {
                                 {/* 상태값만 출력, 클릭 시 모달 오픈 */}
                                 <a
                                     href="#"
-                                    className={statusInfo.className}
+                                    className={`btnCustom ${statusInfo.className}`}
                                     onClick={(e) => {
                                         e.preventDefault();
                                         onItemDtl(item); // 모달 열기
