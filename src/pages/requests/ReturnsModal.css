@@ -75,6 +75,14 @@
     background-color: #5a6268;
 }
 
+/* 모달 안 버튼 */
+.modalBtn {
+    width: 120px;      /* 버튼 너비 */
+    padding: 10px 0;   /* 세로 패딩 늘려 높이 증가 */
+    font-size: 0.9rem; /* 글자 크기 약간 키우기 가능 */
+    letter-spacing: 5px; /* 글자 사이 간격 */
+}
+
 /*body {
     font-family: Arial, sans-serif;
     margin: 0;

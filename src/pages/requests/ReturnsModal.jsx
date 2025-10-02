@@ -189,10 +189,10 @@ const ReturnsModal = ({ isOpen, onClose, data, onUpdateList }) => {
                     <div className="btn_areaC mt30">
                         {isReturning && (
                             <>
-                                <a href="#" className="btnType blue" id="returnBtn" onClick={handleReturnOne}>
+                                <a href="#" className="btnCustom  blue modalBtn" id="returnBtn" onClick={handleReturnOne}>
                                     <span>반납</span>
                                 </a>
-                                <a href="#" className="btnType gray" id="closeBtn" onClick={onClose}>
+                                <a href="#" className="btnCustom  gray modalBtn" id="closeBtn" onClick={onClose}>
                                     <span>닫기</span>
                                 </a>
                             </>
@@ -200,17 +200,17 @@ const ReturnsModal = ({ isOpen, onClose, data, onUpdateList }) => {
 
                         {isPending && (
                             <>
-                                <a href="#" className="btnType blue" id="cancelBtn" onClick={handleCancel}>
+                                <a href="#" className="btnCustom  blue modalBtn" id="cancelBtn" onClick={handleCancel}>
                                     <span>취소</span>
                                 </a>
-                                <a href="#" className="btnType gray" id="closeBtn" onClick={onClose}>
+                                <a href="#" className="btnCustom  gray modalBtn" id="closeBtn" onClick={onClose}>
                                     <span>닫기</span>
                                 </a>
                             </>
                         )}
 
                         {!isReturning && !isPending && (
-                            <a href="#" className="btnType gray" id="closeBtn" onClick={onClose}>
+                            <a href="#" className="btnCustom  gray modalBtn" id="closeBtn" onClick={onClose}>
                                 <span>닫기</span>
                             </a>
                         )}
