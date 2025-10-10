@@ -1,0 +1,88 @@
+@charset "utf-8";
+
+tr td{
+    cursor: pointer;
+}
+
+tr td:hover {
+    text-decoration: underline;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.li {
+    cursor: pointer;
+    margin: 0 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.link {
+    display: block;
+    padding: 8px 12px;
+    color: #337ab7;
+    text-decoration: none;
+}
+
+.active {
+    text-decoration: underline;
+    font-weight: bold;
+    color: black;
+}
+
+
+.datepickerWrapper :global(.react-datepicker) {
+    transform: scale(1.5);
+    font-size: 14px;
+}
+
+/* 캘린더 날짜 폰트 크기 조절 */
+.datepickerWrapper :global(.react-datepicker__day) {
+    font-size: 14px;
+}
+
+.datepickerWrapper :global(.react-datepicker__header) {
+    background-color: #e0f2fe;
+    border-bottom: none;
+}
+
+.datepickerWrapper :global(.react-datepicker__day--selected) {
+    background-color: rgb(186, 217, 241);
+    border-radius: 15px;
+}
+
+/* :global()을 사용하여 요일 부분의 스타일을 직접 재정의 */
+.datepickerWrapper :global(.react-datepicker__day-names) {
+    font-weight: bold;
+    color: #444;
+}
+
+.datepickerWrapper :global(.react-datepicker__day-name) {
+    font-size: 12px;
+    color: #3f3f46;
+
+}
+
+
+/* 주말 요일의 색상을 빨간색으로 */
+.datepickerWrapper :global(.react-datepicker__header) {
+    color: red;
+}
+
+.datepickerInput {
+    width: 150px;
+    height: 30px;
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}

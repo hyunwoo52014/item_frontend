@@ -1048,6 +1048,33 @@ p.subTitle {
   font-weight: bold;
 }
 
+div.content div.conTitle {
+    padding: 0 24px;
+    height: 60px;
+    margin-bottom: 10px;
+    border: 1px solid #e2e6ed;
+    background: #f9fafb;
+}
+
+div.conTitle > span:first-child {
+    font-family: '나눔바른고딕', NanumBarunGothic;
+    line-height: 60px;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+div.conTitle > span.fr {
+    margin-top: 15px;
+}
+
+div.subTitle {
+    margin-top: 20px;
+    margin-bottom: 5px;
+    font-family: '나눔바른고딕', NanumBarunGothic;
+    font-size: 16px;
+    font-weight: bold;
+}
+
 /* 탭 영역 */
 
 .tab_area {

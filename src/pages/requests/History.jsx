@@ -3,7 +3,7 @@ import HistoryBody from "../../components/history/HistoryBody";
 import ReactPaginate from "react-paginate";
 import axios from "axios";
 import HistoryModal from "../../components/history/HistoryModal";
-import customCss from "./css_custom/forHistory.css";
+import styles from "./css_custom/forHistory.module.css";
 import HistorySearchAdmin from "../../components/history/HistorySearchAdmin";
 import HistorySearchUser from "../../components/history/HistorySearchUser";
 
@@ -21,6 +21,7 @@ const History = () => {
         searchMajorSel : "",
         searchSubSel : "",
         searchTitle : "",
+        currentPage : 0,
         pageSize : 5,
     });
     // 검색 응답 받을 시 사용할 요소
@@ -33,11 +34,8 @@ const History = () => {
         statusText : "",
     });
 
-    // 현재 페이지
-    const [currentPage, setCurrentPage] = useState(0);
-
     // 유저 타입 받기
-    const [userType, setUserType] = useState('');
+    const [userType, setUserType] = useState();
 
     // 모달창 상태 정보
     const [modalState, setModalState] = useState({
@@ -57,31 +55,94 @@ const History = () => {
     }
 
 
-    // 검색 실행 이벤트 선언, 자식에서 구현 후 실행
-    const searchDataEvent = (e, searchHandler) => {
-        e.preventDefault();
-        searchHandler();
-    }
+    const searchHandler = async (currentPage = 1) => {
+        currentPage = searchElement.currentPage || currentPage;
 
-    // 네비게이션 값 변경시 수행해야할 함수, 자식에서 구현 후 실행
-    const changePageEvent = (e) => {
-        const currentPage = parseInt(e.selected) + 1;
-        setCurrentPage(currentPage);
-    }
+        const param = new URLSearchParams({
+            pageSize: searchElement.pageSize,
+            currentPage: currentPage,
+            searchMajorSel: searchElement.searchMajorSel,
+            searchSubSel: searchElement.searchSubSel,
+            searchTitle: searchElement.searchTitle,
+        });
 
+        if(userType === 'A') {
+            await axios.post("/requests/adminHistoryList", param)
+                .then(res => {
+                    setResponseDataList({
+                        currentPage: res.data.currentPage,
+                        historyCnt: res.data.historyCnt,
+                        historyList: res.data.historyList,
+                        pageSize: res.data.pageSize,
+                        status: res.status,
+                        statusText: res.statusText,
+                    });
+                })
+                .catch((err) => {
+                    setResponseDataList((prev) => (
+                        {
+                            ...prev,
+                            historyCnt: 0,
+                            historyList: [],
+                        }
+                    ));
+                });
+        } else if(userType === 'B') {
+            await axios.post("/requests/userHistoryList", param)
+                .then(res => {
+                    setResponseDataList({
+                        currentPage: res.data.currentPage,
+                        historyCnt: res.data.historyCnt,
+                        historyList: res.data.historyList,
+                        pageSize: res.data.pageSize,
+                        status: res.status,
+                        statusText: res.statusText,
+                    });
+                })
+                .catch((err) => {
+                    setResponseDataList((prev) => (
+                        {
+                            ...prev,
+                            historyCnt: 0,
+                            historyList: [],
+                        }
+                    ));
+                });
+        }
+
+
+    }
     // 유저 타입 가져오는 함수, 최초실행시만
     useEffect(() => {
         const storedUserTypeData = sessionStorage.getItem("userType");
+        setUserType(storedUserTypeData);
 
-        if(storedUserTypeData === "A"){
-            setUserType(storedUserTypeData);
-        }
     },[]);
 
+    // 처음 컴포넌트가 렌더링 됬을 때, 검색 한번 실행, 유저조건 필요
+    useEffect(() => {
+        searchHandler();
+    }, [userType]);
 
+    useEffect(() => {
+        if(searchElement.searchSubSel !== '' && userType === 'A') {
+            searchHandler();
+        }
+    },[searchElement.searchSubSel]);
+
+
+    // 네비게이션 값 변경시 수행해야할 함수, 자식에서 구현 후 실행
+    const changePageEvent = (e) => {
+        console.log("III",parseInt(e.selected) + 1);
+        searchHandler(parseInt(e.selected) + 1);
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+    }
 
     return (
-        <form id="myForm" action="" method="">
+        <form id="myForm" action="" method="" onSubmit={handleSubmit}>
             <HistoryModalContext.Provider value={{modalState, setModalState}}>
             <div id="wrap_area">
                 <div id="container">
@@ -96,20 +157,21 @@ const History = () => {
                                     <a href={window.location.pathname} className="btn_set refresh">새로고침</a>
                                 </p>
 
-                                <p className="conTitle">
+                                <div className="conTitle">
                                     <span>IT 자산관리</span>
                                     {
                                         userType === "A" ?
                                             <HistorySearchAdmin searchElement={searchElement} updateElement={setSearchElement}
-                                                                getResponseElement={setResponseDataList} changeElement={changeElement}
-                                                                searchDataEvent={searchDataEvent} currentPage={currentPage}
+                                                                changeElement={changeElement} searchHandler={searchHandler}
                                             />
                                             :
-                                            <HistorySearchUser  />
+                                            <HistorySearchUser  searchElement={searchElement} updateElement={setSearchElement}
+                                                                changeElement={changeElement} searchHandler={searchHandler}
+                                            />
                                     }
 
 
-                                </p>
+                                </div>
 
                                 <div id="divEqList">
                                     <table className="col">
@@ -139,9 +201,10 @@ const History = () => {
 
                                 <div className="paging_area" id="userPagination">
                                     <ReactPaginate
-                                        containerClassName={"history_pagination"}
-                                        pageClassName={"history_pagination_li"}
-                                        activeClassName={"active"}
+                                        forcePage={searchElement.currentPage}
+                                        containerClassName={styles.container}
+                                        pageClassName={styles.li}
+                                        activeClassName={styles.active}
                                         breakLabel="..."
                                         nextLabel="다음 >"
                                         onPageChange={changePageEvent}
