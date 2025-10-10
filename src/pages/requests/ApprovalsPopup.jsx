@@ -97,21 +97,17 @@ const ApprovalsPopup=(props)=>{
     const clickApprovalsBtn = (status) => {
         // props.oneRowData 이걸 서버쪽으로 넘겨서 계산해야지
 
-        console.log("oneRowData========");
-        console.log(props.oneRowData);
+
 
         if(status === "yes"){
             props.oneRowData.approve = 'Y';
         }else if(status === "no"){
             props.oneRowData.approve='N';
         }
-        console.log("oneRowData========222[[[====");
-        console.log(props.oneRowData);
+
         axios.post("/api/approvals/clickApprovals",props.oneRowData)
         .then((res)=>{
 
-            console.log("clickApprovalse---------");
-            console.log(res);
             if(props.oneRowData.approve ==='Y' && res.data === 2){
                 //승인되었습니다.
                 setApprovalConfirmModalStatus(()=>(
@@ -142,8 +138,6 @@ const ApprovalsPopup=(props)=>{
 
                 props.onSuccess(); //거절시 데이터 갱신(부모 쪽 리스트 갱신)
             }else{
-                console.log("프로그램 이상 발생 / 관리자에게 문의 필요!");
-                console.log(res);
                 alert("프로그램 이상 발생\n관리자에게 문의해주세요.");
             }
         })

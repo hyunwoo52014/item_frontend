@@ -43,7 +43,8 @@ const ReturnsModal = ({ isOpen, onClose, data, onUpdateList }) => {
         if (window.confirm("선택한 장비를 반납 신청하시겠습니까?")) {
             const param = {
                 loginId: userLoginId,
-                product_detail_code: data.product_detail_code
+                productDetailCode: data.product_detail_code,
+                categoryCode: data.category_code
             };
 
             const postData = new URLSearchParams(param);
@@ -87,10 +88,12 @@ const ReturnsModal = ({ isOpen, onClose, data, onUpdateList }) => {
             return;
         }
 
+
         if (window.confirm("선택한 장비의 반납 신청을 취소하시겠습니까?")) {
             const param = {
                 loginId: userLoginId,
-                productDetailCode: data.product_detail_code
+                productDetailCode: data.product_detail_code,
+                categoryCode: data.category_code
             };
 
             const postData = new URLSearchParams(param);
@@ -186,10 +189,10 @@ const ReturnsModal = ({ isOpen, onClose, data, onUpdateList }) => {
                     <div className="btn_areaC mt30">
                         {isReturning && (
                             <>
-                                <a href="#" className="btnType blue" id="returnBtn" onClick={handleReturnOne}>
+                                <a href="#" className="btnCustom  blue modalBtn" id="returnBtn" onClick={handleReturnOne}>
                                     <span>반납</span>
                                 </a>
-                                <a href="#" className="btnType gray" id="closeBtn" onClick={onClose}>
+                                <a href="#" className="btnCustom  gray modalBtn" id="closeBtn" onClick={onClose}>
                                     <span>닫기</span>
                                 </a>
                             </>
@@ -197,17 +200,17 @@ const ReturnsModal = ({ isOpen, onClose, data, onUpdateList }) => {
 
                         {isPending && (
                             <>
-                                <a href="#" className="btnType blue" id="cancelBtn" onClick={handleCancel}>
+                                <a href="#" className="btnCustom  blue modalBtn" id="cancelBtn" onClick={handleCancel}>
                                     <span>취소</span>
                                 </a>
-                                <a href="#" className="btnType gray" id="closeBtn" onClick={onClose}>
+                                <a href="#" className="btnCustom  gray modalBtn" id="closeBtn" onClick={onClose}>
                                     <span>닫기</span>
                                 </a>
                             </>
                         )}
 
                         {!isReturning && !isPending && (
-                            <a href="#" className="btnType gray" id="closeBtn" onClick={onClose}>
+                            <a href="#" className="btnCustom  gray modalBtn" id="closeBtn" onClick={onClose}>
                                 <span>닫기</span>
                             </a>
                         )}

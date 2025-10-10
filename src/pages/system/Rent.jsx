@@ -246,7 +246,7 @@ const Rent = () => {
                                 <div className="content">
                                     {/* 브레드크럼 네비게이션 */}
                                     <p className="Location">
-                                        <a href="../dashboard/dashboard.do" className="btn_set home">메인으로</a>
+                                        <a href="../dashboard" className="btn_set home">메인으로</a>
                                         <span className="btn_nav bold">시스템관리</span>
                                         <span className="btn_nav bold">대여 현황</span>
                                         <a href="/system/rent" className="btn_set refresh">새로고침</a>
