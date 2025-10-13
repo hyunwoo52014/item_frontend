@@ -1,13 +1,14 @@
-import {useEffect, useState} from "react";
-import * as PropTypes from "prop-types";
+import {useEffect, useState, useCallback} from "react";
+// import * as PropTypes from "prop-types";
 import axios from "axios";
 import ReactPaginate from "react-paginate";
 import Modal from "react-modal";
-
+import './InboundCss.css';
 import InboundModal from "./InboundModal"
+
 const Inbound = () => {
     const [searchInfo,setSearchInfo]= useState({
-        searchSel : "",
+        searchSel : "vendor_nm",
         searchTitle : "",
         currentPage : 1,
         pageSize : 10,
@@ -22,16 +23,18 @@ const Inbound = () => {
     const [modalState,setModalState]= useState({
         isOpen:false,
         action:"",
-        loginId:"",
+        importNumber:0,
     });
 
-    const search = async (cPage = 1)=>{
+    const search = async (cPage = 1, searchParams = null) => {
         console.log("search");
         if(typeof cPage=="object"){
             cPage=1;
         }
 
-        const param = new URLSearchParams(Object.entries(searchInfo))
+        // searchParams가 없으면 현재 searchInfo 사용
+        const paramsToUse = searchParams || searchInfo;
+        const param = new URLSearchParams(Object.entries(paramsToUse))
         param.set("currentPage", cPage);
 
         await axios.post("/asset/searchImport",param)
@@ -55,19 +58,21 @@ const Inbound = () => {
                 console.log(err.errorCode,err.errorMessage);
             })
     }
+
     const pageButton = (e)=>{
         console.log(e.selected);
         search(parseInt(e.selected) + 1);
     }
-    const openModal = (action,loginId = "")=>{
-        console.log(action,loginId);
+
+    const openModal = (action,importNumber)=>{
+        console.log(action);
 
         setModalState((prev)=>(
             {
                 ...prev,
                 isOpen: true,
                 action: action,
-                loginId: loginId,
+                importNumber:importNumber,
             }
         ));
     }
@@ -88,11 +93,36 @@ const Inbound = () => {
         }
     }
 
-    useEffect(()=>{
-        search();
-    },[]);
+    // 검색 버튼 클릭 핸들러
+    const handleSearch = () => {
+        search(1, searchInfo);
+    }
 
+    // 초기 로드를 위한 함수
+    const initialSearch = useCallback(async () => {
+        const param = new URLSearchParams(Object.entries({
+            searchSel: "vendor_nm",
+            searchTitle: "",
+            currentPage: 1,
+            pageSize: 10,
+            blockSize: 5,
+        }));
 
+        await axios.post("/asset/searchImport", param)
+            .then((res) => {
+                setInboundList({
+                    importList: res.data.importList,
+                    totalCount: res.data.totalCount,
+                });
+            })
+            .catch((err) => {
+                console.log(err.errorCode, err.errorMessage);
+            })
+    }, []);
+
+    useEffect(() => {
+        initialSearch();
+    }, [initialSearch]);
 
     const searchstyle = {
         fontsize: "15px",
@@ -115,9 +145,9 @@ const Inbound = () => {
     const pagenavicss = {
         margin: "20px 0",
         display: "flex",
-        justifycontent: "center",
-        alignitems: "center",
-        liststyletype: "none",
+        justifyContent: "center",
+        alignItems: "center",
+        listStyleType: "none",
         padding: "10px",
     };
 
@@ -125,31 +155,32 @@ const Inbound = () => {
         <div>
             <div>
                 <p className="Location">
+                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                     <a className="btn_set home">메인으로</a>{" "}
-                    <span className="btn_nav bold">Sampletest</span>{" "}
-                    <span className="btn_nav bold"> 입고/통계</span>{" "}
-                    <a className="btn_set refresh">입고 관리</a>
+                    <span className="btn_nav bold">입고/통계</span>{" "}
+                    <span className="btn_nav bold"> 입고관리</span>{" "}
+                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+                    <a className="btn_set refresh">새로고침</a>
                 </p>
                 <p className="conTitle" id="conTitle">
-                    <span>입고 관리</span>{" "}
+                    <span>입고관리</span>{" "}
                     <span className="fr">
                          <span style={searchstyle}>검색어</span>
                         <select id="searchSel" name="searchSel" style={{width : 100, margin : 10}}
-                            value={searchInfo.searchSel}
-                            onChange={
-                                (e)=>{
-                                    setSearchInfo((old)=>(
-                                        {
-                                            ...old,
-                                            searchSel: e.target.value,
-                                        }
-                                    ))
+                                value={searchInfo.searchSel}
+                                onChange={
+                                    (e)=>{
+                                        setSearchInfo((old)=>(
+                                            {
+                                                ...old,
+                                                searchSel: e.target.value,
+                                            }
+                                        ))
+                                    }
                                 }
-                            }
                         >
                             <option value="vendor_nm">회사명</option>
-                            <option value="porduct_nm">제품명</option>
-
+                            <option value="product_nm">제품명</option>
                         </select>
 
                         <input
@@ -172,13 +203,12 @@ const Inbound = () => {
                                     )
                                 }
                             }
-
                         />
                         <button
                             className="btn btn-primary"
                             name="searchBtn"
                             id="searchBtn"
-                            onClick={search}
+                            onClick={handleSearch}
                         >
                             <span>검색</span>
                           </button>
@@ -186,7 +216,7 @@ const Inbound = () => {
                               className="btn btn-primary"
                               name="newReg"
                               id="newReg"
-                              onClick={() => openModal("I")}
+                              onClick={() => openModal("new")}
                           >
                             <span>신규등록</span>
                           </button>
@@ -216,23 +246,26 @@ const Inbound = () => {
                             inboundList.importList.map(
                                 (inbound,index)=>{
                                     return(
-                                        <tr key={index}>
-                                            <td>{inbound.importNumber}</td>
-                                            <td>
-                                                <a
-                                                    href="#"
-                                                    onClick={(e) => {
-                                                        e.preventDefault(); // 기본 이동 막기
-                                                        openModal("detail", inbound.importNumber);
-                                                    }}
-                                                >
-                                                    {inbound.productName}
-                                                </a>
-                                            </td>
-                                            <td>{inbound.vendorName}</td>
-                                            <td>{inbound.importDate}</td>
-                                            <td>{inbound.importQuantity}</td>
-                                        </tr>
+                                        <>
+                                            <tr key={index}>
+                                                <td>{inbound.importNumber}</td>
+                                                <td>
+                                                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+                                                    <a
+                                                        href="#"
+                                                        onClick={(e) => {
+                                                            e.preventDefault(); // 기본 이동 막기
+                                                            openModal("detail", inbound.importNumber);
+                                                        }}
+                                                    >
+                                                        {inbound.productName}
+                                                    </a>
+                                                </td>
+                                                <td>{inbound.vendorName}</td>
+                                                <td>{inbound.importDate}</td>
+                                                <td>{inbound.importQuantity}</td>
+                                            </tr>
+                                        </>
                                     )
                                 }
                             )
@@ -241,12 +274,12 @@ const Inbound = () => {
                     </table>
                     <br />
                     <ReactPaginate
-                        claaaName={pagenavicss}
+                        className={pagenavicss}
                         breakLabel="..."
                         nextLabel="다음 >"
                         onPageChange={pageButton}
-                        pageRangeDisplayed={searchInfo.blocksize}
-                        pageCount={inboundList.totalCount % searchInfo.pageSize === 0 ? inboundList.totalCount / searchInfo.pagesize : parseInt(inboundList.totalCount / searchInfo.pageSize) + 1}
+                        pageRangeDisplayed={searchInfo.blockSize}
+                        pageCount={inboundList.totalCount % searchInfo.pageSize === 0 ? inboundList.totalCount / searchInfo.pageSize : parseInt(inboundList.totalCount / searchInfo.pageSize) + 1}
                         previousLabel="< 이전"
                         renderOnZeroPageCount={null}
                         pageClassName={"pageItem"}
@@ -256,12 +289,20 @@ const Inbound = () => {
                     />
                 </div>
             </div>
-            <InboundModal
-                modalState={modalState}
-                closeModal={closeModal}
-            />
+            <Modal
+                style={modalStyle}
+                isOpen={modalState.isOpen}
+                onRequestClose={closeModal}
+                ariaHideApp={false}
+            >
+                <InboundModal
+                    action={modalState.action}
+                    closeModal={closeModal}
+                    importNumber={modalState.importNumber}
+                />
+            </Modal>
         </div>
     )
-
 }
+
 export default Inbound;
