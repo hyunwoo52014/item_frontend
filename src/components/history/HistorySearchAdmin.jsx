@@ -8,6 +8,7 @@ const HistorySearchAdmin = ({searchElement, updateElement, changeElement, search
     const [isSubCategoryVisible, setIsSubCategoryVisible] = useState(false);
 
     const [isTitleVisible, setIsTitleVisible] = useState(false);
+    const [placeholder, setPlaceholder] = useState("");
 
     // 서브 카테고리 가져오기
     useEffect( () => {
@@ -23,7 +24,6 @@ const HistorySearchAdmin = ({searchElement, updateElement, changeElement, search
                         {
                             ...prev,
                             searchSubSel: res.data[0],
-                            currentPage: 0,
                         }
                     ))
                 })
@@ -38,26 +38,17 @@ const HistorySearchAdmin = ({searchElement, updateElement, changeElement, search
                 {
                     ...prev,
                     searchSubSel: '',
-                    currentPage: 0,
                 }
             ))
         }
 
         switch(searchElement.searchMajorSel.toUpperCase()) {
-            case "TEAM":
-                setIsTitleVisible(false);
-                break;
-            case "NAME":
-                setIsTitleVisible(false);
-                break;
             case "ITPRODUCT":
                 setIsTitleVisible(true);
-                break;
-            case "STATUS":
-                setIsTitleVisible(false);
+                setPlaceholder("대여한 장비의 이름을 입력해주세요.");
                 break;
             default :
-                setIsTitleVisible(true);
+                setIsTitleVisible(false);
                 break;
         }
 
@@ -67,6 +58,7 @@ const HistorySearchAdmin = ({searchElement, updateElement, changeElement, search
         e.preventDefault();
         searchHandler();
     }
+
     return (
         <span className="fr">
             <select id="searchMajorSel" name="searchMajorSel" style={{width: "100px"}}
@@ -90,9 +82,10 @@ const HistorySearchAdmin = ({searchElement, updateElement, changeElement, search
                     ))
                 }
             </select>
-            <input type="text" style={{width: "300px", height: "30px"}} id="searchTitle"
-                   name="searchTitle" value={searchElement.searchTitle} onChange={changeElement}
-                   style={{display: isTitleVisible ? "inline-block" : "none"}}
+            <input type="text" id="searchTitle" name="searchTitle"
+                   value={searchElement.searchTitle} onChange={changeElement}
+                   style={{width: "300px", height: "30px", display: isTitleVisible ? "inline-block" : "none"}}
+                   placeholder={placeholder}
             />
             <a href="" className="btnType blue" id="btnSearchword" name="searchword"
                onClick={clickEvent}>

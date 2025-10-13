@@ -1,4 +1,4 @@
-import React, {useEffect, useState, createContext} from "react";
+import React, {useEffect, useState, createContext, useRef} from "react";
 import HistoryBody from "../../components/history/HistoryBody";
 import ReactPaginate from "react-paginate";
 import axios from "axios";
@@ -18,15 +18,15 @@ const History = () => {
     // 모든 자식 컴포넌트에서 사용할 공용 변수들만 선언
     // 검색에 사용할 요소
     const [searchElement, setSearchElement] = useState({
+        currentIndex : 0,
         searchMajorSel : "",
         searchSubSel : "",
         searchTitle : "",
-        currentPage : 0,
         pageSize : 5,
     });
     // 검색 응답 받을 시 사용할 요소
     const [responseDataList, setResponseDataList] = useState({
-        currentPage : 0,
+        currentPage: 0,
         historyCnt : 0,
         historyList : [],
         pageSize : 0,
@@ -55,12 +55,10 @@ const History = () => {
     }
 
 
-    const searchHandler = async (currentPage = 1) => {
-        currentPage = searchElement.currentPage || currentPage;
-
+    const searchHandler = async () => {
         const param = new URLSearchParams({
             pageSize: searchElement.pageSize,
-            currentPage: currentPage,
+            currentIndex: searchElement.currentIndex,
             searchMajorSel: searchElement.searchMajorSel,
             searchSubSel: searchElement.searchSubSel,
             searchTitle: searchElement.searchTitle,
@@ -116,25 +114,37 @@ const History = () => {
     useEffect(() => {
         const storedUserTypeData = sessionStorage.getItem("userType");
         setUserType(storedUserTypeData);
-
     },[]);
 
-    // 처음 컴포넌트가 렌더링 됬을 때, 검색 한번 실행, 유저조건 필요
+    // searchHandler가 실행되어야할 조건 모음
     useEffect(() => {
         searchHandler();
-    }, [userType]);
+    },[userType, searchElement.currentIndex]);
+
+    useEffect(()=>{
+        setSearchElement((prev) => (
+            {
+                ...prev,
+                currentIndex : 0,
+            }
+        ));
+        searchHandler();
+    }, [searchElement.searchSubSel])
 
     useEffect(() => {
-        if(searchElement.searchSubSel !== '' && userType === 'A') {
-            searchHandler();
-        }
-    },[searchElement.searchSubSel]);
-
+        console.log("currentPage ", responseDataList.currentPage);
+    }, [responseDataList.currentPage]);
 
     // 네비게이션 값 변경시 수행해야할 함수, 자식에서 구현 후 실행
     const changePageEvent = (e) => {
-        console.log("III",parseInt(e.selected) + 1);
-        searchHandler(parseInt(e.selected) + 1);
+        console.log("selected",e.selected)
+        setSearchElement((prev) => (
+            {
+                ...prev,
+                currentIndex : e.selected,
+            }
+        ));
+        //searchHandler(parseInt(e.selected) + 1);
     }
 
     const handleSubmit = (e) => {
@@ -201,7 +211,7 @@ const History = () => {
 
                                 <div className="paging_area" id="userPagination">
                                     <ReactPaginate
-                                        forcePage={searchElement.currentPage}
+                                        forcePage={searchElement.currentIndex}
                                         containerClassName={styles.container}
                                         pageClassName={styles.li}
                                         activeClassName={styles.active}
