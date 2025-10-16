@@ -1,0 +1,97 @@
+/* 1. 모달 오버레이: 화면 전체를 덮고 모달을 중앙에 배치 */
+.layerPop.layerType2 {
+    position: fixed;        /*화면 중앙 정렬*/
+    top: 50%;               /* 화면 중앙 세로 기준 */
+    left: 50%;              /* 화면 중앙 가로 기준 */
+    transform: translate(-50%, -50%);  /* 정확히 중앙으로 이동 */
+    width: 700px;
+    min-height: 300px;      /* 너무 작아지지 않도록 */
+    max-height: 50vh;        /* 화면의 50%를 최대 높이로 */
+    height: auto;            /* 내용에 맞게 높이 자동 조절 */
+    --padding: 10px;        /*모달 내부 여백*/
+    border: 3px solid #3e4463;
+    background-color: #f3f3f3;
+    z-index: 9999;
+    box-shadow: 2px 2px 3px #666;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;        /* 전체 모달에서는 스크롤 제거 */
+    --overflow-y: auto; /* 내용이 길어지면 세로 스크롤 가능 */
+}
+
+/* 2. 내용 영역 */
+.layerPop.layerType2 .content {
+    height: auto;
+    max-height: calc(80vh - 100px); /* 헤더 + 푸터 높이를 제외한 최대 높이 */
+    overflow-y: auto;              /* 내용이 길면 스크롤 */
+    padding-right: 10px;            /* 스크롤 생길 때 여백 */
+}
+
+/* 3. 모달 헤더 */
+.layerPop.layerType2 .modal-header {
+    padding: 10px 15px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+/* 4. 모달 콘텐츠 */
+.layerPop.layerType2 .modal-content {
+    position: relative;
+    padding: 10px 15px;
+    background-color: #fff;
+    border-radius: 6px;
+    outline: 0;
+}
+
+
+/* 4. 버튼 공통 */
+.layerPop.layerType2 button.btn-primary,
+.layerPop.layerType2 button.btn-secondary {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-left: 10px;
+    font-size: 14px;
+}
+
+/* 파란색 버튼 (반납/취소) */
+.layerPop.layerType2 button.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+}
+
+/* 회색 버튼 (닫기) */
+.layerPop.layerType2 button.btn-secondary {
+    background-color: #6c757d;
+    color: #fff;
+}
+
+/* 버튼 hover 효과 */
+.layerPop.layerType2 button.btn-primary:hover {
+    background-color: #0069d9;
+}
+
+.layerPop.layerType2 button.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+/* 모달 안 버튼 */
+.modalBtn {
+    width: 120px;      /* 버튼 너비 */
+    padding: 10px 0;   /* 세로 패딩 늘려 높이 증가 */
+    font-size: 0.9rem; /* 글자 크기 약간 키우기 가능 */
+    letter-spacing: 5px; /* 글자 사이 간격 */
+}
+
+/*body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    --font-weight: bold;
+}*/
+
+body, table {
+    font-size: 0.75em;
+    line-height: 1.5em;
+    --font-weight: bold;
+}
